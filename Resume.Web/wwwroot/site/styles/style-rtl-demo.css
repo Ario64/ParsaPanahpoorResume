@@ -30,7 +30,7 @@
  - Other
  
 ------------------------------------------------ */
-@import url(vendors/bootstrap.min.css);
+@import url(vendors/rtl/bootstrap.min.css);
 @import url(vendors/swiper.min.css);
 @import url(vendors/simplebar.min.css);
 @import url(../icons/style.css);

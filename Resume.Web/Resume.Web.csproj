@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Resume.Application\Resume.Application.csproj" />
     <ProjectReference Include="..\Resume.Infra.Data\Resume.Infra.Data.csproj" />
-    <ProjectReference Include="..\Resume.Infra.IoC\Resume.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>

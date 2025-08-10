@@ -7,8 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Resume.Application.Services.Implementations;
+using Resume.Application.Services.Interfaces;
 using Resume.Infra.Data.Context;
-using Resume.Infra.IoC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,18 @@ namespace Resume.Web
             });
             #endregion
 
-            #region Services
-            RegisterServices(services);
+            #region ServiceRegistration 
+
+            services.AddScoped<IThingIDoService, ThingIDoService>();
+            services.AddScoped<ICustomerFeedbackService, CustomerFeedbackService>();
+            services.AddScoped<ICustomerLogoService, CustomerLogoService>();
+            services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IExperienceService, ExperienceService>();
+            services.AddScoped<ISkillService, SkillService>();
+            services.AddScoped<IPortfolioService, PortfolioService>();
+            services.AddScoped<ISocialMediaService, SocialMediaService>();
+            services.AddScoped<IInformationService, InformationService>();
+            services.AddScoped<IMessageService, MessageService>();
 
             #region Google Recaptcha
             services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
@@ -52,12 +63,6 @@ namespace Resume.Web
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
             #endregion
 
-        }
-
-
-        public static void RegisterServices(IServiceCollection services)
-        {
-            DependencyContainers.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
