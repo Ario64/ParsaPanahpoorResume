@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Resume.Domain.Entity.Reservation;
 using Resume.Domain.Models;
 using System.Linq;
 
@@ -15,6 +16,7 @@ namespace Resume.Infra.Data.Context
         #endregion
 
         #region DbSet
+
         public DbSet<ThingIDo> ThingIDos { get; set; }
         public DbSet<CustomerFeedback> CustomerFeedbacks { get; set; }
         public DbSet<CustomerLogo> CustomerLogos { get; set; }
@@ -26,6 +28,11 @@ namespace Resume.Infra.Data.Context
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Information> Information { get; set; }
         public DbSet<Message> Messages { get; set; }
+
+        public DbSet<ReservationDate> ReservationDates { get; set; }
+        public DbSet<ReservationDateTime> ReservationDateTimes { get; set; }
+        public DbSet<PersonSelectedReservation> PersonSelectedReservations { get; set; }
+
         #endregion
 
         #region On Model Cretaing
