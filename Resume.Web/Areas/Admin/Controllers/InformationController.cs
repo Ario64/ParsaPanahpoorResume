@@ -26,11 +26,11 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> LoadInformationFormModal()
         {
-            CreateOrEditInformationViewModel result = await _informationService.FillCreateOrEditInformationViewModel();
+            EditInformationViewModel result = await _informationService.FillCreateOrEditInformationViewModel();
             return View("_InformationFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitInformationFormModal(CreateOrEditInformationViewModel information)
+        public async Task<IActionResult> SubmitInformationFormModal(EditInformationViewModel information)
         {
             var result = await _informationService.CreateOrEditInformation(information);
 

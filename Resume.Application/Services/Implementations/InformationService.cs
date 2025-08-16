@@ -53,13 +53,13 @@ namespace Resume.Application.Services.Implementations
             return await _context.Information.FirstOrDefaultAsync();
         }
 
-        public async Task<CreateOrEditInformationViewModel> FillCreateOrEditInformationViewModel()
+        public async Task<EditInformationViewModel> FillCreateOrEditInformationViewModel()
         {
             Information information = await GetInformationModel();
 
-            if (information == null) return new CreateOrEditInformationViewModel() { Id = 0 };
+            if (information == null) return new EditInformationViewModel() { Id = 0 };
 
-            return new CreateOrEditInformationViewModel() {
+            return new EditInformationViewModel() {
             Id = information.Id,
             Address = information.Address,
             Avatar = information.Avatar,
@@ -74,7 +74,7 @@ namespace Resume.Application.Services.Implementations
 
         }
 
-        public async Task<bool> CreateOrEditInformation(CreateOrEditInformationViewModel information)
+        public async Task<bool> CreateOrEditInformation(EditInformationViewModel information)
         {
             if (information.Id == 0)
             {

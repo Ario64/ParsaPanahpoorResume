@@ -8,7 +8,7 @@ namespace Resume.Application.Services.Interfaces
     {
         Task<InformationViewModel> GetInformation();
         Task<Information> GetInformationModel();
-        Task<CreateOrEditInformationViewModel> FillCreateOrEditInformationViewModel();
-        Task<bool> CreateOrEditInformation(CreateOrEditInformationViewModel information);
+        Task<EditInformationViewModel> FillCreateOrEditInformationViewModel();
+        Task<bool> CreateOrEditInformation(EditInformationViewModel information);
     }
 }
