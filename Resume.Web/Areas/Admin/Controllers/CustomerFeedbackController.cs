@@ -34,11 +34,11 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> LoadCustomrFeedbackFormModal(long id)
         {
-            CreateOrEditCustomerFeedbackViewModel result = await _customerFeedbackService.FillCreateOrEditCustomerFeedbackViewModel(id);
+            CreateCustomerFeedbackViewModel result = await _customerFeedbackService.FillCreateOrEditCustomerFeedbackViewModel(id);
             return PartialView("_CustomerFeedbackFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitCustomerFeedbackFormModal(CreateOrEditCustomerFeedbackViewModel customerFeedback)
+        public async Task<IActionResult> SubmitCustomerFeedbackFormModal(CreateCustomerFeedbackViewModel customerFeedback)
         {
             var result = await _customerFeedbackService.CreateOrEditCustomerFeedback(customerFeedback);
 

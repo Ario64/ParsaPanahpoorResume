@@ -47,7 +47,7 @@ namespace Resume.Application.Services.Implementations
         }
 
 
-        public async Task<bool> CreateOrEditCustomerFeedback(CreateOrEditCustomerFeedbackViewModel customerFeedback)
+        public async Task<bool> CreateOrEditCustomerFeedback(CreateCustomerFeedbackViewModel customerFeedback)
         {
             if (customerFeedback.Id == 0)
             {
@@ -81,15 +81,15 @@ namespace Resume.Application.Services.Implementations
             return true;
         }
 
-        public async Task<CreateOrEditCustomerFeedbackViewModel> FillCreateOrEditCustomerFeedbackViewModel(long id)
+        public async Task<CreateCustomerFeedbackViewModel> FillCreateOrEditCustomerFeedbackViewModel(long id)
         {
-            if (id == 0) return new CreateOrEditCustomerFeedbackViewModel() {Id = 0 };
+            if (id == 0) return new CreateCustomerFeedbackViewModel() {Id = 0 };
 
             CustomerFeedback customerFeedback = await GetCustomerFeedbackById(id);
 
-            if (customerFeedback == null) return new CreateOrEditCustomerFeedbackViewModel() { Id = 0 };
+            if (customerFeedback == null) return new CreateCustomerFeedbackViewModel() { Id = 0 };
 
-            return new CreateOrEditCustomerFeedbackViewModel()
+            return new CreateCustomerFeedbackViewModel()
             {
                 Id = customerFeedback.Id,
                 Avatar = customerFeedback.Avatar,

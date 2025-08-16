@@ -10,8 +10,8 @@ namespace Resume.Application.Services.Interfaces
 
         Task<CustomerFeedback> GetCustomerFeedbackById(long id);
         Task<List<CustomerFeedbackViewModel>> GetCustomerFeedbackForIndex();
-        Task<bool> CreateOrEditCustomerFeedback(CreateOrEditCustomerFeedbackViewModel customerFeedback);
-        Task<CreateOrEditCustomerFeedbackViewModel> FillCreateOrEditCustomerFeedbackViewModel(long id);
+        Task<bool> CreateOrEditCustomerFeedback(CreateCustomerFeedbackViewModel customerFeedback);
+        Task<CreateCustomerFeedbackViewModel> FillCreateOrEditCustomerFeedbackViewModel(long id);
         Task<bool> DeleteCustomerFeedback(long id);
 
     }

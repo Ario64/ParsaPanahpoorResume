@@ -8,6 +8,21 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<CustomerFeedback,CreateOrEditCustomerFeedbackViewModel>().ReverseMap();
+        #region Customer Feedback
+
+        CreateMap<CustomerFeedback, CustomerFeedbackViewModel>().ReverseMap();
+        CreateMap<CustomerFeedback, CreateCustomerFeedbackViewModel>().ReverseMap();
+        CreateMap<CustomerFeedback, CreateCustomerFeedbackViewModel>().ReverseMap();
+        CreateMap<CustomerFeedback, EditCustomerFeedbackViewModel>().ReverseMap();
+        CreateMap<CustomerFeedback, DeleteCustomerFeedbackViewModel>().ReverseMap();
+
+        #endregion
+
+        #region Education
+
+
+
+        #endregion
+
     }
 }
