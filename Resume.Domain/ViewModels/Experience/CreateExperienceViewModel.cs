@@ -1,9 +1,8 @@
-﻿using Resume.Domain.ViewModels.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Domain.ViewModels.Experience
 {
-    public class ExperienceViewModel : BaseViewModel<long>
+    public class CreateExperienceViewModel
     {
         [Display(Name = "عنوان")]
         public string Title { get; set; }
@@ -23,6 +22,5 @@ namespace Resume.Domain.ViewModels.Experience
 
         [Display(Name = "الویت")]
         public int Order { get; set; }
-
     }
 }

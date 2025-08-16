@@ -8,7 +8,7 @@ public class CustomerLogoMappingProfile : Profile
 {
     public CustomerLogoMappingProfile()
     {
-        #region Customer Logo
+        #region Customer Logo Profile
 
         CreateMap<CustomerLogo, CustomerLogoViewModel>().ReverseMap();
         CreateMap<CustomerLogo, CustomerLogoListViewModel>().ReverseMap();

@@ -18,5 +18,4 @@ public class EducationMappingProfile :Profile
 
         #endregion
     }
-
 }
