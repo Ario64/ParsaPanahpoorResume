@@ -27,12 +27,12 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> LoadEducationFormModal(long id)
         {
-            CreateOrEditEducationViewModel result = await _educationService.FillCreateOrEditEducationViewModel(id);
+            CreateEducationViewModel result = await _educationService.FillCreateOrEditEducationViewModel(id);
 
             return PartialView("_EducationFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitEducationFormModal(CreateOrEditEducationViewModel education)
+        public async Task<IActionResult> SubmitEducationFormModal(CreateEducationViewModel education)
         {
             var result = await _educationService.CreateOrEditEducation(education);
 

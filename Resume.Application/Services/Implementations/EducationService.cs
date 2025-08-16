@@ -44,15 +44,15 @@ namespace Resume.Application.Services.Implementations
             return educations;
         }
 
-        public async Task<CreateOrEditEducationViewModel> FillCreateOrEditEducationViewModel(long id)
+        public async Task<CreateEducationViewModel> FillCreateOrEditEducationViewModel(long id)
         {
-            if (id == 0) return new CreateOrEditEducationViewModel() { Id = 0 };
+            if (id == 0) return new CreateEducationViewModel() { Id = 0 };
 
             Education education = await GetEducationById(id);
 
-            if (education == null) return new CreateOrEditEducationViewModel() { Id = 0 };
+            if (education == null) return new CreateEducationViewModel() { Id = 0 };
 
-            return new CreateOrEditEducationViewModel()
+            return new CreateEducationViewModel()
             {
                 Id = education.Id,
                 Description = education.Description,
@@ -63,7 +63,7 @@ namespace Resume.Application.Services.Implementations
             };
         }
 
-        public async Task<bool> CreateOrEditEducation(CreateOrEditEducationViewModel education)
+        public async Task<bool> CreateOrEditEducation(CreateEducationViewModel education)
         {
             if (education.Id == 0)
             {

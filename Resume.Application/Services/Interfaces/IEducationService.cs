@@ -9,8 +9,8 @@ namespace Resume.Application.Services.Interfaces
     {
         Task<Education> GetEducationById(long id);
         Task<List<EducationViewModel>> GetAllEducations();
-        Task<CreateOrEditEducationViewModel> FillCreateOrEditEducationViewModel(long id);
-        Task<bool> CreateOrEditEducation(CreateOrEditEducationViewModel education);
+        Task<CreateEducationViewModel> FillCreateOrEditEducationViewModel(long id);
+        Task<bool> CreateOrEditEducation(CreateEducationViewModel education);
 
         Task<bool> DeleteEducation(long id);
 

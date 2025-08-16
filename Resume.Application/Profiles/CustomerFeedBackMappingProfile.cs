@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Resume.Domain.Models;
 using Resume.Domain.ViewModels.CustomerFeedback;
+using Resume.Domain.ViewModels.CustomerLogo;
 
 namespace Resume.Application.Profiles;
 
-public class MappingProfile : Profile
+public class CustomerFeedBackMappingProfile : Profile
 {
-    public MappingProfile()
+    public CustomerFeedBackMappingProfile()
     {
         #region Customer Feedback
 
@@ -17,12 +18,5 @@ public class MappingProfile : Profile
         CreateMap<CustomerFeedback, DeleteCustomerFeedbackViewModel>().ReverseMap();
 
         #endregion
-
-        #region Education
-
-
-
-        #endregion
-
     }
 }
