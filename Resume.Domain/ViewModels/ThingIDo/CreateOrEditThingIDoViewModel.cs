@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.ThingIDo
 {
-    public class CreateOrEditThingIDoViewModel
+    public class CreateOrEditThingIDoViewModel : BaseViewModel<long>
     {
         #region Properties
-        public long Id { get; set; }
-
 
         [Display(Name = "آیکون")]
         [MaxLength(50, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]

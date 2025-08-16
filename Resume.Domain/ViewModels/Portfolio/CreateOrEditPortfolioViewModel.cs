@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Portfolio
 {
-    public class CreateOrEditPortfolioViewModel
+    public class CreateOrEditPortfolioViewModel : BaseViewModel<long>
     {
-        public long Id { get; set; }
-
-
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         [MaxLength(100, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]

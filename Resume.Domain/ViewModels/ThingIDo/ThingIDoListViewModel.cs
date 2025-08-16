@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.ThingIDo
 {
-    public class ThingIDoListViewModel
+    public class ThingIDoListViewModel : BaseViewModel<long>
     {
-        public long Id { get; set; }
-
-
         [Display(Name = "آیکون")]
         public string Icon { get; set; }
 

@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.CustomerFeedback
 {
-    public class CustomerFeedbackViewModel
+    public class CustomerFeedbackViewModel : BaseViewModel<long>
     {
-
-        public long Id { get; set; }
-
-
         [Display(Name = "آواتار")]
         public string Avatar { get; set; }
 

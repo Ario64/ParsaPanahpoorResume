@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Experience
 {
-    public class ExperienceViewModel
+    public class ExperienceViewModel : BaseViewModel<long>
     {
-        public long Id { get; set; }
-
-
         [Display(Name = "عنوان")]
         public string Title { get; set; }
 

@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Skill
 {
-    public class CreateOrEditSkillViewModel
+    public class CreateOrEditSkillViewModel : BaseViewModel<long>
     {
-
-        public long Id { get; set; }
-
-
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         [MaxLength(100, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]

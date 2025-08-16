@@ -7,6 +7,7 @@ namespace Resume.Domain.Models
     {
 
         #region Properties
+
         [Key]
         public long Id { get; set; }
 

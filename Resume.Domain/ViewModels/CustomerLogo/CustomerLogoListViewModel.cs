@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.CustomerLogo
 {
-    public class CustomerLogoListViewModel
+    public class CustomerLogoListViewModel : BaseViewModel<long>
     {
-        public long Id { get; set; }
-
-
         [Display(Name = "لوگو")]
         public string Logo { get; set; }
 

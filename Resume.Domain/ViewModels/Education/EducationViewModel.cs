@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.VisualBasic.CompilerServices;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Education
 {
-    public class EducationViewModel
+    public class EducationViewModel : BaseViewModel<long>
     {
-        public long Id { get; set; }
-
-
         [Display(Name = "عنوان")]
         public string Title { get; set; }
 

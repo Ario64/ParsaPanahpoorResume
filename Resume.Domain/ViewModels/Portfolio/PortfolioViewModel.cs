@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Portfolio
 {
-    public class PortfolioViewModel
+    public class PortfolioViewModel : BaseViewModel<long>
     {
-        public long Id { get; set; }
-
-
         [Display(Name = "عنوان")]
         public string Title { get; set; }
 
