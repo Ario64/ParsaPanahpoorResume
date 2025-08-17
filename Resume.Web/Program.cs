@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using Resume.Domain.Repository;
+using Resume.Infra.Data.Repository;
 
 namespace Resume.Web;
 
@@ -28,6 +30,7 @@ public class Program
         builder.Services.AddControllersWithViews();
 
         #region Add DbContext
+
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -35,8 +38,10 @@ public class Program
 
         #endregion
 
-        #region ServiceRegistration 
+        #region Registration 
 
+        //Service Registration
+        
         builder.Services.AddScoped<IThingIDoService, ThingIDoService>();
         builder.Services.AddScoped<ICustomerFeedbackService, CustomerFeedbackService>();
         builder.Services.AddScoped<ICustomerLogoService, CustomerLogoService>();
@@ -47,6 +52,11 @@ public class Program
         builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
         builder.Services.AddScoped<IInformationService, InformationService>();
         builder.Services.AddScoped<IMessageService, MessageService>();
+        builder.Services.AddScoped<IReservationService, ReservationService>();
+
+        //Repository Registration
+
+        builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
         #region Google Recaptcha
         builder.Services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
@@ -57,8 +67,6 @@ public class Program
         #region Encoder
         builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
         #endregion
-
-
 
         var app = builder.Build();
 
@@ -84,6 +92,5 @@ public class Program
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.Run();
-
     }
 }
