@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Services.Implementations;
 using Resume.Application.Services.Interfaces;
+using Resume.Domain.ViewModels.Reservation;
 using Resume.Web.Areas.Controllers;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,12 +17,34 @@ public class ReservationController : AdminBaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> ListOfReservationDate(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> Index(CancellationToken cancellationToken = default)
         => View(await _reservationService.GetListOfReservations(cancellationToken));
 
-    //Create (Show form , Insert Data)
+    public async Task<IActionResult> LoadReservationFormModal(ulong id , 
+        CancellationToken cancellationToken = default)
+    {
+        CreateOrUpdateReservationViewModel result = await _reservationService.FillCreateOrUpdateReservationViewModel(id , cancellationToken);
 
+        return PartialView("_ReservationFormModalPartial", result);
+    }
 
-    //Update (Show form , Insert Data)
-    //Delete (Show form , Insert Data)
+    public async Task<IActionResult> SubmitReservationFormModal(CreateOrUpdateReservationViewModel Reservation , 
+        CancellationToken cancellationToken = default)
+    {
+        var result = await _reservationService.CreateOrEditReservationDate(Reservation , cancellationToken);
+
+        if (result) return new JsonResult(new { status = "Success" });
+
+        return new JsonResult(new { status = "Error" });
+    }
+
+    public async Task<IActionResult> DeleteReservation(ulong id , 
+        CancellationToken cancellationToken = default)
+    {
+        var result = await _reservationService.DeleteReservationDate(id , cancellationToken);
+
+        if (result) return new JsonResult(new { status = "Success" });
+
+        return new JsonResult(new { status = "Error" });
+    }
 }

@@ -94,7 +94,92 @@ function DeleteThingIDo(id) {
     });
 }
 
+//Start Reservation Js
 
+function LoadReservationFormModal(id) {
+    $.ajax({
+        url: "/Admin/Reservation/LoadReservationFormModal",
+        type: "get",
+        data: {
+            id: id
+        },
+        beforSend: function () {
+            StartLoading();
+        },
+        success: function (res) {
+            CloseLoading();
+
+            $("#modal-left-content").html(res);
+
+            $('#ReservationForm').data('validator', null);
+            $.validator.unobtrusive.parse("#ReservationForm");
+
+            $('#modal-left').modal('show');
+
+        },
+        error: function () {
+            CloseLoading();
+        }
+    });
+}
+
+function ReservationFormSubmited(res) {
+    CloseLoading();
+
+    if (res.status === 'Success') {
+        ShowMessage('عملیات با موفقیت انجام شد.', 'پیغام موفقیت', 'success')
+        $('#modal-left').modal('hide');
+        $('#data-table-box').load(location.href + ' #data-table-box');
+        $.getScript('/admin/js/data-table.js', function (data, textStatus, jqxhr) { });
+    } else {
+        showMessage('عملیات با شکست مواجه شد', 'پیغام خطا', 'error')
+    }
+
+}
+
+function DeleteReservation(id) {
+    swal.fire({
+        title: "اخطار",
+        text: "آیا از حذف این آیتم اطمینان دارید ؟",
+        icon: "warning",
+        dangerMode: true,
+        showDenyButton: true,
+        confirmButtonText: 'حذف',
+        denyButtonText: 'خیر'
+    }).then((willDelete) => {
+        if (willDelete.isConfirmed) {
+
+            $.ajax({
+                url: "/Admin/Reservation/DeleteReservation",
+                type: "get",
+                data: {
+                    id: id
+                },
+                beforSend: function () {
+                    StartLoading();
+                },
+                success: function (res) {
+                    CloseLoading();
+
+                    if (res.status === "Success") {
+                        ShowMessage('عملیات با موفقیت انجام شد.', 'پیغام موفقیت', 'success');
+                        $(`#ListItem-${id}`).remove();
+                    } else {
+                        ShowMessage('عملیات با شکست مواجه شد.', 'پیغام خطا', 'error');
+                    }
+
+                },
+                error: function () {
+                    CloseLoading();
+                }
+            });
+
+        }
+    });
+}
+
+
+// End Reservation Js
 
 function LoadEducationFormModal(id) {
     $.ajax({
@@ -597,3 +682,4 @@ function DeleteMessage(id) {
         }
     });
 }
+

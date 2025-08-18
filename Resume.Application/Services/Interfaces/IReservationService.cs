@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Resume.Application.Convertors;
 using System;
+using Resume.Domain.ViewModels.Reservation;
 
 namespace Resume.Application.Services.Interfaces;
 
@@ -22,6 +23,12 @@ public interface IReservationService
         string date,
         CancellationToken cancellationToken);
 
-    Task<bool> DeleteReservationDate(ulong reservationDateId,
+    Task<CreateOrUpdateReservationViewModel> FillCreateOrUpdateReservationViewModel(ulong id,
+        CancellationToken cancellationToken);
+
+    Task<bool> CreateOrEditReservationDate(CreateOrUpdateReservationViewModel reservationDate,
+        CancellationToken cancellationToken);
+
+    Task<bool> DeleteReservationDate(ulong id, 
         CancellationToken cancellationToken);
 }
