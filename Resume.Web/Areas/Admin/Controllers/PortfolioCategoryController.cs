@@ -27,11 +27,11 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> LoadPortfolioCategoryFormModal(long id)
         {
-            CreateOrEditPortfolioCategoryViewModel result = await _portfolioService.FillCreateOrEditPortfolioCategoryViewModel(id);
+            EditPortfolioCategoryViewModel result = await _portfolioService.FillCreateOrEditPortfolioCategoryViewModel(id);
             return PartialView("_PortfolioCategorFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitPortfolioCategoryFormModal(CreateOrEditPortfolioCategoryViewModel portfolioCategory)
+        public async Task<IActionResult> SubmitPortfolioCategoryFormModal(EditPortfolioCategoryViewModel portfolioCategory)
         {
             var result = await _portfolioService.CreateOrEditPortfolioCategory(portfolioCategory);
 

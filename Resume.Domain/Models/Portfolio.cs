@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Models
 {
-    public class Portfolio
+    public class Portfolio : BaseEntity<long>
     {
-
-        [Key]
-        public long Id { get; set; }
-
 
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

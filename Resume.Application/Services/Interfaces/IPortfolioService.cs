@@ -19,8 +19,8 @@ namespace Resume.Application.Services.Interfaces
         #region Portfolio Category
         Task<PortfolioCategory> GetPortfolioCategoryById(long id);
         Task<List<PortfolioCategoryViewModel>> GetAllPortfolioCategories();
-        Task<CreateOrEditPortfolioCategoryViewModel> FillCreateOrEditPortfolioCategoryViewModel(long id);
-        Task<bool> CreateOrEditPortfolioCategory(CreateOrEditPortfolioCategoryViewModel portfolioCategory);
+        Task<EditPortfolioCategoryViewModel> FillCreateOrEditPortfolioCategoryViewModel(long id);
+        Task<bool> CreateOrEditPortfolioCategory(EditPortfolioCategoryViewModel portfolioCategory);
         Task<bool> DeletePortfolioCategory(long id);
         #endregion
 

@@ -145,15 +145,15 @@ namespace Resume.Application.Services.Implementations
             return portfolioCategories;
         }
 
-        public async Task<CreateOrEditPortfolioCategoryViewModel> FillCreateOrEditPortfolioCategoryViewModel(long id)
+        public async Task<EditPortfolioCategoryViewModel> FillCreateOrEditPortfolioCategoryViewModel(long id)
         {
-            if (id == 0) return new CreateOrEditPortfolioCategoryViewModel() { Id = 0 };
+            if (id == 0) return new EditPortfolioCategoryViewModel() { Id = 0 };
 
             PortfolioCategory portfolioCategory = await GetPortfolioCategoryById(id);
 
-            if (portfolioCategory == null) return new CreateOrEditPortfolioCategoryViewModel() { Id = 0 };
+            if (portfolioCategory == null) return new EditPortfolioCategoryViewModel() { Id = 0 };
 
-            return new CreateOrEditPortfolioCategoryViewModel()
+            return new EditPortfolioCategoryViewModel()
             {
                 Id = portfolioCategory.Id,
                 Name = portfolioCategory.Name,
@@ -162,7 +162,7 @@ namespace Resume.Application.Services.Implementations
             };
         }
 
-        public async Task<bool> CreateOrEditPortfolioCategory(CreateOrEditPortfolioCategoryViewModel portfolioCategory)
+        public async Task<bool> CreateOrEditPortfolioCategory(EditPortfolioCategoryViewModel portfolioCategory)
         {
 
             if (portfolioCategory.Id == 0)
