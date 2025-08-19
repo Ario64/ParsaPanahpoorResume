@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Domain.ViewModels.CustomerLogo
 {
-    public class EditCustomerLogoViewModel :BaseViewModel<long>
+    public class EditCustomerLogoViewModel :BaseViewModel<ulong>
     {
         [Display(Name = "لوگو")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

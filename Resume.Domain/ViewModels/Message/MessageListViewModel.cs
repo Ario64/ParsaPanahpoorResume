@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Domain.ViewModels.Message;
 
-public class MessageListViewModel: BaseEntity<long>
+public class MessageListViewModel: BaseEntity<ulong>
 {
     public string Name { get; set; }
 

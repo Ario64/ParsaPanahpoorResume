@@ -4,7 +4,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Education
 {
-    public class EducationViewModel : BaseViewModel<long>
+    public class EducationViewModel : BaseViewModel<ulong>
     {
         [Display(Name = "عنوان")]
         public string Title { get; set; }

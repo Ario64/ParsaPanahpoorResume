@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.CustomerFeedback;
 
-public class DeleteCustomerFeedbackViewModel : BaseViewModel<long>
+public class DeleteCustomerFeedbackViewModel : BaseViewModel<ulong>
 {
     
 }

@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.Information;
 
-public class DeleteInformationViewModel : BaseViewModel<long>
+public class DeleteInformationViewModel : BaseViewModel<ulong>
 {
     
 }

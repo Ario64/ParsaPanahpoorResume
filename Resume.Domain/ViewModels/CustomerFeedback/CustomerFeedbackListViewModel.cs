@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.CustomerFeedback;
 
-public class CustomerFeedbackListViewModel : BaseViewModel<long>
+public class CustomerFeedbackListViewModel : BaseViewModel<ulong>
 {
 
     [Display(Name = "آواتار")]

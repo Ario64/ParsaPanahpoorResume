@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Portfolio
 {
-    public class PortfolioCategoryViewModel : BaseViewModel<long>
+    public class PortfolioCategoryViewModel : BaseViewModel<ulong>
     {
         [Display(Name = "عنوان")]
         public string Title { get; set; }

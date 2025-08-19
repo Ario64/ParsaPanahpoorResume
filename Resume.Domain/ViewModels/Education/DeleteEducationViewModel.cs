@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.Education;
 
-public class DeleteEducationViewModel : BaseViewModel<long>
+public class DeleteEducationViewModel : BaseViewModel<ulong>
 {
     
 }

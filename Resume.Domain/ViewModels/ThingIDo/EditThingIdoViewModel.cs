@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.ThingIDo;
 
-public class EditThingIdoViewModel : BaseViewModel<long>
+public class EditThingIdoViewModel : BaseViewModel<ulong>
 {
     [Display(Name = "آیکون")]
     [MaxLength(50, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]

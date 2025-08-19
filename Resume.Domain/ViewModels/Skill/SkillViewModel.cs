@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Skill
 {
-    public class SkillViewModel : BaseViewModel<long>
+    public class SkillViewModel : BaseViewModel<ulong>
     {
         [Display(Name = "عنوان")]
         public string Title { get; set; }

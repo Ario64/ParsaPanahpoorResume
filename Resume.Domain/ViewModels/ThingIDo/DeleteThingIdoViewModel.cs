@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.ThingIDo;
 
-public class DeleteThingIdoViewModel : BaseViewModel<long>
+public class DeleteThingIdoViewModel : BaseViewModel<ulong>
 {
     
 }

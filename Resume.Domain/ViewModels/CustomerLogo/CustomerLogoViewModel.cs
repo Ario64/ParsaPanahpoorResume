@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Resume.Domain.ViewModels.Common;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.CustomerLogo
 {
-    public class CustomerLogoViewModel :BaseViewModel<long>
+    public class CustomerLogoViewModel :BaseViewModel<ulong>
     {
         [Display(Name = "لوگو")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
