@@ -16,6 +16,5 @@ namespace Resume.Domain.ViewModels.Skill
         [Display(Name = "الویت")]
         public int Order { get; set; }
 
-
     }
 }
