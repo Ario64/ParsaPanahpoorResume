@@ -1,17 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Models
 {
-    public class ThingIDo
+    public class ThingIDo : BaseEntity<ulong>
     {
-
-        #region Properties
-
-        [Key]
-        public long Id { get; set; }
-
-
         [Display(Name = "آیکون")]
         [MaxLength(50, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
         public string Icon { get; set; }
@@ -36,8 +30,6 @@ namespace Resume.Domain.Models
 
         [Display(Name = "الویت")]
         public int Order { get; set; } = 0;
-
-        #endregion
 
     }
 }

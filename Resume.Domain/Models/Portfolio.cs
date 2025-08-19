@@ -4,9 +4,8 @@ using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Models
 {
-    public class Portfolio : BaseEntity<long>
+    public class Portfolio : BaseEntity<ulong>
     {
-
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         [MaxLength(100, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]

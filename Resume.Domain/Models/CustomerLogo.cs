@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Models
 {
-    public class CustomerLogo
+    public class CustomerLogo : BaseEntity<ulong>
     {
-        [Key]
-        public long Id { get; set; }
-
-
         [Display(Name = "لوگو")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         public string Logo { get; set; }

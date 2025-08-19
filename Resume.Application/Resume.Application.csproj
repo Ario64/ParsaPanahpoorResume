@@ -15,4 +15,19 @@
     <ProjectReference Include="..\Resume.Infra.Data\Resume.Infra.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\NewFolder10\" />
+    <Folder Include="Features\NewFolder11\" />
+    <Folder Include="Features\NewFolder1\" />
+    <Folder Include="Features\NewFolder2\" />
+    <Folder Include="Features\NewFolder3\" />
+    <Folder Include="Features\NewFolder4\" />
+    <Folder Include="Features\NewFolder5\" />
+    <Folder Include="Features\NewFolder6\" />
+    <Folder Include="Features\NewFolder7\" />
+    <Folder Include="Features\NewFolder8\" />
+    <Folder Include="Features\NewFolder9\" />
+    <Folder Include="Features\NewFolder\" />
+  </ItemGroup>
+
 </Project>

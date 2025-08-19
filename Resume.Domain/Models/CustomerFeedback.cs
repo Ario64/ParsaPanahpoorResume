@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Models
 {
-    public class CustomerFeedback
+    public class CustomerFeedback : BaseEntity<ulong>
     {
-        [Key]
-        public long Id { get; set; }
-
-
+        
         [Display(Name = "آواتار")]
         public string Avatar { get; set; }
 

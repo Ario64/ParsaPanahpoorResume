@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Models
 {
-    public class Skill
+    public class Skill : BaseEntity<ulong>
     {
-        [Key]
-        public long Id { get; set; }
-
-
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
         [MaxLength(100, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
