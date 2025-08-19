@@ -28,13 +28,13 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> LoadThingIDoFormModal(long id)
         {
-            CreateOrEditThingIDoViewModel result = await _thingIDOService.FillCreateOrEditThingIDoViewModel(id);
+            CreateThingIDoViewModel result = await _thingIDOService.FillCreateOrEditThingIDoViewModel(id);
 
             return PartialView("_ThingIDoFormModalPartial", result);
         }
 
 
-        public async Task<IActionResult> SubmitThingIDoFormModal(CreateOrEditThingIDoViewModel thingIDo)
+        public async Task<IActionResult> SubmitThingIDoFormModal(CreateThingIDoViewModel thingIDo)
         {
             var result = await _thingIDOService.CreateOrEditThingIDo(thingIDo);
 

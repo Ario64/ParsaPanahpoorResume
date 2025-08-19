@@ -4,7 +4,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.ThingIDo
 {
-    public class CreateOrEditThingIDoViewModel : BaseViewModel<long>
+    public class CreateThingIDoViewModel
     {
         #region Properties
 

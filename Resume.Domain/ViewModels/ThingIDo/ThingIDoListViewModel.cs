@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.ThingIDo
 {
-    public class ThingIDoListViewModel : BaseViewModel<long>
+    public class ThingIDoListViewModel
     {
         [Display(Name = "آیکون")]
         public string Icon { get; set; }

@@ -44,7 +44,7 @@ namespace Resume.Application.Services.Implementations
             return thingIDos;
         }
 
-        public async Task<bool> CreateOrEditThingIDo(CreateOrEditThingIDoViewModel thingIDo)
+        public async Task<bool> CreateOrEditThingIDo(CreateThingIDoViewModel thingIDo)
         {
 
             if (thingIDo.Id == 0)
@@ -82,15 +82,15 @@ namespace Resume.Application.Services.Implementations
             return true;
         }
 
-        public async Task<CreateOrEditThingIDoViewModel> FillCreateOrEditThingIDoViewModel(long id)
+        public async Task<CreateThingIDoViewModel> FillCreateOrEditThingIDoViewModel(long id)
         {
-            if (id == 0) return new CreateOrEditThingIDoViewModel() { Id = 0 };
+            if (id == 0) return new CreateThingIDoViewModel() { Id = 0 };
 
             ThingIDo thingIDo = await GetThingIDoById(id);
 
-            if (thingIDo == null) return new CreateOrEditThingIDoViewModel() { Id = 0 };
+            if (thingIDo == null) return new CreateThingIDoViewModel() { Id = 0 };
 
-            return new CreateOrEditThingIDoViewModel()
+            return new CreateThingIDoViewModel()
             {
                 Id = thingIDo.Id,
                 ColumnLg = thingIDo.ColumnLg,
