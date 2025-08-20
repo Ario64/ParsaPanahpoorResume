@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="HtmlSanitizer" Version="7.0.473" />
+    <PackageReference Include="HtmlSanitizer" Version="9.0.886" />
+    <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
   </ItemGroup>
 
@@ -16,20 +17,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Education\" />
-    <Folder Include="Features\Experience\" />
-    <Folder Include="Features\CustomerLog\" />
-    <Folder Include="Features\Information\" />
-    <Folder Include="Features\Message\" />
-    <Folder Include="Features\ReservationDateTime\" />
-    <Folder Include="Features\ReservationDate\" />
-    <Folder Include="Features\PortfolioCategory\" />
-    <Folder Include="Features\Portfolio\" />
-    <Folder Include="Features\Skill\" />
-    <Folder Include="Features\SocialMedia\" />
-    <Folder Include="Features\ThingIdo\" />
-    <Folder Include="Features\PersonSelectedReservation\" />
-    <Folder Include="Features\CusromerFeedback\" />
+    <Folder Include="Features\CustomerFeedback\Handlers\Commands\" />
+    <Folder Include="Features\CustomerFeedback\Requests\Commands\" />
+    <Folder Include="Features\CustomerLog\Handlers\" />
+    <Folder Include="Features\CustomerLog\Requests\" />
+    <Folder Include="Features\Education\Handlers\" />
+    <Folder Include="Features\Education\Requests\" />
+    <Folder Include="Features\Experience\Handlers\" />
+    <Folder Include="Features\Experience\Requests\" />
+    <Folder Include="Features\Information\Handlers\" />
+    <Folder Include="Features\Information\Requests\" />
+    <Folder Include="Features\Message\Handlers\" />
+    <Folder Include="Features\Message\Requests\" />
+    <Folder Include="Features\PersonSelectedReservation\Handlers\" />
+    <Folder Include="Features\PersonSelectedReservation\Requests\" />
+    <Folder Include="Features\PortfolioCategory\Handlers\" />
+    <Folder Include="Features\PortfolioCategory\Requests\" />
+    <Folder Include="Features\Portfolio\Handlers\" />
+    <Folder Include="Features\Portfolio\Requests\" />
+    <Folder Include="Features\ReservationDateTime\Handlers\" />
+    <Folder Include="Features\ReservationDateTime\Requests\" />
+    <Folder Include="Features\ReservationDate\Handlers\" />
+    <Folder Include="Features\ReservationDate\Requests\" />
+    <Folder Include="Features\Skill\Handlers\" />
+    <Folder Include="Features\Skill\Requests\" />
+    <Folder Include="Features\SocialMedia\Handlers\" />
+    <Folder Include="Features\SocialMedia\Requests\" />
+    <Folder Include="Features\ThingIdo\Handlers\" />
+    <Folder Include="Features\ThingIdo\Requests\" />
   </ItemGroup>
 
 </Project>
