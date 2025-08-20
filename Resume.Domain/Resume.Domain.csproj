@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\ReservationDateTime\" />
     <Folder Include="ViewModels\ReservationDate\" />
   </ItemGroup>
 
