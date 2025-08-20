@@ -1,7 +1,8 @@
 ﻿using Resume.Domain.Entity.Common;
+using Resume.Domain.Entity.Reservation;
 using System.Collections.Generic;
 
-namespace Resume.Domain.Entity.Reservation;
+namespace Resume.Domain.Entity;
 
 public class ReservationDateTime : BaseEntity<ulong>
 {
