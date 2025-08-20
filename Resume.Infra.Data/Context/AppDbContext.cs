@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Resume.Domain.Entity;
 using Resume.Domain.Entity.Reservation;
 using Resume.Domain.Models;
 using System.Linq;

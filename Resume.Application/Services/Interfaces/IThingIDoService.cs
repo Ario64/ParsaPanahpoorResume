@@ -1,4 +1,4 @@
-﻿using Resume.Domain.Models;
+﻿using Resume.Domain.Entity;
 using Resume.Domain.ViewModels.ThingIDo;
 using System.Collections.Generic;
 using System.Threading.Tasks;

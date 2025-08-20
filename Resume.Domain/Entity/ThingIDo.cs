@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Resume.Domain.Entity.Common;
 
-namespace Resume.Domain.Models
+namespace Resume.Domain.Entity
 {
     public class ThingIDo : BaseEntity<ulong>
     {

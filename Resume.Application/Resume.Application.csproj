@@ -16,18 +16,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\NewFolder10\" />
-    <Folder Include="Features\NewFolder11\" />
-    <Folder Include="Features\NewFolder1\" />
-    <Folder Include="Features\NewFolder2\" />
-    <Folder Include="Features\NewFolder3\" />
-    <Folder Include="Features\NewFolder4\" />
-    <Folder Include="Features\NewFolder5\" />
-    <Folder Include="Features\NewFolder6\" />
-    <Folder Include="Features\NewFolder7\" />
-    <Folder Include="Features\NewFolder8\" />
-    <Folder Include="Features\NewFolder9\" />
-    <Folder Include="Features\NewFolder\" />
+    <Folder Include="Features\Education\" />
+    <Folder Include="Features\Experience\" />
+    <Folder Include="Features\CustomerLog\" />
+    <Folder Include="Features\Information\" />
+    <Folder Include="Features\Message\" />
+    <Folder Include="Features\ReservationDateTime\" />
+    <Folder Include="Features\ReservationDate\" />
+    <Folder Include="Features\PortfolioCategory\" />
+    <Folder Include="Features\Portfolio\" />
+    <Folder Include="Features\Skill\" />
+    <Folder Include="Features\SocialMedia\" />
+    <Folder Include="Features\ThingIdo\" />
+    <Folder Include="Features\PersonSelectedReservation\" />
+    <Folder Include="Features\CusromerFeedback\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Resume.Application.Services.Interfaces;
-using Resume.Domain.Models;
+using Resume.Domain.Entity;
 using Resume.Domain.ViewModels.CustomerFeedback;
 using Resume.Infra.Data.Context;
 using System;
