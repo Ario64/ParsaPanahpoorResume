@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Features\CustomerFeedback\Handlers\Commands\" />
-    <Folder Include="Features\CustomerFeedback\Requests\Commands\" />
     <Folder Include="Features\CustomerLog\Handlers\" />
     <Folder Include="Features\CustomerLog\Requests\" />
     <Folder Include="Features\Education\Handlers\" />

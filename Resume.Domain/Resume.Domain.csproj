@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="IRepository\Information\" />
+    <Folder Include="IRepository\Message\" />
+    <Folder Include="IRepository\ThingIDo\" />
+    <Folder Include="IRepository\SocialMedia\" />
+    <Folder Include="IRepository\Skill\" />
+    <Folder Include="IRepository\ReservationDate\" />
+    <Folder Include="IRepository\Portfolio\" />
+    <Folder Include="IRepository\PersonSelectedReservation\" />
     <Folder Include="ViewModels\ReservationDateTime\" />
     <Folder Include="ViewModels\ReservationDate\" />
   </ItemGroup>
