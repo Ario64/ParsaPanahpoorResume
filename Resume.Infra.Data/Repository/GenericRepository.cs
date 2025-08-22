@@ -10,7 +10,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     #region ctor
 
-    private readonly AppDbContext _context;
+    private protected readonly AppDbContext _context;
 
     public GenericRepository(AppDbContext context)
     {
