@@ -12,6 +12,5 @@ namespace Resume.Application.Services.Interfaces
         Task CreateCustomerFeedback(CustomerFeedback customerFeedback);
         Task EditCustomerFeedback(ulong id);
         Task DeleteCustomerFeedback(ulong id);
-
     }
 }

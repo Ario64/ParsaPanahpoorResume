@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Resume.Domain\Resume.Domain.csproj" />
-    <ProjectReference Include="..\Resume.Infra.Data\Resume.Infra.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +43,7 @@
     <Folder Include="Features\SocialMedia\Requests\" />
     <Folder Include="Features\ThingIdo\Handlers\" />
     <Folder Include="Features\ThingIdo\Requests\" />
+    <Folder Include="UnitOfWork\" />
   </ItemGroup>
 
 </Project>
