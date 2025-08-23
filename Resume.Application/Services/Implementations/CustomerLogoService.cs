@@ -1,30 +1,30 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Resume.Application.Services.Interfaces;
+﻿using Resume.Application.Services.Interfaces;
 using Resume.Domain.ViewModels.CustomerLogo;
-using Resume.Infra.Data.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Resume.Application.UnitOfWork;
+using Resume.Domain.Entity;
 
 namespace Resume.Application.Services.Implementations
 {
     public class CustomerLogoService : ICustomerLogoService
     {
-
         #region Constructor
-        private readonly AppDbContext _context;
 
-        public CustomerLogoService(AppDbContext context)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CustomerLogoService(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
+
         #endregion
 
-
-        public async Task<List<CustomerLogoListViewModel>> GetCustomerLogosForIndexPage()
+        public async Task<List<CustomerLogo>> GetCustomerLogosForIndexPage()
         {
-            List<CustomerLogoListViewModel> customerLogos = await _context.CustomerLogos
-                .OrderBy(c => c.Order)
+            IReadOnlyList<CustomerLogo> customerLogos = await _unitOfWork.GenericRepository<CustomerLogo>().GetAllAsync();
+               customerLogos.OrderBy(c => c.Order)
                 .Select(c => new CustomerLogoListViewModel()
                 {
                     Id = c.Id,

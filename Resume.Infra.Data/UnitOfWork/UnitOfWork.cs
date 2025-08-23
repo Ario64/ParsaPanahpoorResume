@@ -25,7 +25,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IGenericRepository<T> GenericRepository<T>() where T : class
     {
-        return (IGenericRepository<T>)_repositories.GetOrAdd(typeof(T), _= new GenericRepository<T>(_context));
+        return (IGenericRepository<T>)_repositories.GetOrAdd(typeof(T), _ = new GenericRepository<T>(_context));
+
     }
 
     #region Save Changes

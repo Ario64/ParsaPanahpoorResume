@@ -21,6 +21,7 @@ namespace Resume.Web.Controllers
             _customerLogoService = customerLogoService;
         }
         #endregion
+
         public async Task<IActionResult> Index()
         {
 

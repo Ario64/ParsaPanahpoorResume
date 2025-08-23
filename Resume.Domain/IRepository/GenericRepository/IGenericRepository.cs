@@ -8,6 +8,6 @@ public interface IGenericRepository<T> where T : class
     Task<IReadOnlyList<T>> GetAllAsync();
     Task<T> GetAsync(ulong id);
     Task Add(T entity);
-    Task UpdateAsync(T entity);
-    Task DeleteAsync(T entity);
+    void Update(T entity);
+    void Delete(T entity);
 }

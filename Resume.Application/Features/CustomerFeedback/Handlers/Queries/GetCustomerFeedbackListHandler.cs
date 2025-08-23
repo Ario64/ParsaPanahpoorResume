@@ -1,28 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Resume.Application.Features.CustomerFeedback.Requests.Queries;
-using Resume.Application.Services.Interfaces;
+using Resume.Application.UnitOfWork;
 using Resume.Domain.ViewModels.CustomerFeedback;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Queries;
 
 public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomerFeedbackListRequest, List<CustomerFeedbackViewModel>>
 {
-    private readonly ICustomerFeedbackService _customerFeedbackService;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public GetCustomerFeedbackListRequestHandler(ICustomerFeedbackService customerFeedbackService, IMapper mapper)
+    public GetCustomerFeedbackListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _customerFeedbackService = customerFeedbackService;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
     public async Task<List<CustomerFeedbackViewModel>> Handle(GetCustomerFeedbackListRequest request, CancellationToken cancellationToken)
     {
-        var customerFeedbackList = await _customerFeedbackService.GetCustomerFeedbackForIndex();
-       return  _mapper.Map<List<CustomerFeedbackViewModel>>(customerFeedbackList);
+        var customerFeedbackList = await  _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAllAsync();
+       return _mapper.Map<List<CustomerFeedbackViewModel>>(customerFeedbackList);
     }
 }

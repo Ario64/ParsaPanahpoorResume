@@ -4,24 +4,29 @@ using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.Services.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
+using Resume.Application.UnitOfWork;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 
-public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<CreateCustomerFeedbackCommandRequest, ulong>
+public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<CreateCustomerFeedbackCommandRequest, Unit>
 {
-    private readonly ICustomerFeedbackService _customerFeedbackService;
+    #region Constructor
+
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public CreateCustomerFeedbackCommandRequestHandler(ICustomerFeedbackService customerFeedbackService, IMapper mapper)
+    public CreateCustomerFeedbackCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _customerFeedbackService = customerFeedbackService;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
-    public async Task<ulong> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
+    #endregion
+
+    public async Task<Unit> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
         var customerFeedback = _mapper.Map<Domain.Entity.CustomerFeedback>(request.CreateCustomerFeedback);
-        customerFeedback = await _customerFeedbackService.CreateOrEditCustomerFeedback(customerFeedback);
-        return customerFeedback.Id;
+        await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Add(customerFeedback);
+        return Unit.Value;
     }
 }

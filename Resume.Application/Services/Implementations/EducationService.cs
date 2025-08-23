@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Resume.Application.Services.Interfaces;
+﻿using Resume.Application.Services.Interfaces;
 using Resume.Domain.Models;
 using Resume.Domain.ViewModels.Education;
-using Resume.Infra.Data.Context;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
