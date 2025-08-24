@@ -4,7 +4,7 @@ namespace Resume.Domain.ViewModels.Education
 {
     public class EducationViewModel
     {
-        public long Id { get; set; }
+        public ulong Id { get; set; }
 
 
         [Display(Name = "عنوان")]

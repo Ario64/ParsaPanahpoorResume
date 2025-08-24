@@ -2,12 +2,10 @@
 using Resume.Application.Services.Interfaces;
 using Resume.Domain.Models;
 using Resume.Domain.ViewModels.CustomerFeedback;
-using Resume.Infra.Data.Context;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Resume.Infra.Data.Context;
 
 namespace Resume.Application.Services.Implementations
 {

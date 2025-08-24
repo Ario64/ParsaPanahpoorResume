@@ -9,52 +9,65 @@ using Resume.Application.Convertors;
 using Microsoft.EntityFrameworkCore;
 using Resume.Domain.Models;
 using Resume.Domain.ViewModels.Reservation;
+using Resume.Application.Common.Interfaces;
 
 namespace Resume.Application.Services.Implementations;
 
 public class ReservationService : IReservationService
 {
+    #region ctor
     private readonly IReservationRepository _reservationRepository;
-    public ReservationService(IReservationRepository reservationRepository)
+    private readonly IUnitOfWork _unitOfWork;
+
+    public ReservationService(IReservationRepository reservationRepository, IUnitOfWork unitOfWork)
     {
         _reservationRepository = reservationRepository;
+        _unitOfWork = unitOfWork;
+
     }
 
+
+    #endregion
+
     public async Task<List<ReservationDate>> GetListOfReservations(CancellationToken cancellationToken)
-        => await _reservationRepository.GetListOfReservations(cancellationToken);
+        => await _reservationRepository.GetAllAsync(cancellationToken);
 
     public async Task<bool> CreateReservation(string date , 
         CancellationToken cancellationToken)
     {
-        await _reservationRepository.AddReservationDate(new ReservationDate()
+        await _reservationRepository.AddAsync(new ReservationDate()
         {
             Date = date.ToMiladiDateTime()
         } , cancellationToken);
-        await _reservationRepository.SaveChangesAsync(cancellationToken);
+        await _unitOfWork.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<ReservationDate> GetReservationDate(ulong reservationDateId,
         CancellationToken cancellationToken)
-        => await _reservationRepository.GetReservationDate(reservationDateId, cancellationToken);
+        => await _reservationRepository.GetByIdAsync(reservationDateId, cancellationToken);
+
+
 
     public async Task<bool> EditReservationDate(ulong reservationDateId ,
         string date ,   
         CancellationToken cancellationToken)
     {
         //Find original record 
-        var originalRecord = await _reservationRepository.GetReservationDate(reservationDateId , cancellationToken);
+        var originalRecord = await _reservationRepository.GetByIdAsync(reservationDateId , cancellationToken);
         if (originalRecord == null)
             return false;
 
         originalRecord.Date = date.ToMiladiDateTime();
 
         _reservationRepository.Update(originalRecord);
-        await _reservationRepository.SaveChangesAsync(cancellationToken);
+        await _unitOfWork.SaveChangesAsync();
 
         return true;
     }
+
+
 
     public async Task<CreateOrUpdateReservationViewModel> FillCreateOrUpdateReservationViewModel(ulong id , 
         CancellationToken cancellationToken)
@@ -84,8 +97,8 @@ public class ReservationService : IReservationService
                 Date = reservationDate.ReservationDate.ToMiladiDateTime()
             };
 
-            await _reservationRepository.AddReservationDate(newReservationDate , cancellationToken);
-            await _reservationRepository.SaveChangesAsync(cancellationToken);
+            await _reservationRepository.AddAsync(newReservationDate , cancellationToken);
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
 
@@ -97,7 +110,7 @@ public class ReservationService : IReservationService
         currentReservationDate.Date = reservationDate.ReservationDate.ToMiladiDateTime();
 
         _reservationRepository.Update(currentReservationDate);
-        await _reservationRepository.SaveChangesAsync(cancellationToken);
+        await _unitOfWork.SaveChangesAsync();
 
         return true;
     }
@@ -110,8 +123,8 @@ public class ReservationService : IReservationService
 
         reservationDate.IsDelete = true;
 
-        _reservationRepository.Update(reservationDate);
-        await _reservationRepository.SaveChangesAsync(cancellationToken);
+        _reservationRepository.Delete(reservationDate);
+        await _unitOfWork.SaveChangesAsync();
 
         return true;
     }
