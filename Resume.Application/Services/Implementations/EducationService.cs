@@ -1,10 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Resume.Application.Common.Interfaces;
 using Resume.Application.Services.Interfaces;
+using Resume.Domain.IRepository;
 using Resume.Domain.Models;
 using Resume.Domain.ViewModels.Education;
 using Resume.Infra.Data.Context;
+using Resume.Infra.Data.Repository;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Application.Services.Implementations
@@ -12,25 +16,31 @@ namespace Resume.Application.Services.Implementations
     public class EducationService : IEducationService
     {
 
-        #region Constructor
-        private readonly AppDbContext _context;
+        #region ctor
+        private readonly IEducationRepository _educationRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EducationService(AppDbContext context)
+        public EducationService(IEducationRepository educationRepository, IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _educationRepository = educationRepository;
+            _unitOfWork = unitOfWork;
+
         }
         #endregion
 
-        public async Task<Education> GetEducationById(long id)
+
+        public async Task<Education> GetEducationById(ulong id, CancellationToken cancellationToken)
         {
-            return await _context.Educations.FirstOrDefaultAsync(e => e.Id == id);
+            return await _educationRepository.GetByIdAsync(id,  cancellationToken);
         }
 
-        public async Task<List<EducationViewModel>> GetAllEducations()
+        public async Task<List<EducationViewModel>> GetAllEducations(CancellationToken cancellationToken)
         {
-            List<EducationViewModel> educations = await _context.Educations
+            var educations = await _educationRepository.GetAllAsync(cancellationToken);
+
+            return educations
                 .OrderBy(c => c.Order)
-                .Select(c => new EducationViewModel()
+                .Select(c => new EducationViewModel
                 {
                     Description = c.Description,
                     EndDate = c.EndDate,
@@ -39,16 +49,14 @@ namespace Resume.Application.Services.Implementations
                     Title = c.Title,
                     Order = c.Order
                 })
-                .ToListAsync();
-
-            return educations;
+                .ToList();
         }
 
-        public async Task<CreateOrEditEducationViewModel> FillCreateOrEditEducationViewModel(long id)
+        public async Task<CreateOrEditEducationViewModel> FillCreateOrEditEducationViewModel(ulong id, CancellationToken cancellationToken)
         {
             if (id == 0) return new CreateOrEditEducationViewModel() { Id = 0 };
 
-            Education education = await GetEducationById(id);
+            Education education = await GetEducationById(id, cancellationToken);
 
             if (education == null) return new CreateOrEditEducationViewModel() { Id = 0 };
 
@@ -63,7 +71,7 @@ namespace Resume.Application.Services.Implementations
             };
         }
 
-        public async Task<bool> CreateOrEditEducation(CreateOrEditEducationViewModel education)
+        public async Task<bool> CreateOrEditEducation(CreateOrEditEducationViewModel education, CancellationToken cancellationToken)
         {
             if (education.Id == 0)
             {
@@ -76,12 +84,12 @@ namespace Resume.Application.Services.Implementations
                     Title = education.Title
                 };
 
-                await _context.Educations.AddAsync(newEducation);
-                await _context.SaveChangesAsync();
+                await _educationRepository.AddAsync(newEducation, cancellationToken);
+                await _unitOfWork.SaveChangesAsync();
                 return true;
             }
 
-            Education currentEducation = await GetEducationById(education.Id);
+            Education currentEducation = await GetEducationById(education.Id,  cancellationToken);
 
             if (currentEducation == null) return false;
 
@@ -91,20 +99,20 @@ namespace Resume.Application.Services.Implementations
             currentEducation.StartDate = education.StartDate;
             currentEducation.Title = education.Title;
 
-            _context.Educations.Update(currentEducation);
-            await _context.SaveChangesAsync();
+            _educationRepository.Update(currentEducation);
+            await _unitOfWork.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<bool> DeleteEducation(long id)
+        public async Task<bool> DeleteEducation(ulong id, CancellationToken cancellationToken)
         {
-            Education education = await GetEducationById(id);
+            Education education = await GetEducationById(id,  cancellationToken);
 
             if (education == null) return false;
 
-            _context.Educations.Remove(education);
-            await _context.SaveChangesAsync();
+            _educationRepository.Delete(education);
+            await _unitOfWork.SaveChangesAsync();
 
             return true;
         }

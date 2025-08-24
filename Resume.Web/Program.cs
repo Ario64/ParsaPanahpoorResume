@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using System.Threading.Tasks;
-
+using Resume.Domain.IRepository;
 namespace Resume.Web;
 
 public class Program
@@ -59,6 +59,7 @@ public class Program
         //Repository Registration
 
         builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+        builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 
         #region Google Recaptcha
         builder.Services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();

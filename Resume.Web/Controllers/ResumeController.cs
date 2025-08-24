@@ -4,6 +4,7 @@ using Resume.Domain.ViewModels.Page;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Controllers
@@ -23,11 +24,11 @@ namespace Resume.Web.Controllers
         }
         #endregion
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
             ResumePageViewModel model = new ResumePageViewModel()
             {
-                Educations = await _educationService.GetAllEducations(),
+                Educations = await _educationService.GetAllEducations(cancellationToken),
                 Experiences = await _experienceService.GetAllExperiences(),
                 Skills = await _skillService.GetAllSkills()
             };

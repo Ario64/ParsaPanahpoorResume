@@ -23,14 +23,8 @@ public class ReservationRepository : GenericRepository<ReservationDate>, IReserv
     }
 
 
-
     #endregion
 
-    public async Task<List<ReservationDate>> GetListOfReservations(CancellationToken cancellationToken)
-        => await _context.ReservationDates
-                         .Where(p=> !p.IsDelete)
-                         .OrderByDescending(p=> p.CreateDate)
-                         .ToListAsync();
 
 
 }

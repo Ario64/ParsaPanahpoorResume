@@ -11,9 +11,9 @@ namespace Resume.Infra.Data.Repository
         private readonly AppDbContext _dbContext = dbContext;
 
 
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        public async Task<int> SaveChangesAsync()
         {
-            return await _dbContext.SaveChangesAsync(cancellationToken);
+            return await _dbContext.SaveChangesAsync();
         }
 
     }

@@ -13,10 +13,16 @@ namespace Resume.Application.Common.Interfaces
         Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken);
 
         void Delete(TEntity entity);
+        Task<bool> DeleteAsync(ulong id, CancellationToken cancellationToken);
+
 
         void Update(TEntity entity);
 
-        Task<TEntity> Get(ulong id, CancellationToken cancellationToken);
+
+        Task<TEntity?> GetByIdAsync(ulong id, CancellationToken cancellationToken);
+
+        Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+
 
     }
 

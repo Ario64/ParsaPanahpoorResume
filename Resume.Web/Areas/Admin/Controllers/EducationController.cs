@@ -5,6 +5,7 @@ using Resume.Web.Areas.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Areas.Admin.Controllers
@@ -20,30 +21,31 @@ namespace Resume.Web.Areas.Admin.Controllers
         }
         #endregion
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            return View(await _educationService.GetAllEducations());
+            return View(await _educationService.GetAllEducations(cancellationToken));
         }
 
-        public async Task<IActionResult> LoadEducationFormModal(long id)
+        public async Task<IActionResult> LoadEducationFormModal(ulong id, CancellationToken cancellationToken)
         {
-            CreateOrEditEducationViewModel result = await _educationService.FillCreateOrEditEducationViewModel(id);
+            CreateOrEditEducationViewModel result = await _educationService.FillCreateOrEditEducationViewModel(id, cancellationToken);
 
             return PartialView("_EducationFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitEducationFormModal(CreateOrEditEducationViewModel education)
+        public async Task<IActionResult> SubmitEducationFormModal(
+            CreateOrEditEducationViewModel education, CancellationToken cancellationToken)
         {
-            var result = await _educationService.CreateOrEditEducation(education);
+            var result = await _educationService.CreateOrEditEducation(education, cancellationToken);
 
             if (result) return new JsonResult(new { status = "Success" });
 
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeleteEducation(long id)
+        public async Task<IActionResult> DeleteEducation(ulong id, CancellationToken cancellationToken)
         {
-            var result = await _educationService.DeleteEducation(id);
+            var result = await _educationService.DeleteEducation(id, cancellationToken);
 
             if (result) return new JsonResult(new { status = "Success" });
 
