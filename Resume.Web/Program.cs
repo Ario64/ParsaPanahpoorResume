@@ -1,24 +1,25 @@
-using GoogleReCaptcha.V3.Interface;
 using GoogleReCaptcha.V3;
+using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Resume.Application.Common.Interfaces;
 using Resume.Application.Services.Implementations;
 using Resume.Application.Services.Interfaces;
+using Resume.Domain.Repository;
 using Resume.Infra.Data.Context;
+using Resume.Infra.Data.Repository;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-using Resume.Domain.Repository;
-using Resume.Infra.Data.Repository;
 
 namespace Resume.Web;
 
@@ -53,6 +54,7 @@ public class Program
         builder.Services.AddScoped<IInformationService, InformationService>();
         builder.Services.AddScoped<IMessageService, MessageService>();
         builder.Services.AddScoped<IReservationService, ReservationService>();
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         //Repository Registration
 

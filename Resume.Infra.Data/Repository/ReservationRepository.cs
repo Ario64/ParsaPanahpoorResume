@@ -10,16 +10,19 @@ using System.Threading.Tasks;
 
 namespace Resume.Infra.Data.Repository;
 
-public class ReservationRepository : IReservationRepository
+public class ReservationRepository : GenericRepository<ReservationDate>, IReservationRepository
+
 {
     #region Ctor
 
     private readonly AppDbContext _context;
 
-    public ReservationRepository(AppDbContext context)
+    public ReservationRepository(AppDbContext dbContext):base(dbContext)
     {
-        _context = context;
+        _context = dbContext;
     }
+
+
 
     #endregion
 
@@ -29,17 +32,7 @@ public class ReservationRepository : IReservationRepository
                          .OrderByDescending(p=> p.CreateDate)
                          .ToListAsync();
 
-    public async Task<ReservationDate> GetReservationDate(ulong reservationDateId,
-        CancellationToken cancellationToken)
-        => await _context.ReservationDates.FindAsync(reservationDateId , cancellationToken);
 
-    public async Task AddReservationDate(ReservationDate reservationDate,
-        CancellationToken cancellationToken)
-        => await _context.ReservationDates.AddAsync(reservationDate);
-
-    public void Update(ReservationDate reservationDate)
-        => _context.ReservationDates.Update(reservationDate);
-
-    public async Task SaveChangesAsync(CancellationToken cancellationToken)
-        => await _context.SaveChangesAsync(cancellationToken);
 }
+
+

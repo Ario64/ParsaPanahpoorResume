@@ -9,11 +9,13 @@ public interface IReservationRepository
 {
     Task<List<ReservationDate>> GetListOfReservations(
         CancellationToken cancellationToken);
-    Task<ReservationDate> GetReservationDate(ulong reservationDateId,
+
+    Task<ReservationDate> Get(ulong reservationDateId,
         CancellationToken cancellationToken);
-    Task AddReservationDate(ReservationDate reservationDate,
+
+    Task<ReservationDate> AddAsync(ReservationDate reservationDate,
         CancellationToken cancellationToken);
+
     public void Update(
         ReservationDate reservationDate);
-    Task SaveChangesAsync(CancellationToken cancellationToken);
 }

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <ProjectReference Include="..\Resume.Domain\Resume.Domain.csproj" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
@@ -14,8 +15,5 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Resume.Domain\Resume.Domain.csproj" />
-  </ItemGroup>
 
 </Project>
