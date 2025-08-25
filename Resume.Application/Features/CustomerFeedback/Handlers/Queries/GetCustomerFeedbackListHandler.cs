@@ -11,6 +11,8 @@ namespace Resume.Application.Features.CustomerFeedback.Handlers.Queries;
 
 public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomerFeedbackListRequest, List<CustomerFeedbackViewModel>>
 {
+    #region Constructort
+
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
@@ -20,9 +22,11 @@ public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomer
         _mapper = mapper;
     }
 
+    #endregion
+
     public async Task<List<CustomerFeedbackViewModel>> Handle(GetCustomerFeedbackListRequest request, CancellationToken cancellationToken)
     {
-        var customerFeedbackList = await  _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAllAsync();
+        var customerFeedbackList = await  _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAllAsync(cancellationToken);
        return _mapper.Map<List<CustomerFeedbackViewModel>>(customerFeedbackList);
     }
 }

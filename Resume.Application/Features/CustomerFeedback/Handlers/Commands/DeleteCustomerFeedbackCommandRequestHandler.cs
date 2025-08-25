@@ -1,10 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.CustomerFeedback;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 
@@ -13,12 +11,10 @@ public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<Delet
     #region Constructor
 
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
 
-    public DeleteCustomerFeedbackCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public DeleteCustomerFeedbackCommandRequestHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
 
     #endregion

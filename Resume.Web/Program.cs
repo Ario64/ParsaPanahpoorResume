@@ -55,10 +55,10 @@ public class Program
         #endregion
 
         #region Encoder
+
         builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
+
         #endregion
-
-
 
         var app = builder.Build();
 
