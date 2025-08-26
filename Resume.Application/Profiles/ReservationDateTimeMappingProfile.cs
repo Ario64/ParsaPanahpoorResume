@@ -8,8 +8,7 @@ public class ReservationDateTimeMappingProfile : Profile
 {
     public ReservationDateTimeMappingProfile()
     {
-        CreateMap<ReservationDateTime, ReservationDateTimeViewModel>().ReverseMap();
-        CreateMap<ReservationDateTime, ReservationDateTimeListViewModel>().ReverseMap();
+        CreateMap<ReservationDateTime, ReservationDateTimeViewModel>();
         CreateMap<ReservationDateTime, CreateReservationDateTimeViewModel>().ReverseMap();
         CreateMap<ReservationDateTime, EditReservationDateTimeViewModel>().ReverseMap();
         CreateMap<ReservationDateTime, DeleteReservationDateTimeViewModel>().ReverseMap();

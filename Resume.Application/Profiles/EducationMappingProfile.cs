@@ -10,8 +10,7 @@ public class EducationMappingProfile :Profile
     {
         #region Education Profile
 
-        CreateMap<Education, EducationViewModel>().ReverseMap();
-        CreateMap<Education, EducationListViewModel>().ReverseMap();
+        CreateMap<Education, EducationViewModel>();
         CreateMap<Education, CreateEducationViewModel>().ReverseMap();
         CreateMap<Education, EditEducationViewModel>().ReverseMap();
         CreateMap<Education, DeleteEducationViewModel>().ReverseMap();

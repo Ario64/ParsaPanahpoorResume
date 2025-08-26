@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
-using Resume.Application.Services.Interfaces;
+using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
-using Resume.Application.UnitOfWork;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 
@@ -26,7 +25,7 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
     public async Task<Unit> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
         var customerFeedback = _mapper.Map<Domain.Entity.CustomerFeedback>(request.CreateCustomerFeedback);
-        await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Add(customerFeedback);
+        await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().AddAsync(customerFeedback, cancellationToken);
         return Unit.Value;
     }
 }

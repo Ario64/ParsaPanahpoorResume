@@ -3,6 +3,7 @@ using Resume.Domain.IRepository.GenericRepository;
 using Resume.Infra.Data.Context;
 using System;
 using System.Collections.Concurrent;
+using System.Threading;
 using System.Threading.Tasks;
 using Resume.Infra.Data.Repository;
 
@@ -26,7 +27,6 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<T> GenericRepository<T>() where T : class
     {
         return (IGenericRepository<T>)_repositories.GetOrAdd(typeof(T), _ = new GenericRepository<T>(_context));
-
     }
 
     #region Save Changes
@@ -36,9 +36,9 @@ public class UnitOfWork : IUnitOfWork
         _context.SaveChanges();
     }
 
-    public async Task SaveChangesAsync()
+    public async Task SaveChangesAsync(CancellationToken cancellationToken)
     {
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     #endregion
@@ -51,4 +51,5 @@ public class UnitOfWork : IUnitOfWork
     }
 
     #endregion
+
 }

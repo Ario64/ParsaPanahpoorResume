@@ -13,8 +13,7 @@ public class PortfolioMappingProfile: Profile
         CreateMap<Portfolio, CreatePortfolioViewModel>().ReverseMap();
         CreateMap<Portfolio, EditPortfolioViewModel>().ReverseMap();
         CreateMap<Portfolio, DeletePortfolioViewModel>().ReverseMap();
-        CreateMap<Portfolio, PortfolioViewModel>().ReverseMap();
-        CreateMap<Portfolio, PortfolioListViewModel>().ReverseMap();
+        CreateMap<Portfolio, PortfolioViewModel>();
 
         #endregion
 

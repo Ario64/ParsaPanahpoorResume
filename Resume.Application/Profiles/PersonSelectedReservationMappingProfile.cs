@@ -8,8 +8,7 @@ public class PersonSelectedReservationMappingProfile : Profile
 {
     public PersonSelectedReservationMappingProfile()
     {
-        CreateMap<PersonSelectedReservation, PersonSelectedReservationViewModel>().ReverseMap();
-        CreateMap<PersonSelectedReservation, PersonSelectedReservationListViewModel>().ReverseMap();
+        CreateMap<PersonSelectedReservation, PersonSelectedReservationViewModel>();
         CreateMap<PersonSelectedReservation, CreatePersonSelectedReservationViewModel>().ReverseMap();
         CreateMap<PersonSelectedReservation, EditPersonSelectedReservationViewModel>().ReverseMap();
         CreateMap<PersonSelectedReservation, DeletePersonSelectedReservationViewModel>().ReverseMap();

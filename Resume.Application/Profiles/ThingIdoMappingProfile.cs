@@ -8,8 +8,7 @@ public class ThingIdoMappingProfile : Profile
 {
     public ThingIdoMappingProfile()
     {
-        CreateMap<ThingIDo, ThingIdoViewModel>().ReverseMap();
-        CreateMap<ThingIDo, ThingIDoListViewModel>().ReverseMap();
+        CreateMap<ThingIDo, ThingIdoViewModel>();
         CreateMap<ThingIDo, CreateThingIDoViewModel>().ReverseMap();
         CreateMap<ThingIDo, EditThingIdoViewModel>().ReverseMap();
         CreateMap<ThingIDo, DeleteThingIdoViewModel>().ReverseMap();

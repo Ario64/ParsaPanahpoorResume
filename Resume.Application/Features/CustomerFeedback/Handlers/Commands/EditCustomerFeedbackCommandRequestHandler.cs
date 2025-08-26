@@ -24,7 +24,7 @@ public class EditCustomerFeedbackCommandRequestHandler : IRequestHandler<EditCus
 
     public async Task<Unit> Handle(EditCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
-        var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAsync(request.Id);
+        var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.CustomerFeedbackViewModel, customerFeedback);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Update(customerFeedback);
         await _unitOfWork.SaveChangesAsync();

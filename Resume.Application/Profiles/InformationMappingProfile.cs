@@ -10,7 +10,7 @@ public class InformationMappingProfile : Profile
     {
         #region Information Profile
 
-        CreateMap<Information, InformationViewModel>().ReverseMap();
+        CreateMap<Information, InformationViewModel>();
         CreateMap<Information, CreateInformationViewModel>().ReverseMap();
         CreateMap<Information, EditInformationViewModel>().ReverseMap();
         CreateMap<Information, DeleteInformationViewModel>().ReverseMap();

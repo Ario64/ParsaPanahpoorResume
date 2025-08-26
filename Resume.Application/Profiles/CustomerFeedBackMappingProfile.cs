@@ -11,8 +11,7 @@ public class CustomerFeedBackMappingProfile : Profile
     {
         #region Customer Feedback
 
-        CreateMap<CustomerFeedback, CustomerFeedbackViewModel>().ReverseMap();
-        CreateMap<CustomerFeedback, CreateCustomerFeedbackViewModel>().ReverseMap();
+        CreateMap<CustomerFeedback, CustomerFeedbackViewModel>();
         CreateMap<CustomerFeedback, CreateCustomerFeedbackViewModel>().ReverseMap();
         CreateMap<CustomerFeedback, EditCustomerFeedbackViewModel>().ReverseMap();
         CreateMap<CustomerFeedback, DeleteCustomerFeedbackViewModel>().ReverseMap();

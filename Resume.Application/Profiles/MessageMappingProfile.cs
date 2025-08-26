@@ -10,10 +10,10 @@ public class MessageMappingProfile : Profile
     {
         #region Message Profile
 
-        CreateMap<Message, MessageViewModel>().ReverseMap();
-        CreateMap<Message, MessageListViewModel>().ReverseMap();
+        CreateMap<Message, MessageViewModel>();
         CreateMap<Message, CreateMessageViewModel>().ReverseMap();
         CreateMap<Message, DeleteMessageViewModel>().ReverseMap();
+        CreateMap<Message, EditMessageViewModel>().ReverseMap();
 
         #endregion
     }

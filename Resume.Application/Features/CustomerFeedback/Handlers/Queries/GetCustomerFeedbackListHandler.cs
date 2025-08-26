@@ -24,9 +24,9 @@ public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomer
 
     #endregion
 
-    public async Task<List<CustomerFeedbackViewModel>> Handle(GetCustomerFeedbackListRequest request, CancellationToken cancellationToken)
+    public async  Task<List<CustomerFeedbackViewModel>> Handle(GetCustomerFeedbackListRequest request, CancellationToken cancellationToken)
     {
-        var customerFeedbackList = await  _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAllAsync(cancellationToken);
-       return _mapper.Map<List<CustomerFeedbackViewModel>>(customerFeedbackList);
+        var customerFeedbackList = _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAll(cancellationToken);
+        return _mapper.Map<List<CustomerFeedbackViewModel>>(customerFeedbackList);
     }
 }

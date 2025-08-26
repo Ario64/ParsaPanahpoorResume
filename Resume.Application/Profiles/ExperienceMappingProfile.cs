@@ -10,8 +10,7 @@ public class ExperienceMappingProfile : Profile
     {
         #region Experience Profile
 
-        CreateMap<Experience, ExperienceViewModel>().ReverseMap();
-        CreateMap<Experience, ExperienceListViewModel>().ReverseMap();
+        CreateMap<Experience, ExperienceViewModel>();
         CreateMap<Experience, CreateExperienceViewModel>().ReverseMap();
         CreateMap<Experience, EditExperienceViewModel>().ReverseMap();
         CreateMap<Experience, DeleteExperienceViewModel>().ReverseMap();
