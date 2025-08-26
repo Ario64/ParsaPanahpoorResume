@@ -27,10 +27,10 @@ public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomer
 
     public async Task<PagedResult<CustomerFeedbackViewModel>> Handle(GetCustomerFeedbackListRequest request, CancellationToken cancellationToken)
     {
-        var customerFeedbackList =await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
-                                                               .GetAllAsync(request.page, request.pageSize,cancellationToken);
+        var customerFeedbackList = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
+                                                               .GetAllAsync(request.page, request.pageSize, cancellationToken);
 
-        var items =  _mapper.Map<IReadOnlyList<CustomerFeedbackViewModel>>(customerFeedbackList.Items);
+        var items = _mapper.Map<IReadOnlyList<CustomerFeedbackViewModel>>(customerFeedbackList.Items);
 
         return new PagedResult<CustomerFeedbackViewModel>()
         {

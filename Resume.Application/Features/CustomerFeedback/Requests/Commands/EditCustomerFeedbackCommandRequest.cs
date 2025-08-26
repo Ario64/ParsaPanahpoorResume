@@ -6,5 +6,5 @@ namespace Resume.Application.Features.CustomerFeedback.Requests.Commands;
 public class EditCustomerFeedbackCommandRequest : IRequest<Unit>
 {
     public ulong Id { get; set; }
-    public CustomerFeedbackViewModel CustomerFeedbackViewModel { get; set; }
+    public EditCustomerFeedbackViewModel CustomerFeedbackViewModel { get; set; }
 }

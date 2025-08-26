@@ -23,7 +23,7 @@ public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<Delet
     {
         var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Delete(customerFeedback);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }
 }

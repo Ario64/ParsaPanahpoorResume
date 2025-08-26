@@ -25,7 +25,8 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
     public async Task<Unit> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
         var customerFeedback = _mapper.Map<Domain.Entity.CustomerFeedback>(request.CreateCustomerFeedback);
-        await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().AddAsync(customerFeedback, cancellationToken);
+        await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Add(customerFeedback);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }
 }

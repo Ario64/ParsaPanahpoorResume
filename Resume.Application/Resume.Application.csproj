@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\CustomerLog\Handlers\Commands\" />
     <Folder Include="Features\CustomerLog\Handlers\Queries\" />
-    <Folder Include="Features\CustomerLog\Requests\Commands\" />
     <Folder Include="Features\Education\Handlers\" />
     <Folder Include="Features\Education\Requests\" />
     <Folder Include="Features\Experience\Handlers\" />

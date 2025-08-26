@@ -60,11 +60,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     #endregion
 
-    #region AddAsync
+    #region Add
 
-    public async Task AddAsync(T entity, CancellationToken cancellationToken = default)
+    public void Add(T entity)
     {
-        await _context.Set<T>().AddAsync(entity, cancellationToken);
+         _context.Set<T>().Add(entity);
     }
 
     #endregion
