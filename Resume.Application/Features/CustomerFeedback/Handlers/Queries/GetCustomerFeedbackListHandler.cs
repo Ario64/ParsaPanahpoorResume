@@ -6,10 +6,11 @@ using Resume.Domain.ViewModels.CustomerFeedback;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Resume.Domain.ViewModels.Pagination;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Queries;
 
-public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomerFeedbackListRequest, List<CustomerFeedbackViewModel>>
+public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomerFeedbackListRequest, PagedResult<CustomerFeedbackViewModel>>
 {
     #region Constructort
 
@@ -24,9 +25,20 @@ public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomer
 
     #endregion
 
-    public async  Task<List<CustomerFeedbackViewModel>> Handle(GetCustomerFeedbackListRequest request, CancellationToken cancellationToken)
+    public async Task<PagedResult<CustomerFeedbackViewModel>> Handle(GetCustomerFeedbackListRequest request, CancellationToken cancellationToken)
     {
-        var customerFeedbackList = _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAll(cancellationToken);
-        return _mapper.Map<List<CustomerFeedbackViewModel>>(customerFeedbackList);
+        var customerFeedbackList =await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
+                                                               .GetAllAsync(request.page, request.pageSize,cancellationToken);
+
+        var items =  _mapper.Map<IReadOnlyList<CustomerFeedbackViewModel>>(customerFeedbackList.Items);
+
+        return new PagedResult<CustomerFeedbackViewModel>()
+        {
+            Items = items,
+            TotalPages = customerFeedbackList.TotalPages,
+            PageSize = customerFeedbackList.PageSize,
+            TotalCount = customerFeedbackList.TotalCount,
+            Page = customerFeedbackList.Page
+        };
     }
 }
