@@ -32,26 +32,6 @@ public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomer
 
     public async Task<PagedResult<CustomerLogoViewModel>> Handle(GetCustomerLogoListRequest request, CancellationToken cancellationToken)
     {
-        var query = _unitOfWork.GenericRepository<CustomerLogo>().GetAll(cancellationToken);
-        int skip = (request.pageId - 1) * request.pageSize;
-        int take = request.pageSize;
-
-        var items = await query.OrderByDescending(o => o.Id)
-                                .Skip(skip)
-                                .Take(take)
-                                .ProjectTo<CustomerLogoViewModel>(_mapper.ConfigurationProvider)
-                                .ToListAsync(cancellationToken);
-
-        var totalCount = await query.CountAsync(cancellationToken);
-        var totalPages = (int)Math.Ceiling(totalCount / (double)take);
-
-        return new PagedResult<CustomerLogoViewModel>
-        {
-            Items = items,
-            PageSize = take,
-            Page = request.pageId,
-            TotalCount = totalCount,
-            TotalPages = totalPages
-        };
+       
     }
 }

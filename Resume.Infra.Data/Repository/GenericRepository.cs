@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Resume.Application.UnitOfWork;
+using Resume.Domain.Entity;
 using Resume.Domain.IRepository.GenericRepository;
+using Resume.Domain.ViewModels.CustomerLogo;
+using Resume.Domain.ViewModels.Pagination;
 using Resume.Infra.Data.Context;
 
 namespace Resume.Infra.Data.Repository;
@@ -23,10 +29,28 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     #region Get All Async
 
-    public IQueryable<T> GetAll(CancellationToken cancellationToken = default)
+    public async Task<PagedResult<T>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
     {
-        var entityList = _context.Set<T>().AsNoTracking();
-        return entityList;
+        int skip = (page - 1) * pageSize;
+        int take = pageSize;
+
+        var query = _context.Set<T>().AsQueryable();
+
+        var totalCount = await query.CountAsync(cancellationToken);
+        var totalPages = (int)Math.Ceiling(totalCount / (double)take);
+
+        var items = await query.Skip(skip)
+                                      .Take(take)
+                                      .ToListAsync(cancellationToken);
+
+        return new PagedResult<T>()
+        {
+            Items = items,
+            TotalPages = totalPages,
+            Page = page,
+            TotalCount = totalCount,
+            PageSize = pageSize
+        };
     }
 
     #endregion
@@ -38,7 +62,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         var entity = await _context.Set<T>().FindAsync(id, cancellationToken);
         return entity;
     }
-  
+
     #endregion
 
     #region AddAsync
