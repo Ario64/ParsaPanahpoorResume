@@ -8,7 +8,7 @@ namespace Resume.Domain.IRepository.GenericRepository;
 
 public interface IGenericRepository<T> where T : class
 {
-    Task<PagedResult<T>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default);
+    Task<PagedResult<T>> GetAllAsync(int page , int pageSize , CancellationToken cancellationToken = default);
     Task AddAsync(T entity, CancellationToken cancellationToken = default);
     Task<T> GetAsync(object id, CancellationToken cancellationToken = default);
     void Update(T entity);

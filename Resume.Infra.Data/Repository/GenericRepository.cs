@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using Resume.Domain.IRepository.GenericRepository;
+using Resume.Domain.ViewModels.Pagination;
+using Resume.Infra.Data.Context;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-using Resume.Application.UnitOfWork;
-using Resume.Domain.Entity;
-using Resume.Domain.IRepository.GenericRepository;
-using Resume.Domain.ViewModels.CustomerLogo;
-using Resume.Domain.ViewModels.Pagination;
-using Resume.Infra.Data.Context;
 
 namespace Resume.Infra.Data.Repository;
 
@@ -29,7 +24,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     #region Get All Async
 
-    public async Task<PagedResult<T>> GetAllAsync(int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
+    public async Task<PagedResult<T>> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken = default)
     {
         int skip = (page - 1) * pageSize;
         int take = pageSize;
