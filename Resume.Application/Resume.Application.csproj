@@ -18,8 +18,8 @@
 
   <ItemGroup>
     <Folder Include="Features\CustomerLog\Handlers\Queries\" />
-    <Folder Include="Features\Experience\Handlers\" />
-    <Folder Include="Features\Experience\Requests\" />
+    <Folder Include="Features\Experience\Handlers\Commands\" />
+    <Folder Include="Features\Experience\Requests\Commands\" />
     <Folder Include="Features\Information\Handlers\" />
     <Folder Include="Features\Information\Requests\" />
     <Folder Include="Features\Message\Handlers\" />

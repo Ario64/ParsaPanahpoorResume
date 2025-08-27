@@ -25,7 +25,9 @@ public class GetEducationRequestHandler : IRequestHandler<GetEducationRequest, E
 
     public async Task<EducationViewModel> Handle(GetEducationRequest request, CancellationToken cancellationToken)
     {
-        var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().GetAsync(request.Id, cancellationToken);
+        var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>()
+                                         .GetAsync(request.Id, cancellationToken);
+
         return _mapper.Map<EducationViewModel>(education);
     }
 }
