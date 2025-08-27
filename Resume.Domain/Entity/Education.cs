@@ -2,7 +2,7 @@
 using Resume.Domain.Entity.Common;
 
 
-namespace Resume.Domain.Models
+namespace Resume.Domain.Entity
 {
     public class Education : BaseEntity<ulong>
     {

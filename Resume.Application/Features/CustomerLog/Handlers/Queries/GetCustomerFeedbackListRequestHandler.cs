@@ -29,7 +29,7 @@ public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomer
     public async Task<PagedResult<CustomerLogoViewModel>> Handle(GetCustomerLogoListRequest request, CancellationToken cancellationToken)
     {
         var customerLogoList = await _unitOfWork.GenericRepository<CustomerLogo>()
-                                                                      .GetAllAsync(request.pageId, request.pageSize, cancellationToken);
+                                                .GetAllAsync(request.pageId, request.pageSize, cancellationToken);
 
         var mappedItems = _mapper.Map<IReadOnlyList<CustomerLogoViewModel>>(customerLogoList.Items);
 
