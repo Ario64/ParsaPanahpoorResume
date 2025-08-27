@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.IRepository.Education;
 
-public interface IEducationRepository : IGenericRepository<Models.Education>
+public interface IEducationRepository : IGenericRepository<Resume.Domain.Entity.Education>
 {
     
 }
