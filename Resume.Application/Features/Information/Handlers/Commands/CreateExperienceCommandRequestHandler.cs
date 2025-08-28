@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.Experience.Requests.Commands;
+using Resume.Application.Features.Information.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Features.Experience.Handlers.Commands;
+namespace Resume.Application.Features.Information.Handlers.Commands;
 
-public class CreateExperienceCommandRequestHandler : IRequestHandler<CreateExperienceCommandRequest, Unit>
+public class CreateExperienceCommandRequestHandler : IRequestHandler<CreateInformationCommandRequest, Unit>
 {
     #region Constructor
 
@@ -16,16 +16,16 @@ public class CreateExperienceCommandRequestHandler : IRequestHandler<CreateExper
 
     public CreateExperienceCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _unitOfWork = unitOfWork;   
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
     #endregion
 
-    public async Task<Unit> Handle(CreateExperienceCommandRequest request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateInformationCommandRequest request, CancellationToken cancellationToken)
     {
-        var experinece = _mapper.Map<Resume.Domain.Entity.Experience>(request.CreateExperienceViewModel);
-        _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>().Add(experinece);
+        var information = _mapper.Map<Resume.Domain.Entity.Information>(request.CreateInformationViewModel);
+        _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().Add(information);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }
