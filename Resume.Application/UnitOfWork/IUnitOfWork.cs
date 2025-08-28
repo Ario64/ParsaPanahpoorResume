@@ -1,5 +1,4 @@
-﻿using Resume.Domain.IRepository.CustomerFeedback;
-using Resume.Domain.IRepository.GenericRepository;
+﻿using Resume.Domain.IRepository.GenericRepository;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

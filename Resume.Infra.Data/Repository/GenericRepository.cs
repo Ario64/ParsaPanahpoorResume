@@ -35,8 +35,8 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         var totalPages = (int)Math.Ceiling(totalCount / (double)take);
 
         var items = await query.Skip(skip)
-                                      .Take(take)
-                                      .ToListAsync(cancellationToken);
+                               .Take(take)
+                               .ToListAsync(cancellationToken);
 
         return new PagedResult<T>()
         {
