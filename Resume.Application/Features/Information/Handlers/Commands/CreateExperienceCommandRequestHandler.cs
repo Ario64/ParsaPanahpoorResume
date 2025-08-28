@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Information.Handlers.Commands;
 
-public class CreateExperienceCommandRequestHandler : IRequestHandler<CreateInformationCommandRequest, Unit>
+public class CreateInformationCommandRequestHandler : IRequestHandler<CreateInformationCommandRequest, Unit>
 {
     #region Constructor
 
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public CreateExperienceCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateInformationCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
