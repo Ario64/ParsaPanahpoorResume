@@ -18,8 +18,8 @@
 
   <ItemGroup>
     <Folder Include="Features\CustomerLog\Handlers\Queries\" />
-    <Folder Include="Features\Message\Handlers\" />
-    <Folder Include="Features\Message\Requests\" />
+    <Folder Include="Features\Message\Handlers\Commands\" />
+    <Folder Include="Features\Message\Requests\Commands\" />
     <Folder Include="Features\PersonSelectedReservation\Handlers\" />
     <Folder Include="Features\PersonSelectedReservation\Requests\" />
     <Folder Include="Features\PortfolioCategory\Handlers\" />
