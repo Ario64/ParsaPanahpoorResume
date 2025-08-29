@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.Portfolio.Requests.Commands;
+using Resume.Application.Features.PortfolioCategory.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Features.Portfolio.Handlers.Commands;
+namespace Resume.Application.Features.PortfolioCategory.Handlers.Commands;
 
 public class CreatePortfolioCategoryCommandRequestHandler : IRequestHandler<CreatePortfolioCategoryCommandRequest, Unit>
 {
@@ -24,8 +24,8 @@ public class CreatePortfolioCategoryCommandRequestHandler : IRequestHandler<Crea
 
     public async Task<Unit> Handle(CreatePortfolioCategoryCommandRequest request, CancellationToken cancellationToken)
     {
-        var porfolio = _mapper.Map<Resume.Domain.Entity.Portfolio>(request.CreatePortfolioViewModel);
-        _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().Add(porfolio);
+        var porfolio = _mapper.Map<Resume.Domain.Entity.PortfolioCategory>(request.CreatePortfolioCategoryViewModel);
+        _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().Add(porfolio);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }

@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Features.Portfolio.Handlers.Queries;
+namespace Resume.Application.Features.PortfolioCategory.Handlers.Queries;
 
-public class GetPortfolioCategoryListRequestHandler : IRequestHandler<GetPortfolioCategoryListRequest, PagedResult<PortfolioViewModel>>
+public class GetPortfolioCategoryListRequestHandler : IRequestHandler<GetPortfolioCategoryListRequest, PagedResult<PortfolioCategoryViewModel>>
 {
     #region Constructor
 
@@ -25,20 +25,21 @@ public class GetPortfolioCategoryListRequestHandler : IRequestHandler<GetPortfol
 
     #endregion
 
-    public async Task<PagedResult<PortfolioViewModel>> Handle(GetPortfolioCategoryListRequest request, CancellationToken cancellationToken)
+    public async Task<PagedResult<PortfolioCategoryViewModel>> Handle(GetPortfolioCategoryListRequest request, CancellationToken cancellationToken)
     {
-        var portfolioList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>()
+        var portfolioCategoryList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>()
                                              .GetAllAsync(request.page, request.pageSize, cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<PortfolioViewModel>>(portfolioList.Items);
+        var items = _mapper.Map<IReadOnlyList<PortfolioCategoryViewModel>>(portfolioCategoryList.Items);
 
-        return new PagedResult<PortfolioViewModel>
+        return new PagedResult<PortfolioCategoryViewModel>
         {
             Items = items,
             Page = request.page,
             PageSize = request.pageSize,
-            TotalCount = portfolioList.TotalCount,
-            TotalPages = portfolioList.TotalPages
+            TotalCount = portfolioCategoryList.TotalCount,
+            TotalPages = portfolioCategoryList.TotalPages
         };
     }
+
 }

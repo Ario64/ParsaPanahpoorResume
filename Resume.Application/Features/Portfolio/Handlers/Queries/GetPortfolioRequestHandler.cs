@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Portfolio.Handlers.Queries;
 
-public class GetPortfolioRequestHandler : IRequestHandler<GetPortfolioRequest, PortfolioViewModel>
+public class GetPortfolioCategoryRequestHandler : IRequestHandler<GetPortfolioCategoryRequest, PortfolioViewModel>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetPortfolioRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetPortfolioCategoryRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -23,7 +23,7 @@ public class GetPortfolioRequestHandler : IRequestHandler<GetPortfolioRequest, P
 
     #endregion
 
-    public async Task<PortfolioViewModel> Handle(GetPortfolioRequest request, CancellationToken cancellationToken)
+    public async Task<PortfolioViewModel> Handle(GetPortfolioCategoryRequest request, CancellationToken cancellationToken)
     {
         var portfolio = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().GetAsync(request.Id, cancellationToken);
         return _mapper.Map<PortfolioViewModel>(portfolio);

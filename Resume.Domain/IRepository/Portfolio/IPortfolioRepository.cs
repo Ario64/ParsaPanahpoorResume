@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.IRepository.Portfolio;
 
-public interface IPortfolioRepository : IGenericRepository<Models.Portfolio>
+public interface IPortfolioRepository : IGenericRepository<Entity.Portfolio>
 {
     
 }
