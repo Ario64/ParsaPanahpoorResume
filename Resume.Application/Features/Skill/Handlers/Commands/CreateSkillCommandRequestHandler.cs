@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Skill.Handlers.Commands;
 
-public class CreateSkillCommandRequestHandler : IRequestHandler<CreateSkillCommandRequest, Unit>
+public class CreateSocialMediaCommandRequestHandler : IRequestHandler<CreateSocialMediaCommandRequest, Unit>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateSkillCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateSocialMediaCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -22,7 +22,7 @@ public class CreateSkillCommandRequestHandler : IRequestHandler<CreateSkillComma
 
     #endregion
 
-    public async Task<Unit> Handle(CreateSkillCommandRequest request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateSocialMediaCommandRequest request, CancellationToken cancellationToken)
     {
         var skill = _mapper.Map<Resume.Domain.Entity.Skill>(request.CreateSkillViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().Add(skill);

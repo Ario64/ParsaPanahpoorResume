@@ -18,14 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Features\CustomerLog\Handlers\Queries\" />
-    <Folder Include="Features\SocialMedia\Handlers\Commands\" />
-    <Folder Include="Features\SocialMedia\Handlers\Queries\" />
-    <Folder Include="Features\SocialMedia\Requests\Commands\" />
-    <Folder Include="Features\SocialMedia\Requests\Queries\" />
-    <Folder Include="Features\ThingIdo\Handlers\Commands\" />
-    <Folder Include="Features\ThingIdo\Handlers\Queries\" />
-    <Folder Include="Features\ThingIdo\Requests\Commands\" />
-    <Folder Include="Features\ThingIdo\Requests\Queries\" />
     <Folder Include="UnitOfWork\" />
   </ItemGroup>
 

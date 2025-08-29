@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Resume.Application.Features.Skill.Requests.Commands;
+namespace Resume.Application.Features.ThingIdo.Requests.Commands;
 
 public record DeleteThingIDoCommandRequest : IRequest<Unit>
 {

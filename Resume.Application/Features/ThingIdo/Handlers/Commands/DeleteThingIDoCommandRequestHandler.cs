@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using Resume.Application.Features.Skill.Requests.Commands;
+using Resume.Application.Features.ThingIdo.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Features.Skill.Handlers.Commands;
+namespace Resume.Application.Features.ThingIdo.Handlers.Commands;
 
 public class DeleteThingIDoCommandRequestHandler : IRequestHandler<DeleteThingIDoCommandRequest, Unit>
 {
@@ -21,8 +21,8 @@ public class DeleteThingIDoCommandRequestHandler : IRequestHandler<DeleteThingID
 
     public async Task<Unit> Handle(DeleteThingIDoCommandRequest request, CancellationToken cancellationToken)
     {
-        var skill = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().GetAsync(request.Id, cancellationToken);
-        _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().Delete(skill);
+        var thingIDO = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>().GetAsync(request.Id, cancellationToken);
+        _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>().Delete(thingIDO);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }
