@@ -22,10 +22,6 @@
     <Folder Include="Features\ReservationDateTime\Handlers\Queries\" />
     <Folder Include="Features\ReservationDateTime\Requests\Commands\" />
     <Folder Include="Features\ReservationDateTime\Requests\Queries\" />
-    <Folder Include="Features\ReservationDate\Handlers\Commands\" />
-    <Folder Include="Features\ReservationDate\Handlers\Queries\" />
-    <Folder Include="Features\ReservationDate\Requests\Commands\" />
-    <Folder Include="Features\ReservationDate\Requests\Queries\" />
     <Folder Include="Features\Skill\Handlers\Commands\" />
     <Folder Include="Features\Skill\Handlers\Queries\" />
     <Folder Include="Features\Skill\Requests\Commands\" />

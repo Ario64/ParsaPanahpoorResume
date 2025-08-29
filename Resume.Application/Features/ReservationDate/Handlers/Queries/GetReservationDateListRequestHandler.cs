@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.Portfolio.Requests.Queries;
+using Resume.Application.Features.ReservationDate.Requests.Queries;
 using Resume.Application.UnitOfWork;
 using Resume.Domain.ViewModels.Pagination;
-using Resume.Domain.ViewModels.Portfolio;
+using Resume.Domain.ViewModels.ReservationDate;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Features.PortfolioCategory.Handlers.Queries;
+namespace Resume.Application.Features.ReservationDate.Handlers.Queries;
 
-public class GetReservationDateListRequestHandler : IRequestHandler<GetPortfolioCategoryListRequest, PagedResult<PortfolioCategoryViewModel>>
+public class GetReservationDateListRequestHandler : IRequestHandler<GetReservationDateListRequest, PagedResult<ReservationDateViewModel>>
 {
     #region Constructor
 
@@ -25,14 +25,14 @@ public class GetReservationDateListRequestHandler : IRequestHandler<GetPortfolio
 
     #endregion
 
-    public async Task<PagedResult<PortfolioCategoryViewModel>> Handle(GetPortfolioCategoryListRequest request, CancellationToken cancellationToken)
+    public async Task<PagedResult<ReservationDateViewModel>> Handle(GetReservationDateListRequest request, CancellationToken cancellationToken)
     {
-        var portfolioCategoryList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>()
+        var portfolioCategoryList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>()
                                              .GetAllAsync(request.page, request.pageSize, cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<PortfolioCategoryViewModel>>(portfolioCategoryList.Items);
+        var items = _mapper.Map<IReadOnlyList<ReservationDateViewModel>>(portfolioCategoryList.Items);
 
-        return new PagedResult<PortfolioCategoryViewModel>
+        return new PagedResult<ReservationDateViewModel>
         {
             Items = items,
             Page = request.page,

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.PortfolioCategory.Requests.Commands;
+using Resume.Application.Features.ReservationDate.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Features.PortfolioCategory.Handlers.Commands;
+namespace Resume.Application.Features.ReservationDate.Handlers.Commands;
 
 public class CreateReservationDateCommandRequestHandler : IRequestHandler<CreateReservationDateCommandRequest, Unit>
 {
@@ -24,8 +24,8 @@ public class CreateReservationDateCommandRequestHandler : IRequestHandler<Create
 
     public async Task<Unit> Handle(CreateReservationDateCommandRequest request, CancellationToken cancellationToken)
     {
-        var porfolio = _mapper.Map<Resume.Domain.Entity.PortfolioCategory>(request.CreatePortfolioCategoryViewModel);
-        _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().Add(porfolio);
+        var reservationDate = _mapper.Map<Resume.Domain.Entity.ReservationDate>(request.CreateReservationDateViewModel);
+        _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().Add(reservationDate);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }

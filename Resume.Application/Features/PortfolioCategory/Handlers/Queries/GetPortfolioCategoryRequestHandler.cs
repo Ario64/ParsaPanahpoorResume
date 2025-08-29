@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.PortfolioCategory.Handlers.Queries;
 
-public class GetPortfolioCategoryRequestHandler : IRequestHandler<GetPortfolioCategoryRequest, PortfolioCategoryViewModel>
+public class GetReservationDateRequestHandler : IRequestHandler<GetPortfolioCategoryRequest, PortfolioCategoryViewModel>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetPortfolioCategoryRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetReservationDateRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

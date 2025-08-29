@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Resume.Application.Features.PortfolioCategory.Requests.Commands;
+namespace Resume.Application.Features.ReservationDate.Requests.Commands;
 
 public record DeleteReservationDateCommandRequest : IRequest<Unit>
 {
