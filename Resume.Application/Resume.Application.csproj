@@ -18,20 +18,32 @@
 
   <ItemGroup>
     <Folder Include="Features\CustomerLog\Handlers\Queries\" />
-    <Folder Include="Features\PortfolioCategory\Handlers\" />
-    <Folder Include="Features\PortfolioCategory\Requests\" />
-    <Folder Include="Features\Portfolio\Handlers\" />
-    <Folder Include="Features\Portfolio\Requests\" />
-    <Folder Include="Features\ReservationDateTime\Handlers\" />
-    <Folder Include="Features\ReservationDateTime\Requests\" />
-    <Folder Include="Features\ReservationDate\Handlers\" />
-    <Folder Include="Features\ReservationDate\Requests\" />
-    <Folder Include="Features\Skill\Handlers\" />
-    <Folder Include="Features\Skill\Requests\" />
-    <Folder Include="Features\SocialMedia\Handlers\" />
-    <Folder Include="Features\SocialMedia\Requests\" />
-    <Folder Include="Features\ThingIdo\Handlers\" />
-    <Folder Include="Features\ThingIdo\Requests\" />
+    <Folder Include="Features\PortfolioCategory\Handlers\Commands\" />
+    <Folder Include="Features\PortfolioCategory\Handlers\Queries\" />
+    <Folder Include="Features\PortfolioCategory\Requests\Commands\" />
+    <Folder Include="Features\PortfolioCategory\Requests\Queries\" />
+    <Folder Include="Features\Portfolio\Handlers\Commands\" />
+    <Folder Include="Features\Portfolio\Requests\Commands\" />
+    <Folder Include="Features\ReservationDateTime\Handlers\Commands\" />
+    <Folder Include="Features\ReservationDateTime\Handlers\Queries\" />
+    <Folder Include="Features\ReservationDateTime\Requests\Commands\" />
+    <Folder Include="Features\ReservationDateTime\Requests\Queries\" />
+    <Folder Include="Features\ReservationDate\Handlers\Commands\" />
+    <Folder Include="Features\ReservationDate\Handlers\Queries\" />
+    <Folder Include="Features\ReservationDate\Requests\Commands\" />
+    <Folder Include="Features\ReservationDate\Requests\Queries\" />
+    <Folder Include="Features\Skill\Handlers\Commands\" />
+    <Folder Include="Features\Skill\Handlers\Queries\" />
+    <Folder Include="Features\Skill\Requests\Commands\" />
+    <Folder Include="Features\Skill\Requests\Queries\" />
+    <Folder Include="Features\SocialMedia\Handlers\Commands\" />
+    <Folder Include="Features\SocialMedia\Handlers\Queries\" />
+    <Folder Include="Features\SocialMedia\Requests\Commands\" />
+    <Folder Include="Features\SocialMedia\Requests\Queries\" />
+    <Folder Include="Features\ThingIdo\Handlers\Commands\" />
+    <Folder Include="Features\ThingIdo\Handlers\Queries\" />
+    <Folder Include="Features\ThingIdo\Requests\Commands\" />
+    <Folder Include="Features\ThingIdo\Requests\Queries\" />
     <Folder Include="UnitOfWork\" />
   </ItemGroup>
 
