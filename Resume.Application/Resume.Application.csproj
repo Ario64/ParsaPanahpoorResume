@@ -22,8 +22,6 @@
     <Folder Include="Features\PortfolioCategory\Handlers\Queries\" />
     <Folder Include="Features\PortfolioCategory\Requests\Commands\" />
     <Folder Include="Features\PortfolioCategory\Requests\Queries\" />
-    <Folder Include="Features\Portfolio\Handlers\Commands\" />
-    <Folder Include="Features\Portfolio\Requests\Commands\" />
     <Folder Include="Features\ReservationDateTime\Handlers\Commands\" />
     <Folder Include="Features\ReservationDateTime\Handlers\Queries\" />
     <Folder Include="Features\ReservationDateTime\Requests\Commands\" />
