@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ReservationDate.Handlers.Commands;
 
-public class DeleteReservationDateCommandRequestHandler : IRequestHandler<DeleteReservationDateCommandRequest, Unit>
+public class DeleteReservationDateTimeCommandRequestHandler : IRequestHandler<DeleteReservationDateTimeCommandRequest, Unit>
 {
 
     #region Constructor
@@ -15,7 +15,7 @@ public class DeleteReservationDateCommandRequestHandler : IRequestHandler<Delete
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteReservationDateCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public DeleteReservationDateTimeCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -23,7 +23,7 @@ public class DeleteReservationDateCommandRequestHandler : IRequestHandler<Delete
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteReservationDateCommandRequest request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteReservationDateTimeCommandRequest request, CancellationToken cancellationToken)
     {
         var reservationDate = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().Delete(reservationDate);

@@ -18,10 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Features\CustomerLog\Handlers\Queries\" />
-    <Folder Include="Features\ReservationDateTime\Handlers\Commands\" />
-    <Folder Include="Features\ReservationDateTime\Handlers\Queries\" />
-    <Folder Include="Features\ReservationDateTime\Requests\Commands\" />
-    <Folder Include="Features\ReservationDateTime\Requests\Queries\" />
     <Folder Include="Features\Skill\Handlers\Commands\" />
     <Folder Include="Features\Skill\Handlers\Queries\" />
     <Folder Include="Features\Skill\Requests\Commands\" />

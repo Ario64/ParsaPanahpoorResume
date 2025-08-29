@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.ReservationDate.Requests.Commands;
+using Resume.Application.Features.ReservationDateTime.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Features.ReservationDate.Handlers.Commands;
+namespace Resume.Application.Features.ReservationDateTime.Handlers.Commands;
 
 public class EditReservationDateTimeCommandRequestHandler : IRequestHandler<EditReservationDateTimeCommandRequest, Unit>
 {
@@ -24,9 +24,9 @@ public class EditReservationDateTimeCommandRequestHandler : IRequestHandler<Edit
 
     public async Task<Unit> Handle(EditReservationDateTimeCommandRequest request, CancellationToken cancellationToken)
     {
-        var reservationDate = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().GetAsync(request.Id, cancellationToken);
-        _mapper.Map(request.EditReservationDateViewModel, reservationDate);
-        _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().Update(reservationDate);
+        var reservationDateTime = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>().GetAsync(request.Id, cancellationToken);
+        _mapper.Map(request.EditReservationDateTimeViewModel, reservationDateTime);
+        _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>().Update(reservationDateTime);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }
