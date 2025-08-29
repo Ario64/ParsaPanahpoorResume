@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.ReservationDateTime.Requests.Commands;
+using Resume.Application.Features.Skill.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Resume.Application.Features.ReservationDateTime.Handlers.Commands;
+namespace Resume.Application.Features.Skill.Handlers.Commands;
 
 public class CreateSkillCommandRequestHandler : IRequestHandler<CreateSkillCommandRequest, Unit>
 {
@@ -24,8 +24,8 @@ public class CreateSkillCommandRequestHandler : IRequestHandler<CreateSkillComma
 
     public async Task<Unit> Handle(CreateSkillCommandRequest request, CancellationToken cancellationToken)
     {
-        var reservationDateTime = _mapper.Map<Resume.Domain.Entity.ReservationDateTime>(request.CreateReservationDateTimeViewModel);
-        _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>().Add(reservationDateTime);
+        var skill = _mapper.Map<Resume.Domain.Entity.Skill>(request.CreateSkillViewModel);
+        _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().Add(skill);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }
