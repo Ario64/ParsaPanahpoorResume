@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Portfolio;
 
 namespace Resume.Application.Features.PortfolioCategory.Requests.Commands;
 
-public record CreateReservationDateCommandRequest : IRequest<Unit>
+public record CreatePortfolioCategoryCommandRequest(CreatePortfolioCategoryViewModel CreatePortfolioCategoryViewModel) : IRequest<bool>
 {
-    public CreatePortfolioCategoryViewModel CreatePortfolioCategoryViewModel { get; init; }
+   
 }

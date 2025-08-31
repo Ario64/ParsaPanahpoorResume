@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.SocialMedia
 {
-    public class SocialMediaViewModel : BaseViewModel<ulong>
+    public class SocialMediaViewModel : BaseViewModel<long>
     {
         [Display(Name = "لینک")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

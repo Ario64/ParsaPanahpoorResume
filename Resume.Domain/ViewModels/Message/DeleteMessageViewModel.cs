@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.Message;
 
-public class DeleteMessageViewModel: BaseViewModel<ulong>
+public class DeleteMessageViewModel: BaseViewModel<long>
 {
     
 }

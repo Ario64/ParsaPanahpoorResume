@@ -2,7 +2,6 @@
 
 namespace Resume.Application.Features.Skill.Requests.Commands;
 
-public record DeleteThingIDoCommandRequest : IRequest<Unit>
+public record DeleteSkillCommandRequest(ulong Id) : IRequest<bool>
 {
-    public ulong Id { get; set; }
 }

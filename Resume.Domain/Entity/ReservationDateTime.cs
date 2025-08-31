@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Resume.Domain.Entity;
 
-public class ReservationDateTime : BaseEntity<ulong>
+public class ReservationDateTime : BaseEntity<long>
 {
     public string StartTime { get; set; }
     public string EndTime { get; set; }

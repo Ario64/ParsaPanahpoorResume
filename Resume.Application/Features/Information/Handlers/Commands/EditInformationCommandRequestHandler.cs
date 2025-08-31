@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.Experience.Requests.Commands;
+using Resume.Application.Features.Information.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Information.Handlers.Commands;
 
-public class EditInformationCommandRequestHandler : IRequestHandler<EditInformationCommandRequest, Unit>
+public class EditInformationCommandRequestHandler : IRequestHandler<EditInformationCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,12 +22,12 @@ public class EditInformationCommandRequestHandler : IRequestHandler<EditInformat
 
     #endregion
 
-    public async Task<Unit> Handle(EditInformationCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(EditInformationCommandRequest request, CancellationToken cancellationToken)
     {
         var information = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().GetAsync(request.Id, cancellationToken);
         _mapper.Map( request.EditInformationViewModel, information);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().Update(information);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

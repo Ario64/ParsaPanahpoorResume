@@ -2,7 +2,7 @@
 
 namespace Resume.Application.Features.ReservationDateTime.Requests.Commands;
 
-public record DeleteSkillCommandRequest : IRequest<Unit>
+public record DeleteReservationDateTimeCommandRequest(ulong Id) : IRequest<bool>
 {
-    public ulong Id { get; set; }
+ 
 }

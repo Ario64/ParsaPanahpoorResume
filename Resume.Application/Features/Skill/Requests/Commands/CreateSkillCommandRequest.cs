@@ -3,7 +3,6 @@ using Resume.Domain.ViewModels.Skill;
 
 namespace Resume.Application.Features.Skill.Requests.Commands;
 
-public record CreateSocialMediaCommandRequest : IRequest<Unit>
+public record CreateSkillCommandRequest(CreateSkillViewModel CreateSkillViewModel) : IRequest<bool>
 {
-    public CreateSkillViewModel CreateSkillViewModel { get; init; }
 }

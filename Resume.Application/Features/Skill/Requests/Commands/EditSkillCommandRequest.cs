@@ -3,8 +3,7 @@ using Resume.Domain.ViewModels.Skill;
 
 namespace Resume.Application.Features.Skill.Requests.Commands;
 
-public record EditSocialMediaCommandRequest : IRequest<Unit>
+public record EditSkillCommandRequest(ulong Id, EditSkillViewModel EditSkillViewModel) : IRequest<Unit>
 {
-    public ulong Id { get; init; }
-    public EditSkillViewModel EditSkillViewModel { get; init; }
+  
 }

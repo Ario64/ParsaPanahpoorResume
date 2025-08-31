@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ReservationDateTime.Handlers.Queries;
 
-public class GetSkillRequestHandler : IRequestHandler<GetSkillRequest, ReservationDateTimeViewModel>
+public class GetReservationDateTimeRequestHandler : IRequestHandler<GetReservationDateTimeRequest, ReservationDateTimeViewModel>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetSkillRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetReservationDateTimeRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -23,7 +23,7 @@ public class GetSkillRequestHandler : IRequestHandler<GetSkillRequest, Reservati
 
     #endregion
 
-    public async Task<ReservationDateTimeViewModel> Handle(GetSkillRequest request, CancellationToken cancellationToken)
+    public async Task<ReservationDateTimeViewModel> Handle(GetReservationDateTimeRequest request, CancellationToken cancellationToken)
     {
         var reservationDateTime = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>().GetAsync(request.Id, cancellationToken);
         return _mapper.Map<ReservationDateTimeViewModel>(reservationDateTime);

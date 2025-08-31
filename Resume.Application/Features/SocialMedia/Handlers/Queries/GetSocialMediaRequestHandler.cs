@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.SocialMedia.Handlers.Queries;
 
-public class GetThingIDoRequestHandler : IRequestHandler<GetThingIDoRequest, SocialMediaViewModel>
+public class GetSocialMediaRequestHandler : IRequestHandler<GetSocialMediaRequest, SocialMediaViewModel>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetThingIDoRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetSocialMediaRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -23,7 +23,7 @@ public class GetThingIDoRequestHandler : IRequestHandler<GetThingIDoRequest, Soc
 
     #endregion
 
-    public async Task<SocialMediaViewModel> Handle(GetThingIDoRequest request, CancellationToken cancellationToken)
+    public async Task<SocialMediaViewModel> Handle(GetSocialMediaRequest request, CancellationToken cancellationToken)
     {
         var socialMedia = await _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().GetAsync(request.Id, cancellationToken);
         return _mapper.Map<SocialMediaViewModel>(socialMedia);

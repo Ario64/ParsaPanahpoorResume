@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 
-public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<CreateCustomerFeedbackCommandRequest, Unit>
+public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<CreateCustomerFeedbackCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,11 +22,11 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
 
     #endregion
 
-    public async Task<Unit> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
-        var customerFeedback = _mapper.Map<Domain.Entity.CustomerFeedback>(request.CreateCustomerFeedback);
-        await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Add(customerFeedback);
+        var customerFeedback = _mapper.Map<Domain.Entity.CustomerFeedback>(request.CreateCustomerFeedbackViewModel);
+        _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Add(customerFeedback);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

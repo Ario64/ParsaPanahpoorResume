@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.SocialMedia.Handlers.Commands;
 
-public class DeleteSocialCommandRequestHandler : IRequestHandler<DeleteSocialCommandRequest, Unit>
+public class DeleteSocialCommandRequestHandler : IRequestHandler<DeleteSocialCommandRequest, bool>
 {
     #region Constructor
 
@@ -19,11 +19,11 @@ public class DeleteSocialCommandRequestHandler : IRequestHandler<DeleteSocialCom
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteSocialCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteSocialCommandRequest request, CancellationToken cancellationToken)
     {
         var socialMedia = await _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().Delete(socialMedia);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

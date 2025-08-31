@@ -1,22 +1,16 @@
-using GoogleReCaptcha.V3.Interface;
 using GoogleReCaptcha.V3;
+using GoogleReCaptcha.V3.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Resume.Application.Services.Implementations;
-using Resume.Application.Services.Interfaces;
 using Resume.Infra.Data.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using System.Configuration;
+using Resume.Application;
+using Resume.Infra.Data;
 
 namespace Resume.Web;
 
@@ -40,16 +34,8 @@ public class Program
 
         #region ServiceRegistration 
 
-        builder.Services.AddScoped<IThingIDoService, ThingIDoService>();
-        builder.Services.AddScoped<ICustomerFeedbackService, CustomerFeedbackService>();
-        builder.Services.AddScoped<ICustomerLogoService, CustomerLogoService>();
-        builder.Services.AddScoped<IEducationService, EducationService>();
-        builder.Services.AddScoped<IExperienceService, ExperienceService>();
-        builder.Services.AddScoped<ISkillService, SkillService>();
-        builder.Services.AddScoped<IPortfolioService, PortfolioService>();
-        builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
-        builder.Services.AddScoped<IInformationService, InformationService>();
-        builder.Services.AddScoped<IMessageService, MessageService>();
+        builder.Services.ConfigureApplicationServices();
+        builder.Services.ConfigureInfrastructureServices();
 
         #region Google Recaptcha
         builder.Services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();

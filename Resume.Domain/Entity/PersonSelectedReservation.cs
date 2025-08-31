@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.Entity.Reservation;
 
-public class PersonSelectedReservation : BaseEntity<ulong>
+public class PersonSelectedReservation : BaseEntity<long>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

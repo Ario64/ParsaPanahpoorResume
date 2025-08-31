@@ -13,19 +13,19 @@
     </div>
 </div>
 
-@if (Model.ThingIDoList != null && Model.ThingIDoList.Any())
+@if (Model.ThingIDoList.Items != null && Model.ThingIDoList.Items.Any())
 {
     <partial name="_ThingIDoPartial" model="@Model.ThingIDoList" />
 }
 
 
-@if (Model.CustomerFeedbakcList != null && Model.CustomerFeedbakcList.Any())
+@if (Model.CustomerFeedbakcList.Items != null && Model.CustomerFeedbakcList.Items.Any())
 {
     <partial name="_CustomerFeedbackPartial" model="@Model.CustomerFeedbakcList" />
 }
 
 
-@if (Model.CustomerLogoList != null && Model.CustomerLogoList.Any())
+@if (Model.CustomerLogoList.Items != null && Model.CustomerLogoList.Items.Any())
 {
     <partial name="_CustomerLogoPartial" model="@Model.CustomerLogoList" />
 }

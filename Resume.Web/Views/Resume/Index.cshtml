@@ -9,20 +9,20 @@
 </div>
 
 
-@if (Model.Educations != null && Model.Educations.Any())
+@if (Model.Educations.Items != null && Model.Educations.Items.Any())
 {
     <partial name="_EducationPartial" model="@Model.Educations" />
 }
 
 
-@if (Model.Experiences != null && Model.Experiences.Any())
+@if (Model.Experiences.Items != null && Model.Experiences.Items.Any())
 {
     <partial name="_ExperiencesPartial" model="@Model.Experiences" />
 }
 
 
 
-@if (Model.Skills != null && Model.Skills.Any())
+@if (Model.Skills.Items != null && Model.Skills.Items.Any())
 {
     <partial name="_SkillsPartial" model="@Model.Skills" />
 }

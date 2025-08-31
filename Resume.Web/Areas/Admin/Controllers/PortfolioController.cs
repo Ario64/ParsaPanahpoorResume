@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Eetensions;
+using Resume.Application.Features.Portfolio.Handlers.Commands;
+using Resume.Application.Features.Portfolio.Requests.Commands;
+using Resume.Application.Features.Portfolio.Requests.Queries;
 using Resume.Application.Generator;
-using Resume.Application.Services.Interfaces;
 using Resume.Application.StaticTools;
 using Resume.Domain.ViewModels.Portfolio;
 using Resume.Web.Areas.Controllers;
@@ -14,36 +17,37 @@ namespace Resume.Web.Areas.Admin.Controllers
     public class PortfolioController : AdminBaseController
     {
         #region Constructor
-        private readonly IPortfolioService _portfolioService;
 
-        public PortfolioController(IPortfolioService portfolioService)
+        private readonly IMediator _mediator;
+
+        public PortfolioController(IMediator mediator)
         {
-            _portfolioService = portfolioService;
+            _mediator = mediator;
         }
-        #endregion
 
+        #endregion
 
         public async Task<IActionResult> Index()
         {
-            return View(await _portfolioService.GetAllPortfolios());
+            return View(await _mediator.Send(new GetPortfolioListRequest()));
         }
 
-        public async Task<IActionResult> LoadPortfolioFormModal(long id)
+        public async Task<IActionResult> LoadPortfolioFormModal(ulong id)
         {
-            CreateOrEditPortfolioViewModel result = await _portfolioService.FillCreateOrEditPortfolioViewModel(id);
+            var result = await _mediator.Send(new GetPortfolioRequest(id));
             return PartialView("_PortfolioFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitPortfolioFormModal(CreateOrEditPortfolioViewModel portfolio)
+        public async Task<IActionResult> SubmitPortfolioFormModal(CreatePortfolioViewModel portfolio)
         {
-            var result = await _portfolioService.CreateOrEditPortfolio(portfolio);
+            var result = await _mediator.Send(new CreatePortfolioCommandRequest(portfolio));
             if (result) return new JsonResult(new { status = "Success" });
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeletePortfolio(long id)
+        public async Task<IActionResult> DeletePortfolio(ulong id)
         {
-            var result = await _portfolioService.DeletePortfolio(id);
+            var result = await _mediator.Send(new DeletePortfolioCommandRequest(id));
             if (result) return new JsonResult(new { status = "Success" });
             return new JsonResult(new { status = "Error" });
         }
@@ -70,7 +74,6 @@ namespace Resume.Web.Areas.Admin.Controllers
                 return new JsonResult(new { status = "Error" });
             }
         }
-
 
     }
 }

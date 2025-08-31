@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Skill.Handlers.Commands;
 
-public class DeleteThingIDoCommandRequestHandler : IRequestHandler<DeleteThingIDoCommandRequest, Unit>
+public class DeleteSkillCommandRequestHandler : IRequestHandler<DeleteSkillCommandRequest, bool>
 {
     #region Constructor
 
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteThingIDoCommandRequestHandler(IUnitOfWork unitOfWork)
+    public DeleteSkillCommandRequestHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteThingIDoCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteSkillCommandRequest request, CancellationToken cancellationToken)
     {
         var skill = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().Delete(skill);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

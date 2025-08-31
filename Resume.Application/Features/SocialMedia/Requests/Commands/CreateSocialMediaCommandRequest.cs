@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using Resume.Domain.ViewModels.SocialMedia;
 
-namespace Resume.Application.Features.SocialMedia.Requests.Commands;
+namespace Resume.Application.Features.ThingIdo.Requests.Commands;
 
-public record CreateThingIDoCommandRequest : IRequest<Unit>
+public record CreateSocialMediaCommandRequest(SocialMediaViewModel SocialMediaViewModel) : IRequest<bool>
 {
-    public SocialMediaViewModel CreateSocialMediaViewModel { get; init; }
 }

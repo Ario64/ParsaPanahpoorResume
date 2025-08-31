@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Skill;
 
-public class DeleteSkillViewModel :  BaseViewModel<ulong>
+public class DeleteSkillViewModel :  BaseViewModel<long>
 {
     
 }

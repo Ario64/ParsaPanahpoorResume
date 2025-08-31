@@ -3,7 +3,7 @@ using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Entity
 {
-    public class CustomerLogo : BaseEntity<ulong>
+    public class CustomerLogo : BaseEntity<long>
     {
         [Display(Name = "لوگو")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

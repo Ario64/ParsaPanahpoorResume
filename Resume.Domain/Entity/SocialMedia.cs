@@ -3,7 +3,7 @@ using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Entity
 {
-    public class SocialMedia : BaseEntity<ulong>
+    public class SocialMedia : BaseEntity<long>
     {
         [Display(Name = "لینک")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

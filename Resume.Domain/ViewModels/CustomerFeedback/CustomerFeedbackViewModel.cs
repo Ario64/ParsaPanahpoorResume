@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.CustomerFeedback
 {
-    public class CustomerFeedbackViewModel : BaseViewModel<ulong>
+    public class CustomerFeedbackViewModel : BaseViewModel<long>
     {
         [Display(Name = "آواتار")]
         public string Avatar { get; set; }

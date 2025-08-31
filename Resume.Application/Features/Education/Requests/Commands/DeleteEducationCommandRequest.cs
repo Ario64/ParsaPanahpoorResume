@@ -2,7 +2,7 @@
 
 namespace Resume.Application.Features.Education.Requests.Commands;
 
-public record DeleteEducationCommandRequest : IRequest<Unit>
+public record DeleteEducationCommandRequest(ulong Id): IRequest<bool>
 {
-    public ulong Id { get; set; }
+   
 }

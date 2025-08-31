@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Information.Handlers.Commands;
 
-public class CreateInformationCommandRequestHandler : IRequestHandler<CreateInformationCommandRequest, Unit>
+public class CreateInformationCommandRequestHandler : IRequestHandler<CreateInformationCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,11 +22,11 @@ public class CreateInformationCommandRequestHandler : IRequestHandler<CreateInfo
 
     #endregion
 
-    public async Task<Unit> Handle(CreateInformationCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CreateInformationCommandRequest request, CancellationToken cancellationToken)
     {
         var information = _mapper.Map<Resume.Domain.Entity.Information>(request.CreateInformationViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().Add(information);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

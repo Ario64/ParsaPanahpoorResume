@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Portfolio.Handlers.Commands;
 
-public class EditPortfolioCategoryCommandRequestHandler : IRequestHandler<EditPortfolioCategoryCommandRequest, Unit>
+public class EditPortfolioCommandRequestHandler : IRequestHandler<EditPortfolioCommandRequest, bool>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public EditPortfolioCategoryCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public EditPortfolioCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -22,12 +22,12 @@ public class EditPortfolioCategoryCommandRequestHandler : IRequestHandler<EditPo
 
     #endregion
 
-    public async Task<Unit> Handle(EditPortfolioCategoryCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(EditPortfolioCommandRequest request, CancellationToken cancellationToken)
     {
         var portfolio = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditPortfolioViewModel, portfolio);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().Update(portfolio);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

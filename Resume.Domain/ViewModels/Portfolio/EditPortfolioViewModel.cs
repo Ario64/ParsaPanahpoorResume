@@ -5,7 +5,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Portfolio
 {
-    public class EditPortfolioViewModel : BaseViewModel<ulong>
+    public class EditPortfolioViewModel : BaseViewModel<long>
     {
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

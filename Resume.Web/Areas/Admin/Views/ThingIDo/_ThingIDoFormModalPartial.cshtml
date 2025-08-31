@@ -1,15 +1,10 @@
 ﻿@model Resume.Domain.ViewModels.ThingIDo.CreateThingIDoViewModel
 
-@{
-    bool isCreate = Model.Id == 0 ? true : false;
-}
-
-
 <form id="ThingIDoForm" asp-area="Admin" asp-controller="ThingIDo" asp-action="SubmitThingIDoFormModal"
       data-ajax="true" data-ajax-begin="StartLoading()" data-ajax-success="ThingIDoFormSubmited">
 
     <div class="modal-header">
-        <h5 class="modal-title">@(isCreate ? "ایجاد" : "ویرایش")</h5>
+        <h5 class="modal-title">ایجاد</h5>
         <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -20,11 +15,6 @@
 
         <div class="row">
             <div class="col-12">
-
-                @if (!isCreate)
-                {
-                    <input type="hidden" asp-for="Id" />
-                }
 
                 <div class="form-group">
                     <label asp-for="Title"></label>
@@ -67,7 +57,7 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="btn btn-bold btn-pure float-right @(isCreate ? "btn-success" : "btn-warning")">@(isCreate ? "ایجاد" : "ویرایش")</button>
+                    <button type="submit" class="btn btn-bold btn-pure float-right btn-success">ایجاد</button>
                 </div>
 
             </div>

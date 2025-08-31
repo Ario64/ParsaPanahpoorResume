@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Resume.Domain.Entity;
 using Resume.Domain.Entity.Reservation;
-using Resume.Domain.Models;
 using System.Linq;
 
 namespace Resume.Infra.Data.Context
@@ -10,10 +9,12 @@ namespace Resume.Infra.Data.Context
     {
 
         #region Constructor
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
+
         #endregion
 
         #region DbSet
@@ -37,6 +38,7 @@ namespace Resume.Infra.Data.Context
         #endregion
 
         #region On Model Cretaing
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
@@ -47,6 +49,7 @@ namespace Resume.Infra.Data.Context
 
             base.OnModelCreating(modelBuilder);
         }
+
         #endregion
 
     }

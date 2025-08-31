@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Resume.Domain.Models;
+using Resume.Domain.Entity;
 using Resume.Domain.ViewModels.Portfolio;
 
 namespace Resume.Application.Profiles;

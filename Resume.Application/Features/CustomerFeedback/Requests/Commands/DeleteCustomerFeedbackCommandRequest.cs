@@ -2,7 +2,6 @@
 
 namespace Resume.Application.Features.CustomerFeedback.Requests.Commands;
 
-public class DeleteCustomerFeedbackCommandRequest : IRequest<Unit>
+public record DeleteCustomerFeedbackCommandRequest(ulong Id): IRequest<bool>
 {
-    public ulong Id { get; set; }
 }

@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.ThingIDo;
 
 namespace Resume.Application.Features.ThingIdo.Requests.Commands;
 
-public record CreateThingIDoCommandRequest : IRequest<Unit>
+public record CreateThingIDoCommandRequest(CreateThingIDoViewModel CreateThingIDoViewModel) : IRequest<bool>
 {
-    public CreateThingIDoViewModel CreateThingIDoViewModel { get; init; }
+
 }

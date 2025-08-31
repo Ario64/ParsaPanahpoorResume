@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.ReservationDate;
 
 namespace Resume.Application.Features.ReservationDate.Requests.Queries;
 
-public record GetReservationDateTimeRequest : IRequest<ReservationDateViewModel>
+public record GetReservationDateRequest : IRequest<ReservationDateViewModel>
 {
     public ulong Id { get; init; }
 }

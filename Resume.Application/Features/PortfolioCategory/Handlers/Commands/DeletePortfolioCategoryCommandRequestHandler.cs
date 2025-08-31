@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.Portfolio.Requests.Commands;
+using Resume.Application.Features.PortfolioCategory.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Application.Features.PortfolioCategory.Handlers.Commands;
 
-public class DeleteReservationDateCommandRequestHandler : IRequestHandler<DeletePortfolioCategoryCommandRequest, Unit>
+public class DeletePortfolioCategoryCommandRequestHandler : IRequestHandler<DeletePortfolioCategoryCommandRequest, bool>
 {
 
     #region Constructor
@@ -15,7 +15,7 @@ public class DeleteReservationDateCommandRequestHandler : IRequestHandler<Delete
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteReservationDateCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public DeletePortfolioCategoryCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -23,11 +23,11 @@ public class DeleteReservationDateCommandRequestHandler : IRequestHandler<Delete
 
     #endregion
 
-    public async Task<Unit> Handle(DeletePortfolioCategoryCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeletePortfolioCategoryCommandRequest request, CancellationToken cancellationToken)
     {
-        var portfolioCategory = await _unitOfWork.GenericRepository<DeleteReservationDateCommandRequestHandler>().GetAsync(request.Id, cancellationToken);
-        _unitOfWork.GenericRepository<DeleteReservationDateCommandRequestHandler>().Delete(portfolioCategory);
+        var portfolioCategory = await _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().GetAsync(request.Id, cancellationToken);
+        _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().Delete(portfolioCategory);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

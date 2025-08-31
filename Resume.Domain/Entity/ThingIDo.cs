@@ -4,7 +4,7 @@ using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Entity
 {
-    public class ThingIDo : BaseEntity<ulong>
+    public class ThingIDo : BaseEntity<long>
     {
         [Display(Name = "آیکون")]
         [MaxLength(50, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]

@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.IRepository.Information;
 
-public interface IInformationRepository : IGenericRepository<Models.Information>
+public interface IInformationRepository : IGenericRepository<Entity.Information>
 {
     
 }

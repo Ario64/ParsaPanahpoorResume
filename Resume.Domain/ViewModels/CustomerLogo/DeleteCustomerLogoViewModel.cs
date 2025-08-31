@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.CustomerLogo
 {
-    public class DeleteCustomerLogoViewModel : BaseViewModel<ulong>
+    public class DeleteCustomerLogoViewModel : BaseViewModel<long>
     {
     }
 }

@@ -3,7 +3,7 @@ using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.ViewModels.ReservationDate;
 
-public class DeleteReservationDateViewModel : BaseEntity<ulong>
+public class DeleteReservationDateViewModel : BaseEntity<long>
 {
     
 }

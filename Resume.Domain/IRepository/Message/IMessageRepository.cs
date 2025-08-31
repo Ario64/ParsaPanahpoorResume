@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.IRepository.Message;
 
-public interface IMessageRepository : IGenericRepository<Models.Message>
+public interface IMessageRepository : IGenericRepository<Entity.Message>
 {
     
 }

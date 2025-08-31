@@ -1,54 +1,55 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Resume.Application.Features.Portfolio.Requests.Commands;
+using Resume.Application.Features.Portfolio.Requests.Queries;
+using Resume.Application.Features.PortfolioCategory.Requests.Commands;
 using Resume.Domain.ViewModels.Portfolio;
 using Resume.Web.Areas.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Areas.Admin.Controllers
 {
     public class PortfolioCategoryController : AdminBaseController
     {
-
         #region Constructor
-        private readonly IPortfolioService _portfolioService;
-        public PortfolioCategoryController(IPortfolioService portfolioService)
+
+        private readonly IMediator _mediator;
+
+        public PortfolioCategoryController(IMediator mediator)
         {
-            _portfolioService = portfolioService;
+            _mediator = mediator;
         }
+
         #endregion
 
         public async Task<IActionResult> Index()
         {
-            return View(await _portfolioService.GetAllPortfolioCategories());
+            return View(await _mediator.Send(new GetPortfolioListRequest()));
         }
 
-        public async Task<IActionResult> LoadPortfolioCategoryFormModal(long id)
+        public async Task<IActionResult> LoadPortfolioCategoryFormModal(CreatePortfolioCategoryViewModel portolioCategory)
         {
-            EditPortfolioCategoryViewModel result = await _portfolioService.FillCreateOrEditPortfolioCategoryViewModel(id);
+            var result = await _mediator.Send(new CreatePortfolioCategoryCommandRequest(portolioCategory));
             return PartialView("_PortfolioCategorFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitPortfolioCategoryFormModal(EditPortfolioCategoryViewModel portfolioCategory)
+        public async Task<IActionResult> SubmitPortfolioCategoryFormModal(ulong id, EditPortfolioCategoryViewModel portfolioCategory)
         {
-            var result = await _portfolioService.CreateOrEditPortfolioCategory(portfolioCategory);
+            var result = await _mediator.Send(new EditPortfolioCategoryCommandRequest(id, portfolioCategory));
 
             if (result) return new JsonResult(new { status = "Success" });
 
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeletePortfolioCategory(long id)
+        public async Task<IActionResult> DeletePortfolioCategory(ulong id)
         {
-            var result = await _portfolioService.DeletePortfolioCategory(id);
+            var result = await _mediator.Send(new DeletePortfolioCategoryCommandRequest(id));
 
             if (result) return new JsonResult(new { status = "Success" });
 
             return new JsonResult(new { status = "Error" });
         }
-
 
     }
 }

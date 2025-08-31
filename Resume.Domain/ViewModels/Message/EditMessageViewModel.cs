@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.Message;
 
-public class EditMessageViewModel : BaseViewModel<ulong>
+public class EditMessageViewModel : BaseViewModel<long>
 {
     [Display(Name = " نام و نام خانوادگی")]
     [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Resume.Application.Features.Education.Requests.Commands;
+using Resume.Application.Features.Education.Requests.Queries;
 using Resume.Domain.ViewModels.Education;
 using Resume.Web.Areas.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Areas.Admin.Controllers
@@ -12,38 +11,40 @@ namespace Resume.Web.Areas.Admin.Controllers
     public class EducationController : AdminBaseController
     {
         #region Constructor
-        private readonly IEducationService _educationService;
 
-        public EducationController(IEducationService educationService)
+        private readonly IMediator _meditor;
+
+        public EducationController(IMediator meditor)
         {
-            _educationService = educationService;
+            _meditor = meditor;
         }
+
         #endregion
 
         public async Task<IActionResult> Index()
         {
-            return View(await _educationService.GetAllEducations());
+            return View(await _meditor.Send(new GetEducationListRequest(1, 10)));
         }
 
-        public async Task<IActionResult> LoadEducationFormModal(long id)
+        public async Task<IActionResult> LoadEducationFormModal(ulong id)
         {
-            CreateEducationViewModel result = await _educationService.FillCreateOrEditEducationViewModel(id);
+            var result = await _meditor.Send(new GetEducationRequest(id));
 
             return PartialView("_EducationFormModalPartial", result);
         }
 
         public async Task<IActionResult> SubmitEducationFormModal(CreateEducationViewModel education)
         {
-            var result = await _educationService.CreateOrEditEducation(education);
+            var result = await _meditor.Send(new CreateEducationCommandRequest(education));
 
             if (result) return new JsonResult(new { status = "Success" });
 
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeleteEducation(long id)
+        public async Task<IActionResult> DeleteEducation(ulong id)
         {
-            var result = await _educationService.DeleteEducation(id);
+            var result = await _meditor.Send(new DeleteEducationCommandRequest(id));
 
             if (result) return new JsonResult(new { status = "Success" });
 

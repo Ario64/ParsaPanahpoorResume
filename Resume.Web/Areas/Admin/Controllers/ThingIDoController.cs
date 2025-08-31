@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Resume.Application.Features.ThingIdo.Requests.Commands;
+using Resume.Application.Features.ThingIdo.Requests.Queries;
 using Resume.Domain.ViewModels.ThingIDo;
 using Resume.Web.Areas.Controllers;
 using System.Threading.Tasks;
@@ -9,44 +11,40 @@ namespace Resume.Web.Areas.Admin.Controllers
     public class ThingIDoController : AdminBaseController
     {
         #region Constructor
-        private readonly IThingIDoService _thingIDOService;
 
-        public ThingIDoController(IThingIDoService thingIDOService)
+        private readonly IMediator _mediator;
+
+        public ThingIDoController(IMediator mediator)
         {
-            _thingIDOService = thingIDOService;
+            _mediator = mediator;
         }
+
         #endregion
 
-
-        #region List
         public async Task<IActionResult> Index()
         {
-            return View(await _thingIDOService.GetAllThingIDoForIndex());
+            return View(await _mediator.Send(new GetThingIDoListRequest()));
         }
-        #endregion
 
-
-        public async Task<IActionResult> LoadThingIDoFormModal(long id)
+        public async Task<IActionResult> LoadThingIDoFormModal(ulong id)
         {
-            CreateThingIDoViewModel result = await _thingIDOService.FillCreateOrEditThingIDoViewModel(id);
+            var result = await _mediator.Send(new GetThingIDoRequest(id) );
 
             return PartialView("_ThingIDoFormModalPartial", result);
         }
 
-
         public async Task<IActionResult> SubmitThingIDoFormModal(CreateThingIDoViewModel thingIDo)
         {
-            var result = await _thingIDOService.CreateOrEditThingIDo(thingIDo);
+            var result = await _mediator.Send(new CreateThingIDoCommandRequest(thingIDo));
 
             if (result) return new JsonResult(new { status = "Success" });
 
             return new JsonResult(new { status = "Error" });
         }
 
-
-        public async Task<IActionResult> DeleteThingIDO(long id)
+        public async Task<IActionResult> DeleteThingIDO(ulong id)
         {
-            var result = await _thingIDOService.DeleteThingIDo(id);
+            var result = await _mediator.Send(new DeleteThingIDoCommandRequest(id));
 
             if (result) return new JsonResult(new { status = "Success" });
 

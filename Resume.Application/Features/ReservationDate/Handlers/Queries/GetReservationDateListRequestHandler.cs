@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ReservationDate.Handlers.Queries;
 
-public class GetReservationDateTimeListRequestHandler : IRequestHandler<GetReservationDateTimeListRequest, PagedResult<ReservationDateViewModel>>
+public class GetReservationDateListRequestHandler : IRequestHandler<GetReservationDateListRequest, PagedResult<ReservationDateViewModel>>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetReservationDateTimeListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetReservationDateListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -25,7 +25,7 @@ public class GetReservationDateTimeListRequestHandler : IRequestHandler<GetReser
 
     #endregion
 
-    public async Task<PagedResult<ReservationDateViewModel>> Handle(GetReservationDateTimeListRequest request, CancellationToken cancellationToken)
+    public async Task<PagedResult<ReservationDateViewModel>> Handle(GetReservationDateListRequest request, CancellationToken cancellationToken)
     {
         var portfolioCategoryList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>()
                                              .GetAllAsync(request.page, request.pageSize, cancellationToken);

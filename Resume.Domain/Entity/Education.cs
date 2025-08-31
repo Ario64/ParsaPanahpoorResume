@@ -4,7 +4,7 @@ using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Entity
 {
-    public class Education : BaseEntity<ulong>
+    public class Education : BaseEntity<long>
     {
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.PortfolioCategory.Handlers.Commands;
 
-public class CreateReservationDateCommandRequestHandler : IRequestHandler<CreateReservationDateCommandRequest, Unit>
+public class CreatePortfolioCategoryCommandRequestHandler : IRequestHandler<CreatePortfolioCategoryCommandRequest, bool>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateReservationDateCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreatePortfolioCategoryCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -22,11 +22,11 @@ public class CreateReservationDateCommandRequestHandler : IRequestHandler<Create
 
     #endregion
 
-    public async Task<Unit> Handle(CreateReservationDateCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CreatePortfolioCategoryCommandRequest request, CancellationToken cancellationToken)
     {
         var porfolio = _mapper.Map<Resume.Domain.Entity.PortfolioCategory>(request.CreatePortfolioCategoryViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().Add(porfolio);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

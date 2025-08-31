@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 
-public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<DeleteCustomerFeedbackCommandRequest, Unit>
+public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<DeleteCustomerFeedbackCommandRequest, bool>
 {
     #region Constructor
 
@@ -19,11 +19,11 @@ public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<Delet
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
         var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Delete(customerFeedback);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

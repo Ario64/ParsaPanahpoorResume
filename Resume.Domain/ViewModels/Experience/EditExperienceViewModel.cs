@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Domain.ViewModels.Experience
 {
-    public class EditExperienceViewModel : BaseViewModel<ulong>
+    public class EditExperienceViewModel : BaseViewModel<long>
     {
         [Display(Name = "عنوان")]
         public string Title { get; set; }

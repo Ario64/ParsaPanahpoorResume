@@ -3,7 +3,7 @@ using Resume.Domain.Entity.Common;
 
 namespace Resume.Domain.Entity
 {
-    public class CustomerFeedback : BaseEntity<ulong>
+    public class CustomerFeedback : BaseEntity<long>
     {
         
         [Display(Name = "آواتار")]

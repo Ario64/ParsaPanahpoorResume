@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.Portfolio.Requests.Queries;
+using Resume.Application.Features.PortfolioCategory.Requests.Queries;
 using Resume.Application.UnitOfWork;
 using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.Portfolio;
@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.PortfolioCategory.Handlers.Queries;
 
-public class GetReservationDateListRequestHandler : IRequestHandler<GetPortfolioCategoryListRequest, PagedResult<PortfolioCategoryViewModel>>
+public class GetPortfolioCategoryListRequestHandler : IRequestHandler<GetPortfolioCategoryListRequest, PagedResult<PortfolioCategoryViewModel>>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetReservationDateListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetPortfolioCategoryListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

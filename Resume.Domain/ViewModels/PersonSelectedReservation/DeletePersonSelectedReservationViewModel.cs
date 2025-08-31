@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.PersonSelectedReservation;
 
-public class DeletePersonSelectedReservationViewModel : BaseViewModel<ulong>
+public class DeletePersonSelectedReservationViewModel : BaseViewModel<long>
 {
     
 }

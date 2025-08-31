@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.ReservationDateTime;
 
-public class DeleteReservationDateTimeViewModel : BaseViewModel<ulong>
+public class DeleteReservationDateTimeViewModel : BaseViewModel<long>
 {
     
 }

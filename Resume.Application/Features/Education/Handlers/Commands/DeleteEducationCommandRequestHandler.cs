@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Education.Handlers.Commands;
 
-public class DeleteEducationCommandRequestHandler : IRequestHandler<DeleteEducationCommandRequest, Unit>
+public class DeleteEducationCommandRequestHandler : IRequestHandler<DeleteEducationCommandRequest, bool>
 {
     #region Constructor
 
@@ -19,11 +19,11 @@ public class DeleteEducationCommandRequestHandler : IRequestHandler<DeleteEducat
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteEducationCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteEducationCommandRequest request, CancellationToken cancellationToken)
     {
         var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().GetAsync(request.Id);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().Delete(education);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

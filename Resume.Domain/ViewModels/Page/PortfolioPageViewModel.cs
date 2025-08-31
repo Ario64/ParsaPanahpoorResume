@@ -1,11 +1,12 @@
-﻿using Resume.Domain.ViewModels.Portfolio;
+﻿using Resume.Domain.ViewModels.Pagination;
+using Resume.Domain.ViewModels.Portfolio;
 using System.Collections.Generic;
 
 namespace Resume.Domain.ViewModels.Page
 {
     public class PortfolioPageViewModel
     {
-        public List<PortfolioViewModel> Portfolios { get; set; }
-        public List<PortfolioCategoryViewModel> PortfolioCategories { get; set; }
+        public PagedResult<PortfolioViewModel> Portfolios { get; set; }
+        public PagedResult<PortfolioCategoryViewModel> PortfolioCategories { get; set; }
     }
 }

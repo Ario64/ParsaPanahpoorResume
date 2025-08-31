@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Portfolio.Handlers.Commands;
 
-public class DeletePortfolioCategoryCommandRequestHandler : IRequestHandler<DeletePortfolioCategoryCommandRequest, Unit>
+public class DeletePortfolioCommandRequestHandler : IRequestHandler<DeletePortfolioCommandRequest, bool>
 {
 
     #region Constructor
@@ -15,7 +15,7 @@ public class DeletePortfolioCategoryCommandRequestHandler : IRequestHandler<Dele
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeletePortfolioCategoryCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public DeletePortfolioCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -23,11 +23,11 @@ public class DeletePortfolioCategoryCommandRequestHandler : IRequestHandler<Dele
 
     #endregion
 
-    public async Task<Unit> Handle(DeletePortfolioCategoryCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeletePortfolioCommandRequest request, CancellationToken cancellationToken)
     {
-        var portfolio = await _unitOfWork.GenericRepository<DeletePortfolioCategoryCommandRequestHandler>().GetAsync(request.Id, cancellationToken);
-        _unitOfWork.GenericRepository<DeletePortfolioCategoryCommandRequestHandler>().Delete(portfolio);
+        var portfolio = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().GetAsync(request.Id, cancellationToken);
+        _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().Delete(portfolio);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

@@ -1,10 +1,9 @@
 ﻿using GoogleReCaptcha.V3.Interface;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Services.Interfaces;
+using Resume.Application.Features.Information.Requests.Queries;
+using Resume.Application.Features.Message.Requests.Commands;
 using Resume.Domain.ViewModels.Message;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Controllers
@@ -13,23 +12,24 @@ namespace Resume.Web.Controllers
     {
 
         #region Constructor
-        private readonly IMessageService _messageService;
-        private readonly ICaptchaValidator _captchaValidator;
-        private readonly IInformationService _informationService;
 
-        public ContactController(IMessageService messageService, ICaptchaValidator captchaValidator, IInformationService informationService)
+        private readonly IMediator _mediator;
+        private readonly ICaptchaValidator _captchaValidator;
+     
+
+        public ContactController(ICaptchaValidator captchaValidator,  IMediator mediator)
         {
-            _messageService = messageService;
+            _mediator = mediator;
             _captchaValidator = captchaValidator;
-            _informationService = informationService;
         }
+
         #endregion
 
 
         public async Task<IActionResult> Index()
         {
 
-            ViewData["Information"] = await _informationService.GetInformation();
+            ViewData["Information"] = await _mediator.Send(new GetInformationListRequest());
             return View();
         }
 
@@ -38,7 +38,7 @@ namespace Resume.Web.Controllers
         public async Task<IActionResult> Index(CreateMessageViewModel message)
         {
 
-            ViewData["Information"] = await _informationService.GetInformation();
+            ViewData["Information"] = await _mediator.Send(new GetInformationListRequest());
 
             if (!await _captchaValidator.IsCaptchaPassedAsync(message.Captcha))
             {
@@ -51,7 +51,7 @@ namespace Resume.Web.Controllers
                 return View(message);
             }
 
-            var result = await _messageService.CreateMessage(message);
+            var result = await _mediator.Send(new CreateMessageCommandRequest(message));
 
             if (result)
             {

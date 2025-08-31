@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Information;
 
 namespace Resume.Application.Features.Information.Requests.Commands;
 
-public record CreateInformationCommandRequest : IRequest<Unit>
+public record CreateInformationCommandRequest(CreateInformationViewModel CreateInformationViewModel) : IRequest<bool>
 {
-    public CreateInformationViewModel CreateInformationViewModel { get; init; }
+    
 }

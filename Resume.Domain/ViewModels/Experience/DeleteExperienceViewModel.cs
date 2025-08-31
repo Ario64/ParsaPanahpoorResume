@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.Experience
 {
-    public class DeleteExperienceViewModel : BaseViewModel<ulong>
+    public class DeleteExperienceViewModel : BaseViewModel<long>
     {
     }
 }

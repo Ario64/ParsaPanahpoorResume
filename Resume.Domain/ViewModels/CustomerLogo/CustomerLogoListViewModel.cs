@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Common;
 
 namespace Resume.Domain.ViewModels.CustomerLogo
 {
-    public class CustomerLogoListViewModel : BaseViewModel<ulong>
+    public class CustomerLogoListViewModel : BaseViewModel<long>
     {
         [Display(Name = "لوگو")]
         public string Logo { get; set; }

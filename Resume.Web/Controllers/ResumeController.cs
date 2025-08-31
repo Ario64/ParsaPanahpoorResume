@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Resume.Application.Features.Education.Requests.Queries;
+using Resume.Application.Features.Experience.Requests.Queries;
+using Resume.Application.Features.Skill.Requests.Queries;
 using Resume.Domain.ViewModels.Page;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Controllers
@@ -12,24 +12,23 @@ namespace Resume.Web.Controllers
     {
 
         #region Constructor
-        private readonly IEducationService _educationService;
-        private readonly IExperienceService _experienceService;
-        private readonly ISkillService _skillService;
-        public ResumeController(IEducationService educationService, IExperienceService experienceService, ISkillService skillService)
+
+        private readonly IMediator _mediator;
+
+        public ResumeController(IMediator mediator)
         {
-            _educationService = educationService;
-            _experienceService = experienceService;
-            _skillService = skillService;
+            _mediator = mediator;
         }
+
         #endregion
 
         public async Task<IActionResult> Index()
         {
             ResumePageViewModel model = new ResumePageViewModel()
             {
-                Educations = await _educationService.GetAllEducations(),
-                Experiences = await _experienceService.GetAllExperiences(),
-                Skills = await _skillService.GetAllSkills()
+                Educations = await _mediator.Send(new GetEducationListRequest()),
+                Experiences =await _mediator.Send(new GetExperienceListRequest()),
+                Skills = await _mediator.Send(new GetSkillListRequest())
             };
 
             return View(model);

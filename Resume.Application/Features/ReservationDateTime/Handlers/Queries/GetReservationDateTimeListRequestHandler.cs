@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.ReservationDateTime.Requests.Queries;
+using Resume.Application.Features.ReservationDate.Requests.Queries;
 using Resume.Application.UnitOfWork;
 using Resume.Domain.ViewModels.Pagination;
-using Resume.Domain.ViewModels.ReservationDate;
 using Resume.Domain.ViewModels.ReservationDateTime;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ReservationDateTime.Handlers.Queries;
 
-public class GetSkillListRequestHandler : IRequestHandler<GetSkillListRequest, PagedResult<ReservationDateTimeViewModel>>
+public class GetReservationDateTimeListRequestHandler : IRequestHandler<GetReservationDateTimeListRequest, PagedResult<ReservationDateTimeViewModel>>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetSkillListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetReservationDateTimeListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -26,7 +25,7 @@ public class GetSkillListRequestHandler : IRequestHandler<GetSkillListRequest, P
 
     #endregion
 
-    public async Task<PagedResult<ReservationDateTimeViewModel>> Handle(GetSkillListRequest request, CancellationToken cancellationToken)
+    public async Task<PagedResult<ReservationDateTimeViewModel>> Handle(GetReservationDateTimeListRequest request, CancellationToken cancellationToken)
     {
         var reservationDateTime = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>()
                                              .GetAllAsync(request.page, request.pageSize, cancellationToken);

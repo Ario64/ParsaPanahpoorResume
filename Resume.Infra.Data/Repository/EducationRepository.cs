@@ -1,5 +1,5 @@
 ﻿using Resume.Domain.IRepository.Education;
-using Resume.Domain.Models;
+using Resume.Domain.Entity;
 using Resume.Infra.Data.Context;
 
 namespace Resume.Infra.Data.Repository;
@@ -16,6 +16,5 @@ public class EducationRepository : GenericRepository<Education>, IEducationRepos
     }
 
     #endregion
-
 
 }

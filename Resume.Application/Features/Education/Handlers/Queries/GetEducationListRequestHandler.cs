@@ -2,11 +2,9 @@
 using MediatR;
 using Resume.Application.Features.Education.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.Entity;
 using Resume.Domain.ViewModels.Education;
 using Resume.Domain.ViewModels.Pagination;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading;
 using System.Threading.Tasks;
 

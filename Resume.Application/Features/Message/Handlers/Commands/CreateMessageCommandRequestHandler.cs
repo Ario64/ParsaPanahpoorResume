@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Message.Handlers.Commands;
 
-public class CreateMessageCommandRequestHandler : IRequestHandler<CreateMessageCommandRequest, Unit>
+public class CreateMessageCommandRequestHandler : IRequestHandler<CreateMessageCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,11 +22,11 @@ public class CreateMessageCommandRequestHandler : IRequestHandler<CreateMessageC
 
     #endregion
 
-    public async Task<Unit> Handle(CreateMessageCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CreateMessageCommandRequest request, CancellationToken cancellationToken)
     {
         var message = _mapper.Map<Domain.Entity.Message>(request.CreateMessageViewModel);
         _unitOfWork.GenericRepository<Domain.Entity.Message>().Add(message);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Resume.Application.Features.CustomerFeedback.Requests.Queries;
+using Resume.Application.Features.CustomerLog.Requests.Queries;
+using Resume.Application.Features.ThingIdo.Requests.Queries;
 using Resume.Domain.ViewModels.Page;
 using System.Threading.Tasks;
 
@@ -9,17 +12,14 @@ namespace Resume.Web.Controllers
     {
 
         #region Constructor
-        private readonly IThingIDoService _thingIDoService;
-        private readonly ICustomerFeedbackService _customerFeedbackService;
-        private readonly ICustomerLogoService _customerLogoService;
 
+        private readonly IMediator _mediator;
 
-        public HomeController(IThingIDoService thingIDoService, ICustomerFeedbackService customerFeedbackService, ICustomerLogoService customerLogoService)
+        public HomeController(IMediator mediator)
         {
-            _thingIDoService = thingIDoService;
-            _customerFeedbackService = customerFeedbackService;
-            _customerLogoService = customerLogoService;
+            _mediator = mediator;
         }
+
         #endregion
 
         public async Task<IActionResult> Index()
@@ -27,9 +27,9 @@ namespace Resume.Web.Controllers
 
             IndexPageViewModel model = new IndexPageViewModel()
             {
-                ThingIDoList = await _thingIDoService.GetAllThingIDoForIndex(),
-                CustomerFeedbakcList = await _customerFeedbackService.GetCustomerFeedbackForIndex(),
-                CustomerLogoList = await _customerLogoService.GetCustomerLogosForIndexPage()
+                ThingIDoList = await _mediator.Send(new GetThingIDoListRequest()),
+                CustomerFeedbakcList = await _mediator.Send(new GetCustomerFeedbackListRequest()),
+                CustomerLogoList = await _mediator.Send(new GetCustomerLogoListRequest())
             };
 
             return View(model);

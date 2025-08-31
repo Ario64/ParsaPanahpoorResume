@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ThingIdo.Handlers.Commands;
 
-public class DeleteThingIDoCommandRequestHandler : IRequestHandler<DeleteThingIDoCommandRequest, Unit>
+public class DeleteThingIDoCommandRequestHandler : IRequestHandler<DeleteThingIDoCommandRequest, bool>
 {
     #region Constructor
 
@@ -19,11 +19,11 @@ public class DeleteThingIDoCommandRequestHandler : IRequestHandler<DeleteThingID
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteThingIDoCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteThingIDoCommandRequest request, CancellationToken cancellationToken)
     {
         var thingIDO = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>().Delete(thingIDO);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Eetensions;
+using Resume.Application.Features.Information.Requests.Commands;
 using Resume.Application.Generator;
-using Resume.Application.Services.Interfaces;
 using Resume.Application.StaticTools;
 using Resume.Domain.ViewModels.Information;
 using Resume.Web.Areas.Controllers;
@@ -13,32 +14,32 @@ namespace Resume.Web.Areas.Admin.Controllers
 {
     public class InformationController : AdminBaseController
     {
-
         #region Constructor
-        private readonly IInformationService _informationService;
 
-        public InformationController(IInformationService informationService)
+        private readonly IMediator _mediator;
+
+        public InformationController(IMediator mediator)
         {
-            _informationService = informationService;
+            _mediator = mediator;
         }
+
         #endregion
 
 
-        public async Task<IActionResult> LoadInformationFormModal()
+        public async Task<IActionResult> LoadInformationFormModal(CreateInformationViewModel information)
         {
-            EditInformationViewModel result = await _informationService.FillCreateOrEditInformationViewModel();
+            var result = await _mediator.Send(new CreateInformationCommandRequest(information));
             return View("_InformationFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitInformationFormModal(EditInformationViewModel information)
+        public async Task<IActionResult> SubmitInformationFormModal(ulong id, EditInformationViewModel information)
         {
-            var result = await _informationService.CreateOrEditInformation(information);
+            var result = await _mediator.Send(new EditInformationCommandRequest(id, information) );
 
             if (result) return new JsonResult(new { status = "Success" });
 
             return new JsonResult(new { status = "Error" });
         }
-
 
         [HttpPost]
         public async Task<IActionResult> UploadInformationAvatarAjax(IFormFile file)
@@ -62,7 +63,6 @@ namespace Resume.Web.Areas.Admin.Controllers
                 return new JsonResult(new { status = "Error" });
             }
         }
-
 
         [HttpPost]
         public async Task<IActionResult> UploadInformationResumeAjax(IFormFile file)

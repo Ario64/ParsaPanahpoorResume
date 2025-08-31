@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Message.Handlers.Commands;
 
-public class DeleteMessageCommandRequestHandler : IRequestHandler<DeleteMessageCommandRequest, Unit>
+public class DeleteMessageCommandRequestHandler : IRequestHandler<DeleteMessageCommandRequest, bool>
 {
     #region Constructor
 
@@ -19,11 +19,11 @@ public class DeleteMessageCommandRequestHandler : IRequestHandler<DeleteMessageC
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteMessageCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteMessageCommandRequest request, CancellationToken cancellationToken)
     {
         var message = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().Delete(message);
         await _unitOfWork.SaveChangesAsync(cancellationToken);  
-        return Unit.Value;
+        return true;
     }
 }

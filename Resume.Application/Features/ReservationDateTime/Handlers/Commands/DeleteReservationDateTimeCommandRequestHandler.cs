@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ReservationDateTime.Handlers.Commands;
 
-public class DeleteSkillCommandRequestHandler : IRequestHandler<DeleteSkillCommandRequest, Unit>
+public class DeleteReservationDateTimeCommandRequestHandler : IRequestHandler<DeleteReservationDateTimeCommandRequest, bool>
 {
     #region Constructor
 
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteSkillCommandRequestHandler(IUnitOfWork unitOfWork)
+    public DeleteReservationDateTimeCommandRequestHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteSkillCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteReservationDateTimeCommandRequest request, CancellationToken cancellationToken)
     {
         var reservationDateTime = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>().Delete(reservationDateTime);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.SocialMedia.Handlers.Commands;
 
-public class EditThingIDoCommandRequestHandler : IRequestHandler<EditThingIDoCommandRequest, Unit>
+public class EditSocialMediaCommandRequestHandler : IRequestHandler<EditSocialMediaCommandRequest, bool>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public EditThingIDoCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public EditSocialMediaCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -22,12 +22,12 @@ public class EditThingIDoCommandRequestHandler : IRequestHandler<EditThingIDoCom
 
     #endregion
 
-    public async Task<Unit> Handle(EditThingIDoCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(EditSocialMediaCommandRequest request, CancellationToken cancellationToken)
     {
         var socialMedia = await _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditSocialMediaViewModel, socialMedia);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().Update(socialMedia);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

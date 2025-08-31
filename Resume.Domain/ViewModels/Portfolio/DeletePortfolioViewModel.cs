@@ -2,7 +2,7 @@
 
 namespace Resume.Domain.ViewModels.Portfolio;
 
-public class DeletePortfolioViewModel : BaseViewModel<ulong>
+public class DeletePortfolioViewModel : BaseViewModel<long>
 {
     
 }

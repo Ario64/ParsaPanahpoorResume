@@ -2,7 +2,7 @@
 
 namespace Resume.Application.Features.ThingIdo.Requests.Commands;
 
-public record DeleteThingIDoCommandRequest : IRequest<Unit>
+public record DeleteThingIDoCommandRequest(ulong Id) : IRequest<bool>
 {
-    public ulong Id { get; set; }
+   
 }

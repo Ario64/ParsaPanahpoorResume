@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Resume.Application.Features.Message.Requests.Commands;
+using Resume.Application.Features.Message.Requests.Queries;
 using Resume.Web.Areas.Controllers;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Areas.Admin.Controllers
@@ -8,21 +11,24 @@ namespace Resume.Web.Areas.Admin.Controllers
     public class MessageController : AdminBaseController
     {
         #region Constructor
-        private readonly IMessageService _messageService;
 
-        public MessageController(IMessageService messageService)
+        private readonly IMediator _mediator;
+
+        public MessageController(IMediator mediator)
         {
-            _messageService = messageService;
+            _mediator = mediator;
         }
+
         #endregion
+
         public async Task<IActionResult> Index()
         {
-            return View(await _messageService.GetAllMessages());
+            return View(await _mediator.Send(new GetMessageListRequest()));
         }
 
-        public async Task<IActionResult> DeleteMessage(long id)
+        public async Task<IActionResult> DeleteMessage(ulong id)
         {
-            var result = await _messageService.DeleteMessage(id);
+            var result = await _mediator.Send(new DeleteMessageCommandRequest(id));
 
             if (result) return new JsonResult(new { status = "Success" });
 

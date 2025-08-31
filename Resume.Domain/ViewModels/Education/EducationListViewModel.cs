@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Domain.ViewModels.Education;
 
-public class EducationListViewModel : BaseViewModel<ulong>
+public class EducationListViewModel : BaseViewModel<long>
 {
     [Display(Name = "عنوان")]
     public string Title { get; set; }

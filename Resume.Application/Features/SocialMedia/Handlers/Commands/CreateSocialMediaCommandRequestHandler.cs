@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using MediatR;
-using Resume.Application.Features.SocialMedia.Requests.Commands;
+using Resume.Application.Features.ThingIdo.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Application.Features.SocialMedia.Handlers.Commands;
 
-public class CreateThingIDoCommandRequestHandler : IRequestHandler<CreateThingIDoCommandRequest, Unit>
+public class CreateSocialMediaCommandRequestHandler : IRequestHandler<CreateSocialMediaCommandRequest, bool>
 {
     #region Constructor
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateThingIDoCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateSocialMediaCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -22,11 +22,11 @@ public class CreateThingIDoCommandRequestHandler : IRequestHandler<CreateThingID
 
     #endregion
 
-    public async Task<Unit> Handle(CreateThingIDoCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CreateSocialMediaCommandRequest request, CancellationToken cancellationToken)
     {
-        var social = _mapper.Map<Resume.Domain.Entity.SocialMedia>(request.CreateSocialMediaViewModel);
+        var social = _mapper.Map<Resume.Domain.Entity.SocialMedia>(request.SocialMediaViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().Add(social);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }
