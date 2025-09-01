@@ -32,7 +32,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View("_InformationFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitInformationFormModal(ulong id, EditInformationViewModel information)
+        public async Task<IActionResult> SubmitInformationFormModal(long id, EditInformationViewModel information)
         {
             var result = await _mediator.Send(new EditInformationCommandRequest(id, information) );
 

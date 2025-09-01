@@ -3,8 +3,14 @@ using Resume.Domain.ViewModels.ReservationDate;
 
 namespace Resume.Application.Features.ReservationDate.Requests.Commands;
 
-public record EditReservationDateTimeCommandRequest : IRequest<Unit>
+public record EditReservationDateTimeCommandRequest : IRequest<bool>
 {
-    public ulong Id { get; init; }
+    public long Id { get; init; }
     public EditReservationDateViewModel EditReservationDateViewModel { get; init; }
+
+    public EditReservationDateTimeCommandRequest(long id, EditReservationDateViewModel editReservationDateViewModel)
+    {
+        Id = id;
+        EditReservationDateViewModel = editReservationDateViewModel;
+    }
 }

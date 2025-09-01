@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Message;
 
 namespace Resume.Application.Features.Message.Requests.Queries;
 
-public record GetMessageRequest : IRequest<MessageViewModel>
+public record GetMessageRequest(long Id) : IRequest<MessageViewModel>
 {
-    public int Id { get; set; }
+   
 }

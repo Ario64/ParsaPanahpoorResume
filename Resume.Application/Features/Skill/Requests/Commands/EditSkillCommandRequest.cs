@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Skill;
 
 namespace Resume.Application.Features.Skill.Requests.Commands;
 
-public record EditSkillCommandRequest(ulong Id, EditSkillViewModel EditSkillViewModel) : IRequest<Unit>
+public record EditSkillCommandRequest(long Id, EditSkillViewModel EditSkillViewModel) : IRequest<bool>
 {
   
 }

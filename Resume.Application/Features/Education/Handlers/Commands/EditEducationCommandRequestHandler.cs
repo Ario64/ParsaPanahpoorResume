@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Education.Handlers.Commands;
 
-public class EditEducationCommandRequestHandler : IRequestHandler<EditEducationCommandRequest, Unit>
+public class EditEducationCommandRequestHandler : IRequestHandler<EditEducationCommandRequest, bool>
 {
     #region Constructor
 
@@ -17,17 +17,17 @@ public class EditEducationCommandRequestHandler : IRequestHandler<EditEducationC
     public EditEducationCommandRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _mapper = mapper;
-        _unitOfWork = unitOfWork;   
+        _unitOfWork = unitOfWork;
     }
 
     #endregion
 
-    public async Task<Unit> Handle(EditEducationCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(EditEducationCommandRequest request, CancellationToken cancellationToken)
     {
         var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().GetAsync(request.Id);
         var editedEducation = _mapper.Map(request.EditEducationViewModel, education);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().Update(editedEducation);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

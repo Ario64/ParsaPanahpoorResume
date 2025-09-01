@@ -10,7 +10,6 @@ namespace Resume.Web.Controllers
 {
     public class ContactController : Controller
     {
-
         #region Constructor
 
         private readonly IMediator _mediator;
@@ -25,14 +24,11 @@ namespace Resume.Web.Controllers
 
         #endregion
 
-
         public async Task<IActionResult> Index()
         {
-
             ViewData["Information"] = await _mediator.Send(new GetInformationListRequest());
             return View();
         }
-
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(CreateMessageViewModel message)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Experience.Handlers.Commands;
 
-public class EditExperienceCommandRequestHandler : IRequestHandler<EditExperienceCommandRequest, Unit>
+public class EditExperienceCommandRequestHandler : IRequestHandler<EditExperienceCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,12 +22,12 @@ public class EditExperienceCommandRequestHandler : IRequestHandler<EditExperienc
 
     #endregion
 
-    public async Task<Unit> Handle(EditExperienceCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(EditExperienceCommandRequest request, CancellationToken cancellationToken)
     {
         var experience = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditExperienceViewModel, experience);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>().Update(experience);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

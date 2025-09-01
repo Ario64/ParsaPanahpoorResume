@@ -32,7 +32,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetPortfolioListRequest()));
         }
 
-        public async Task<IActionResult> LoadPortfolioFormModal(ulong id)
+        public async Task<IActionResult> LoadPortfolioFormModal(long id)
         {
             var result = await _mediator.Send(new GetPortfolioRequest(id));
             return PartialView("_PortfolioFormModalPartial", result);
@@ -45,7 +45,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeletePortfolio(ulong id)
+        public async Task<IActionResult> DeletePortfolio(long id)
         {
             var result = await _mediator.Send(new DeletePortfolioCommandRequest(id));
             if (result) return new JsonResult(new { status = "Success" });

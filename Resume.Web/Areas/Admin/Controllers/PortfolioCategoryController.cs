@@ -33,7 +33,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return PartialView("_PortfolioCategorFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitPortfolioCategoryFormModal(ulong id, EditPortfolioCategoryViewModel portfolioCategory)
+        public async Task<IActionResult> SubmitPortfolioCategoryFormModal(long id, EditPortfolioCategoryViewModel portfolioCategory)
         {
             var result = await _mediator.Send(new EditPortfolioCategoryCommandRequest(id, portfolioCategory));
 
@@ -42,7 +42,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeletePortfolioCategory(ulong id)
+        public async Task<IActionResult> DeletePortfolioCategory(long id)
         {
             var result = await _mediator.Send(new DeletePortfolioCategoryCommandRequest(id));
 

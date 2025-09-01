@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.PersonSelectedReservation.Handlers.Commands;
 
-public class DeletePersonSelectedReservationCommandRequestHandler : IRequestHandler<DeletePersonSelectedReservationCommandRequest, Unit>
+public class DeletePersonSelectedReservationCommandRequestHandler : IRequestHandler<DeletePersonSelectedReservationCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,13 +22,13 @@ public class DeletePersonSelectedReservationCommandRequestHandler : IRequestHand
 
     #endregion
 
-    public async Task<Unit> Handle(DeletePersonSelectedReservationCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeletePersonSelectedReservationCommandRequest request, CancellationToken cancellationToken)
     {
        var person = await _unitOfWork.GenericRepository<Domain.Entity.Reservation.PersonSelectedReservation>()
                                      .GetAsync(request.Id, cancellationToken);
 
         _unitOfWork.GenericRepository<Domain.Entity.Reservation.PersonSelectedReservation>().Delete(person);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

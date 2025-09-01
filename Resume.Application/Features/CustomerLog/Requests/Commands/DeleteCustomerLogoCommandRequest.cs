@@ -2,7 +2,7 @@
 
 namespace Resume.Application.Features.CustomerLog.Requests.Commands; 
 
-public class DeleteCustomerLogoCommandRequest : IRequest<Unit>
+public record DeleteCustomerLogoCommandRequest(long id) : IRequest<bool>
 {
-    public ulong Id { get; set; }
+    
 }

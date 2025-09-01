@@ -5,10 +5,10 @@ namespace Resume.Application.Features.PortfolioCategory.Requests.Commands;
 
 public record EditPortfolioCategoryCommandRequest : IRequest<bool>
 {
-    public ulong Id { get; init; }
+    public long Id { get; init; }
     public EditPortfolioCategoryViewModel EditPortfolioViewModel { get; init; }
 
-    public EditPortfolioCategoryCommandRequest(ulong id, EditPortfolioCategoryViewModel editPortfolioCategoryViewModel)
+    public EditPortfolioCategoryCommandRequest(long id, EditPortfolioCategoryViewModel editPortfolioCategoryViewModel)
     {
         Id = id;    
         EditPortfolioViewModel = editPortfolioCategoryViewModel;    

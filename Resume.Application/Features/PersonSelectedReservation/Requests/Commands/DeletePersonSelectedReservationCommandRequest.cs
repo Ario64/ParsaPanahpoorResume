@@ -2,7 +2,7 @@
 
 namespace Resume.Application.Features.PersonSelectedReservation.Requests.Commands;
 
-public record DeletePersonSelectedReservationCommandRequest : IRequest<Unit>
+public record DeletePersonSelectedReservationCommandRequest(long Id) : IRequest<bool>
 {
-    public ulong Id { get; init; }
+   
 }

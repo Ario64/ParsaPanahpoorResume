@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Experience;
 
 namespace Resume.Application.Features.Experience.Requests.Commands;
 
-public record CreateExperienceCommandRequest : IRequest<Unit>
+public record CreateExperienceCommandRequest(CreateExperienceViewModel CreateExperienceViewModel) : IRequest<bool>
 {
-    public CreateExperienceViewModel CreateExperienceViewModel { get; init; }
+  
 }

@@ -26,7 +26,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _meditor.Send(new GetEducationListRequest(1, 10)));
         }
 
-        public async Task<IActionResult> LoadEducationFormModal(ulong id)
+        public async Task<IActionResult> LoadEducationFormModal(long id)
         {
             var result = await _meditor.Send(new GetEducationRequest(id));
 
@@ -42,7 +42,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeleteEducation(ulong id)
+        public async Task<IActionResult> DeleteEducation(long id)
         {
             var result = await _meditor.Send(new DeleteEducationCommandRequest(id));
 

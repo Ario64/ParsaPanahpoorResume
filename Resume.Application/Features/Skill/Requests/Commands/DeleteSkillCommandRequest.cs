@@ -2,6 +2,6 @@
 
 namespace Resume.Application.Features.Skill.Requests.Commands;
 
-public record DeleteSkillCommandRequest(ulong Id) : IRequest<bool>
+public record DeleteSkillCommandRequest(long Id) : IRequest<bool>
 {
 }

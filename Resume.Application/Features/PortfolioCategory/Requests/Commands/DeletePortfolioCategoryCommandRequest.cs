@@ -2,7 +2,7 @@
 
 namespace Resume.Application.Features.PortfolioCategory.Requests.Commands;
 
-public record DeletePortfolioCategoryCommandRequest(ulong Id) : IRequest<bool>
+public record DeletePortfolioCategoryCommandRequest(long Id) : IRequest<bool>
 {
     
 }

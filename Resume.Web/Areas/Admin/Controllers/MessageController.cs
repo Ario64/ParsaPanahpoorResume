@@ -26,7 +26,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetMessageListRequest()));
         }
 
-        public async Task<IActionResult> DeleteMessage(ulong id)
+        public async Task<IActionResult> DeleteMessage(long id)
         {
             var result = await _mediator.Send(new DeleteMessageCommandRequest(id));
 

@@ -3,6 +3,6 @@ using Resume.Domain.ViewModels.Portfolio;
 
 namespace Resume.Application.Features.PortfolioCategory.Requests.Queries;
 
-public record GetPortfolioCategoryRequest(ulong Id) : IRequest<PortfolioCategoryViewModel>
+public record GetPortfolioCategoryRequest(long Id) : IRequest<PortfolioCategoryViewModel>
 {
 }

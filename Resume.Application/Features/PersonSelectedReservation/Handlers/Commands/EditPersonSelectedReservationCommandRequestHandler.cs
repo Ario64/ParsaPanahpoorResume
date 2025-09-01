@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.PersonSelectedReservation.Handlers.Commands
 {
-    public class EditPersonSelectedReservationCommandRequestHandler : IRequestHandler<EditPersonSelectedReservationCommandRequest, Unit>
+    public class EditPersonSelectedReservationCommandRequestHandler : IRequestHandler<EditPersonSelectedReservationCommandRequest, bool>
     {
         #region Constructor
 
@@ -22,7 +22,7 @@ namespace Resume.Application.Features.PersonSelectedReservation.Handlers.Command
 
         #endregion
 
-        public async Task<Unit> Handle(EditPersonSelectedReservationCommandRequest request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(EditPersonSelectedReservationCommandRequest request, CancellationToken cancellationToken)
         {
             var person = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Reservation.PersonSelectedReservation>()
                                           .GetAsync(request.Id, cancellationToken);
@@ -30,7 +30,7 @@ namespace Resume.Application.Features.PersonSelectedReservation.Handlers.Command
             _mapper.Map(request.EditPersonSelectedReservationViewModel, person);
             _unitOfWork.GenericRepository<Resume.Domain.Entity.Reservation.PersonSelectedReservation>().Update(person);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
-            return Unit.Value;
+            return true;
         }
     }
 }

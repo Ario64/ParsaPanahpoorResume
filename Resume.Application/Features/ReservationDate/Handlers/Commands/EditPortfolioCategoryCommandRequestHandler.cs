@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ReservationDate.Handlers.Commands;
 
-public class EditReservationDateTimeCommandRequestHandler : IRequestHandler<EditReservationDateTimeCommandRequest, Unit>
+public class EditReservationDateTimeCommandRequestHandler : IRequestHandler<EditReservationDateTimeCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,12 +22,12 @@ public class EditReservationDateTimeCommandRequestHandler : IRequestHandler<Edit
 
     #endregion
 
-    public async Task<Unit> Handle(EditReservationDateTimeCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(EditReservationDateTimeCommandRequest request, CancellationToken cancellationToken)
     {
         var reservationDate = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditReservationDateViewModel, reservationDate);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().Update(reservationDate);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

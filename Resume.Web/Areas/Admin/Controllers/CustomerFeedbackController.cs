@@ -31,7 +31,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetCustomerFeedbackListRequest(1,10)));
         }
 
-        public async Task<IActionResult> LoadCustomrFeedbackFormModal(ulong id)
+        public async Task<IActionResult> LoadCustomrFeedbackFormModal(long id)
         {
             var result = await _mediator.Send(new GetCustomerFeedbackRequest(id));
             return PartialView("_CustomerFeedbackFormModalPartial", result);
@@ -49,7 +49,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeleteCustomerFeedback(ulong id)
+        public async Task<IActionResult> DeleteCustomerFeedback(long id)
         {
             var result = await _mediator.Send(new DeleteCustomerFeedbackCommandRequest(id));
 

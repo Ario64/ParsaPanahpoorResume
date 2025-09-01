@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerLog.Handlers.Commands;
 
-public class CreateCustomerLogoCommandRequestHandler : IRequestHandler<CreateCustomerLogoCommandRequest, Unit>
+public class CreateCustomerLogoCommandRequestHandler : IRequestHandler<CreateCustomerLogoCommandRequest, bool>
 {
     #region Constructor
 
@@ -23,11 +23,11 @@ public class CreateCustomerLogoCommandRequestHandler : IRequestHandler<CreateCus
 
     #endregion
 
-    public async Task<Unit> Handle(CreateCustomerLogoCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(CreateCustomerLogoCommandRequest request, CancellationToken cancellationToken)
     {
         var customerLogo = _mapper.Map<CustomerLogo>(request.CustomerLogoViewModel);
         _unitOfWork.GenericRepository<CustomerLogo>().Add(customerLogo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

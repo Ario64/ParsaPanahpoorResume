@@ -5,10 +5,10 @@ namespace Resume.Application.Features.SocialMedia.Requests.Commands;
 
 public record EditSocialMediaCommandRequest : IRequest<bool>
 {
-    public ulong Id { get; init; }
+    public long Id { get; init; }
     public SocialMediaViewModel EditSocialMediaViewModel { get; init; }
 
-    public EditSocialMediaCommandRequest(ulong id, SocialMediaViewModel socialMediaViewModel)
+    public EditSocialMediaCommandRequest(long id, SocialMediaViewModel socialMediaViewModel)
     {
         Id = id;
         EditSocialMediaViewModel = socialMediaViewModel;

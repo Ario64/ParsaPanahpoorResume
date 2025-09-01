@@ -23,7 +23,8 @@ namespace Resume.Web.Controllers
         public async Task<IActionResult> Index()
         {
 
-            PortfolioPageViewModel model = new PortfolioPageViewModel() {
+            PortfolioPageViewModel model = new PortfolioPageViewModel()
+            {
                 Portfolios = await _mediator.Send(new GetPortfolioListRequest()),
                 PortfolioCategories = await _mediator.Send(new GetPortfolioCategoryListRequest())
             };

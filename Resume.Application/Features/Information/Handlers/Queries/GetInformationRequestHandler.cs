@@ -25,7 +25,14 @@ public class GetInformationRequestHandler : IRequestHandler<GetInformationReques
 
     public async Task<InformationViewModel> Handle(GetInformationRequest request, CancellationToken cancellationToken)
     {
-        var information = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().GetAsync(request.Id, cancellationToken);
-        return _mapper.Map<InformationViewModel>(information);
+
+        if (request.Id == null)
+        {
+            var information = new InformationViewModel();
+            return information;
+        }
+
+         var entity = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().GetAsync(request.Id, cancellationToken);
+        return _mapper.Map<InformationViewModel>(entity);
     }
 }

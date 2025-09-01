@@ -8,8 +8,7 @@ namespace Resume.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-
-            return View("MetaTag");
+            return  View("MetaTag");
         }
     }
 }

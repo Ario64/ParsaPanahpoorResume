@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ThingIdo.Handlers.Commands;
 
-public class EditThingIDoCommandRequestHandler : IRequestHandler<EditThingIDoCommandRequest, Unit>
+public class EditThingIDoCommandRequestHandler : IRequestHandler<EditThingIDoCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,12 +22,12 @@ public class EditThingIDoCommandRequestHandler : IRequestHandler<EditThingIDoCom
 
     #endregion
 
-    public async Task<Unit> Handle(EditThingIDoCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(EditThingIDoCommandRequest request, CancellationToken cancellationToken)
     {
         var thingIDo = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditThingIdoViewModel, thingIDo);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>().Update(thingIDo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

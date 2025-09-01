@@ -11,18 +11,18 @@
 
 @if (Model.Educations.Items != null && Model.Educations.Items.Any())
 {
-    <partial name="_EducationPartial" model="@Model.Educations" />
+    <partial name="_EducationPartial" model="@Model.Educations.Items" />
 }
 
 
 @if (Model.Experiences.Items != null && Model.Experiences.Items.Any())
 {
-    <partial name="_ExperiencesPartial" model="@Model.Experiences" />
+    <partial name="_ExperiencesPartial" model="@Model.Experiences.Items" />
 }
 
 
 
 @if (Model.Skills.Items != null && Model.Skills.Items.Any())
 {
-    <partial name="_SkillsPartial" model="@Model.Skills" />
+    <partial name="_SkillsPartial" model="@Model.Skills.Items" />
 }

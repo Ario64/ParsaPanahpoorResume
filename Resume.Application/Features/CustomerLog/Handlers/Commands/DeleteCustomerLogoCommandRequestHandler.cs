@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerLog.Handlers.Commands;
 
-public class DeleteCustomerLogoCommandRequestHandler : IRequestHandler<DeleteCustomerLogoCommandRequest, Unit>
+public class DeleteCustomerLogoCommandRequestHandler : IRequestHandler<DeleteCustomerLogoCommandRequest, bool>
 {
     #region Constructor
 
@@ -19,11 +19,11 @@ public class DeleteCustomerLogoCommandRequestHandler : IRequestHandler<DeleteCus
 
     #endregion
 
-    public async Task<Unit> Handle(DeleteCustomerLogoCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteCustomerLogoCommandRequest request, CancellationToken cancellationToken)
     {
-        var customerLogo = await _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().GetAsync(request.Id);
+        var customerLogo = await _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().GetAsync(request.id);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().Delete(customerLogo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

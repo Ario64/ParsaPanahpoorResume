@@ -2,7 +2,7 @@
 
 namespace Resume.Application.Features.Message.Requests.Commands;
 
-public record DeleteMessageCommandRequest(ulong Id) : IRequest<bool>
+public record DeleteMessageCommandRequest(long Id) : IRequest<bool>
 {
  
 }

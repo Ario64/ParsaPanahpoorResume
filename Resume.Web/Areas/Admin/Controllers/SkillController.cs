@@ -26,7 +26,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetSkillListRequest()));
         }
 
-        public async Task<IActionResult> LoadSkillFormModal(ulong id)
+        public async Task<IActionResult> LoadSkillFormModal(long id)
         {
             var resutlt = await _mediator.Send(new GetSkillRequest(id));
             return PartialView("_SkillFormModalPartial", resutlt);
@@ -41,7 +41,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeleteSkill(ulong id)
+        public async Task<IActionResult> DeleteSkill(long id)
         {
             var result = await _mediator.Send(new DeleteSkillCommandRequest(id));
 

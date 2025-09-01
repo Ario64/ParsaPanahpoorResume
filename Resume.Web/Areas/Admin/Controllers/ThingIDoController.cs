@@ -26,7 +26,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetThingIDoListRequest()));
         }
 
-        public async Task<IActionResult> LoadThingIDoFormModal(ulong id)
+        public async Task<IActionResult> LoadThingIDoFormModal(long id)
         {
             var result = await _mediator.Send(new GetThingIDoRequest(id) );
 
@@ -42,7 +42,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return new JsonResult(new { status = "Error" });
         }
 
-        public async Task<IActionResult> DeleteThingIDO(ulong id)
+        public async Task<IActionResult> DeleteThingIDO(long id)
         {
             var result = await _mediator.Send(new DeleteThingIDoCommandRequest(id));
 

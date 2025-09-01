@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Skill.Handlers.Commands;
 
-public class EditSkillCommandRequestHandler : IRequestHandler<EditSkillCommandRequest, Unit>
+public class EditSkillCommandRequestHandler : IRequestHandler<EditSkillCommandRequest, bool>
 {
     #region Constructor
 
@@ -22,12 +22,12 @@ public class EditSkillCommandRequestHandler : IRequestHandler<EditSkillCommandRe
 
     #endregion
 
-    public async Task<Unit> Handle(EditSkillCommandRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(EditSkillCommandRequest request, CancellationToken cancellationToken)
     {
         var skill = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditSkillViewModel, skill);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().Update(skill);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        return true;
     }
 }

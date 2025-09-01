@@ -3,7 +3,7 @@ using Resume.Domain.ViewModels.Skill;
 
 namespace Resume.Application.Features.Skill.Requests.Queries;
 
-public record GetSkillRequest(ulong Id) : IRequest<SkillViewModel>
+public record GetSkillRequest(long Id) : IRequest<SkillViewModel>
 {
     
 }
