@@ -38,7 +38,9 @@ public class Program
         builder.Services.ConfigureInfrastructureServices();
 
         #region Google Recaptcha
+
         builder.Services.AddHttpClient<ICaptchaValidator, GoogleReCaptchaValidator>();
+
         #endregion
 
         #endregion
