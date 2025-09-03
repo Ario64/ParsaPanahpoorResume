@@ -1,9 +1,7 @@
 ﻿using Resume.Application.ICacheService;
-using Resume.Infra.Data.Migrations;
 using StackExchange.Redis;
 using System;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
 namespace Resume.Infra.Data.CacheService;

@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Resume.Domain.ViewModels.CustomerFeedback;
 using Resume.Domain.ViewModels.Pagination;
+using System.Collections.Generic;
 
 namespace Resume.Application.Features.CustomerFeedback.Requests.Queries;
 
-public record GetCustomerFeedbackListRequest(int page = 1, int pageSize = 10) : IRequest<PagedResult<CustomerFeedbackViewModel>>
+public record GetCustomerFeedbackListRequest() : IRequest<IReadOnlyList<CustomerFeedbackViewModel>>
 {
 
 }
