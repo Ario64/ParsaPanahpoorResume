@@ -5,8 +5,6 @@ using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Domain.ViewModels.CustomerFeedback;
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,11 +36,11 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
         //Map to view model to save in cache
         var customerFeedbackViewModel = _mapper.Map<Domain.ViewModels.CustomerFeedback.CustomerFeedbackViewModel>(customerFeedback);
 
-        var cacheKey = $"CustomerFeedback_{customerFeedback.Id}";
+        var cacheKey = $"CustomerFeedback:{customerFeedback.Id}";
         await _cache.SetAsync<CustomerFeedbackViewModel>(cacheKey, customerFeedbackViewModel, TimeSpan.FromMinutes(5));
 
         //Remove list from cache to get updated list
-        await _cache.RemoveAsync("CustomerFeedbackList_List");
+        await _cache.RemoveAsync("CustomerFeedbackList:List");
 
         return true;
     }

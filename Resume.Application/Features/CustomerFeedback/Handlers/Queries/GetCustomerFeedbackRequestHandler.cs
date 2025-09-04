@@ -29,7 +29,7 @@ public class GetCustomerFeedbackRequestHandler : IRequestHandler<GetCustomerFeed
 
     public async Task<CustomerFeedbackViewModel> Handle(GetCustomerFeedbackRequest request, CancellationToken cancellationToken)
     {
-        var cacheKey = $"CustomerFeedback_{request.Id}";
+        var cacheKey = $"CustomerFeedback:{request.Id}";
         var cacheCustomerFeedback = await _cache.GetAsync<CustomerFeedbackViewModel>(cacheKey);
 
         //If exist in redis then return it
@@ -38,7 +38,9 @@ public class GetCustomerFeedbackRequestHandler : IRequestHandler<GetCustomerFeed
             return cacheCustomerFeedback;
         }
 
-        var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().GetAsync(request.Id, cancellationToken);
+        var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
+                                                .GetAsync(request.Id, cancellationToken);
+
         var customerViewModel = _mapper.Map<CustomerFeedbackViewModel>(customerFeedback);
 
         //Save in redis
