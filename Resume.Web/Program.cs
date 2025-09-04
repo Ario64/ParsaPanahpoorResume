@@ -28,14 +28,12 @@ public class Program
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
 
-        builder.Services.AddDbContext<AppDbContext>();
-
         #endregion
 
         #region ServiceRegistration 
 
         builder.Services.ConfigureApplicationServices();
-        builder.Services.ConfigureInfrastructureServices();
+        builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 
         #region Google Recaptcha
 

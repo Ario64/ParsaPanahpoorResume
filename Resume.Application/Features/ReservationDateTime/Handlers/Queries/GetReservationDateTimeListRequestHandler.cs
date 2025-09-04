@@ -28,7 +28,7 @@ public class GetReservationDateTimeListRequestHandler : IRequestHandler<GetReser
     public async Task<PagedResult<ReservationDateTimeViewModel>> Handle(GetReservationDateTimeListRequest request, CancellationToken cancellationToken)
     {
         var reservationDateTime = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>()
-                                             .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<ReservationDateTimeViewModel>>(reservationDateTime.Items);
 

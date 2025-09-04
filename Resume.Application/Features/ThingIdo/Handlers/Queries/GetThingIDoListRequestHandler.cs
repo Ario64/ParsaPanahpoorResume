@@ -28,7 +28,7 @@ public class GetThingIDoListRequestHandler : IRequestHandler<GetThingIDoListRequ
     public async Task<PagedResult<ThingIdoViewModel>> Handle(GetThingIDoListRequest request, CancellationToken cancellationToken)
     {
         var thingIDoList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>()
-                                             .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<ThingIdoViewModel>>(thingIDoList.Items);
 

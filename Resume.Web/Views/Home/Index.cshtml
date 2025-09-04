@@ -19,13 +19,13 @@
 }
 
 
-@if (Model.CustomerFeedbakcList.Items != null && Model.CustomerFeedbakcList.Items.Any())
+@if (Model.CustomerFeedbakcList != null && Model.CustomerFeedbakcList.Any())
 {
-    <partial name="_CustomerFeedbackPartial" model="@Model.CustomerFeedbakcList.Items" />
+    <partial name="_CustomerFeedbackPartial" model="@Model.CustomerFeedbakcList" />
 }
 
 
-@if (Model.CustomerLogoList.Items != null && Model.CustomerLogoList.Items.Any())
+@if (Model.CustomerLogoList != null && Model.CustomerLogoList.Any())
 {
-    <partial name="_CustomerLogoPartial" model="@Model.CustomerLogoList.Items" />
+    <partial name="_CustomerLogoPartial" model="@Model.CustomerLogoList" />
 }

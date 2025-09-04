@@ -3,6 +3,7 @@ using Resume.Domain.IRepository.GenericRepository;
 using Resume.Domain.ViewModels.Pagination;
 using Resume.Infra.Data.Context;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,9 +23,19 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     #endregion
 
-    #region Get All Async
+    #region Get All Async 
 
-    public async Task<PagedResult<T>> GetAllAsync(int page, int pageSize, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var entities = await _context.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
+        return entities;
+    }
+
+    #endregion
+
+    #region Get All Async with pagination
+
+    public async Task<PagedResult<T>> GetAllPagedAsync(int page, int pageSize, CancellationToken cancellationToken = default)
     {
         int skip = (page - 1) * pageSize;
         int take = pageSize;
@@ -64,7 +75,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public void Add(T entity)
     {
-         _context.Set<T>().Add(entity);
+        _context.Set<T>().Add(entity);
     }
 
     #endregion

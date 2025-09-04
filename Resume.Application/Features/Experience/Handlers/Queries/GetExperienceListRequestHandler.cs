@@ -28,7 +28,7 @@ public class GetExperienceListRequestHandler : IRequestHandler<GetExperienceList
     public async Task<PagedResult<ExperienceViewModel>> Handle(GetExperienceListRequest request, CancellationToken cancellationToken)
     {
         var experience = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>()
-                                          .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                          .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<ExperienceViewModel>>(experience.Items);
 

@@ -28,7 +28,7 @@ public class GetMessageListRequestHandler : IRequestHandler<GetMessageListReques
     public async Task<PagedResult<MessageViewModel>> Handle(GetMessageListRequest request, CancellationToken cancellationToken)
     {
         var messages = await _unitOfWork.GenericRepository<Domain.Entity.Message>()
-                                        .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                        .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var  items = _mapper.Map<IReadOnlyList<MessageViewModel>>(messages.Items);
 

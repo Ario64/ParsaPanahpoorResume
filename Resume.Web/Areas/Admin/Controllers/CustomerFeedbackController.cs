@@ -28,7 +28,7 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _mediator.Send(new GetCustomerFeedbackListRequest(1,10)));
+            return View(await _mediator.Send(new GetCustomerFeedbackListRequest()));
         }
 
         public async Task<IActionResult> LoadCustomrFeedbackFormModal(long id)

@@ -28,7 +28,7 @@ public class GetInformationListRequestHandler : IRequestHandler<GetInformationLi
     public async Task<PagedResult<InformationViewModel>> Handle(GetInformationListRequest request, CancellationToken cancellationToken)
     {
         var informationList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>()
-                                               .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                               .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<InformationViewModel>>(informationList.Items);
 

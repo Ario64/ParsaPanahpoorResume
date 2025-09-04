@@ -28,7 +28,7 @@ public class GetPersonSelectedReservationListRequestHandler : IRequestHandler<Ge
     public async Task<PagedResult<PersonSelectedReservationViewModel>> Handle(GetPersonSelectedReservationListRequest request, CancellationToken cancellationToken)
     {
         var people = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Reservation.PersonSelectedReservation>()
-                                      .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                      .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<PersonSelectedReservationViewModel>>(people.Items);
 

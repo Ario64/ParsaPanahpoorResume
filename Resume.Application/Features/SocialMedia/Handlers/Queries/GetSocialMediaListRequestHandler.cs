@@ -29,7 +29,7 @@ public class GetSocialMediaListRequestHandler : IRequestHandler<GetSocialMediaLi
     public async Task<PagedResult<SocialMediaViewModel>> Handle(GetSocialMediaListRequest request, CancellationToken cancellationToken)
     {
         var socialMediaList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>()
-                                             .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<SocialMediaViewModel>>(socialMediaList.Items);
 

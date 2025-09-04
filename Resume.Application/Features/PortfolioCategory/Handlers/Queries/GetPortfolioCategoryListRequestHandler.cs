@@ -28,7 +28,7 @@ public class GetPortfolioCategoryListRequestHandler : IRequestHandler<GetPortfol
     public async Task<PagedResult<PortfolioCategoryViewModel>> Handle(GetPortfolioCategoryListRequest request, CancellationToken cancellationToken)
     {
         var portfolioCategoryList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>()
-                                             .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<PortfolioCategoryViewModel>>(portfolioCategoryList.Items);
 

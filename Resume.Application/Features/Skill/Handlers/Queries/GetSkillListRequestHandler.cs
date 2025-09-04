@@ -28,7 +28,7 @@ public class GetSkillListRequestHandler : IRequestHandler<GetSkillListRequest, P
     public async Task<PagedResult<SkillViewModel>> Handle(GetSkillListRequest request, CancellationToken cancellationToken)
     {
         var skillList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>()
-                                             .GetAllAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<SkillViewModel>>(skillList.Items);
 
