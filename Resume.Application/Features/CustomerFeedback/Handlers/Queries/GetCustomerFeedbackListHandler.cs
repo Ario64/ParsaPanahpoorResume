@@ -30,7 +30,7 @@ public class GetCustomerFeedbackListRequestHandler : IRequestHandler<GetCustomer
 
     public async Task<IReadOnlyList<CustomerFeedbackViewModel>> Handle(GetCustomerFeedbackListRequest request, CancellationToken cancellationToken)
     {
-        var cacheKey = $"CustomerFeedbackList:List";
+        var cacheKey = "CustomerFeedbackList";
         var customerFeedbackListCached = await _cache.GetAsync<IReadOnlyList<CustomerFeedbackViewModel>>(cacheKey);
 
         //If list exists in redis then return it

@@ -1,8 +1,10 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Resume.Application.Features.CustomerLog.Requests.Queries;
+using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Domain.Entity;
 using Resume.Domain.ViewModels.CustomerLogo;
@@ -15,18 +17,39 @@ public class GetCustomerLogoRequestHandler : IRequestHandler<GetCustomerLogoRequ
 
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ICacheServices _cache;
 
-    public GetCustomerLogoRequestHandler(IMapper mapper, IUnitOfWork unitOfWork)
+    public GetCustomerLogoRequestHandler(IMapper mapper, IUnitOfWork unitOfWork, ICacheServices cache)
     {
         _mapper = mapper;
         _unitOfWork = unitOfWork;
+        _cache = cache;
     }
 
     #endregion
 
     public async Task<CustomerLogoViewModel> Handle(GetCustomerLogoRequest request, CancellationToken cancellationToken)
     {
-        var customerLogo = await _unitOfWork.GenericRepository<CustomerLogo>().GetAsync(request.Id, cancellationToken);
-        return _mapper.Map<CustomerLogoViewModel>(customerLogo);
+        var cacheKey = $"CustomerLogo:{request.Id}";
+        var cachedCustomerLogo = await _cache.GetAsync<CustomerLogoViewModel>(cacheKey);
+
+        //If data exists in cache, return it
+        if ((cachedCustomerLogo != null))
+        {
+            return cachedCustomerLogo;
+        }
+
+        //Fetch data from database
+        var customerLogo = await _unitOfWork.GenericRepository<CustomerLogo>()
+                                            .GetAsync(request.Id, cancellationToken);
+
+        //Mapping data
+        var mappedCustomerLogo = _mapper.Map<CustomerLogoViewModel>(customerLogo);
+
+        //Store data in cache for future requests
+        await _cache.SetAsync<CustomerLogoViewModel>(cacheKey, mappedCustomerLogo, TimeSpan.FromMinutes(10));
+
+        return mappedCustomerLogo;
+
     }
 }

@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\CustomerLog\Handlers\Queries\" />
     <Folder Include="UnitOfWork\" />
   </ItemGroup>
 
