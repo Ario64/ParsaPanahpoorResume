@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Resume.Application.Features.CustomerLog.Requests.Commands;
+using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,10 +12,12 @@ public class DeleteCustomerLogoCommandRequestHandler : IRequestHandler<DeleteCus
     #region Constructor
 
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ICacheServices _cache;
 
-    public DeleteCustomerLogoCommandRequestHandler(IUnitOfWork unitOfWork)
+    public DeleteCustomerLogoCommandRequestHandler(IUnitOfWork unitOfWork, ICacheServices cache)
     {
         _unitOfWork = unitOfWork;
+        _cache = cache;
     }
 
     #endregion
@@ -24,6 +27,10 @@ public class DeleteCustomerLogoCommandRequestHandler : IRequestHandler<DeleteCus
         var customerLogo = await _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().GetAsync(request.id);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().Delete(customerLogo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        var cacheKey =$"CustomerLogo:{request.id}"; 
+        await _cache.RemoveAsync(cacheKey);
+
         return true;
     }
 }
