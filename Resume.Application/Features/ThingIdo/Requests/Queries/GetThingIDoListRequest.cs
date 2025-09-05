@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.ThingIDo;
+using System.Collections.Generic;
 
 namespace Resume.Application.Features.ThingIdo.Requests.Queries;
 
-public record GetThingIDoListRequest(int page = 1, int pageSize = 10) : IRequest<PagedResult<ThingIdoViewModel>>
+public record GetThingIDoListRequest() : IRequest<IReadOnlyList<ThingIdoViewModel>>
 {
 }

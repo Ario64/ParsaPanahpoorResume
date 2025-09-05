@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ThingIdo.Handlers.Queries;
 
-public class GetThingIDoListRequestHandler : IRequestHandler<GetThingIDoListRequest, PagedResult<ThingIdoViewModel>>
+public class GetThingIDoListRequestHandler : IRequestHandler<GetThingIDoListRequest, IReadOnlyList<ThingIdoViewModel>>
 {
     #region Constructor
 
@@ -25,21 +25,14 @@ public class GetThingIDoListRequestHandler : IRequestHandler<GetThingIDoListRequ
 
     #endregion
 
-    public async Task<PagedResult<ThingIdoViewModel>> Handle(GetThingIDoListRequest request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<ThingIdoViewModel>> Handle(GetThingIDoListRequest request, CancellationToken cancellationToken)
     {
         var thingIDoList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>()
-                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllAsync(cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<ThingIdoViewModel>>(thingIDoList.Items);
+        var thingIDoListViewModel = _mapper.Map<IReadOnlyList<ThingIdoViewModel>>(thingIDoList);
 
-        return new PagedResult<ThingIdoViewModel>
-        {
-            Items = items,
-            Page = request.page,
-            PageSize = request.pageSize,
-            TotalCount = thingIDoList.TotalCount,
-            TotalPages = thingIDoList.TotalPages
-        };
+        return thingIDoListViewModel;
     }
 
 }

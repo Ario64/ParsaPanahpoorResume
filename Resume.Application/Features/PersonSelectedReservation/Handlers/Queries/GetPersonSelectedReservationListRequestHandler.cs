@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.PersonSelectedReservation.Handlers.Queries;
 
-public class GetPersonSelectedReservationListRequestHandler : IRequestHandler<GetPersonSelectedReservationListRequest, PagedResult<PersonSelectedReservationViewModel>>
+public class GetPersonSelectedReservationListRequestHandler : IRequestHandler<GetPersonSelectedReservationListRequest, IReadOnlyList<PersonSelectedReservationViewModel>>
 {
     #region Constructor
 
@@ -25,20 +25,13 @@ public class GetPersonSelectedReservationListRequestHandler : IRequestHandler<Ge
 
     #endregion
 
-    public async Task<PagedResult<PersonSelectedReservationViewModel>> Handle(GetPersonSelectedReservationListRequest request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<PersonSelectedReservationViewModel>> Handle(GetPersonSelectedReservationListRequest request, CancellationToken cancellationToken)
     {
         var people = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Reservation.PersonSelectedReservation>()
-                                      .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
+                                      .GetAllAsync(cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<PersonSelectedReservationViewModel>>(people.Items);
+        var peopleViewModel = _mapper.Map<IReadOnlyList<PersonSelectedReservationViewModel>>(people);
 
-        return new PagedResult<PersonSelectedReservationViewModel>
-        {
-            Items = items,
-            TotalCount = people.TotalCount,
-            Page = request.page,
-            PageSize = request.pageSize,
-            TotalPages = people.TotalPages
-        };
+        return peopleViewModel;
     }
 }

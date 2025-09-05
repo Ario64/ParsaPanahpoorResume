@@ -2,8 +2,6 @@
 using MediatR;
 using Resume.Application.Features.SocialMedia.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.Pagination;
-using Resume.Domain.ViewModels.Skill;
 using Resume.Domain.ViewModels.SocialMedia;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Skill.Handlers.Queries;
 
-public class GetSocialMediaListRequestHandler : IRequestHandler<GetSocialMediaListRequest, PagedResult<SocialMediaViewModel>>
+public class GetSocialMediaListRequestHandler : IRequestHandler<GetSocialMediaListRequest, IReadOnlyList<SocialMediaViewModel>>
 {
     #region Constructor
 
@@ -26,21 +24,14 @@ public class GetSocialMediaListRequestHandler : IRequestHandler<GetSocialMediaLi
 
     #endregion
 
-    public async Task<PagedResult<SocialMediaViewModel>> Handle(GetSocialMediaListRequest request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<SocialMediaViewModel>> Handle(GetSocialMediaListRequest request, CancellationToken cancellationToken)
     {
         var socialMediaList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>()
-                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllAsync( cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<SocialMediaViewModel>>(socialMediaList.Items);
+        var socialMediaListViewModel = _mapper.Map<IReadOnlyList<SocialMediaViewModel>>(socialMediaList);
 
-        return new PagedResult<SocialMediaViewModel>
-        {
-            Items = items,
-            Page = request.page,
-            PageSize = request.pageSize,
-            TotalCount = socialMediaList.TotalCount,
-            TotalPages = socialMediaList.TotalPages
-        };
+        return socialMediaListViewModel;
     }
 
 }

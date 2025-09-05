@@ -31,6 +31,7 @@ public class GetPortfolioListRequestHandler : IRequestHandler<GetPortfolioListRe
                                              .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<PortfolioViewModel>>(portfolioList.Items);
+
         var categoryList = items.GroupBy(g => new { g.Id, g.PortfolioCategoryName })
                                 .Select(g => new PortfolioCategoryViewModel
                                 {

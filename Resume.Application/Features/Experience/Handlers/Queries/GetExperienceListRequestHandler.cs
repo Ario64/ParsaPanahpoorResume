@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Experience.Handlers.Queries;
 
-public class GetExperienceListRequestHandler : IRequestHandler<GetExperienceListRequest, PagedResult<ExperienceViewModel>>
+public class GetExperienceListRequestHandler : IRequestHandler<GetExperienceListRequest, IReadOnlyList<ExperienceViewModel>>
 {
     #region Constructor
 
@@ -25,20 +25,13 @@ public class GetExperienceListRequestHandler : IRequestHandler<GetExperienceList
 
     #endregion
 
-    public async Task<PagedResult<ExperienceViewModel>> Handle(GetExperienceListRequest request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<ExperienceViewModel>> Handle(GetExperienceListRequest request, CancellationToken cancellationToken)
     {
-        var experience = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>()
-                                          .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
+        var experienceList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>()
+                                          .GetAllAsync(cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<ExperienceViewModel>>(experience.Items);
+        var experienceListViewModel = _mapper.Map<IReadOnlyList<ExperienceViewModel>>(experienceList);
 
-        return new PagedResult<ExperienceViewModel>
-        {
-            Items = items,
-            Page = request.page,
-            PageSize = request.pageSize,
-            TotalCount = experience.TotalCount,
-            TotalPages = experience.TotalPages
-        };
+        return experienceListViewModel;
     }
 }

@@ -2,7 +2,6 @@
 using MediatR;
 using Resume.Application.Features.PortfolioCategory.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.Portfolio;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.PortfolioCategory.Handlers.Queries;
 
-public class GetPortfolioCategoryListRequestHandler : IRequestHandler<GetPortfolioCategoryListRequest, PagedResult<PortfolioCategoryViewModel>>
+public class GetPortfolioCategoryListRequestHandler : IRequestHandler<GetPortfolioCategoryListRequest, IReadOnlyList<PortfolioCategoryViewModel>>
 {
     #region Constructor
 
@@ -25,21 +24,14 @@ public class GetPortfolioCategoryListRequestHandler : IRequestHandler<GetPortfol
 
     #endregion
 
-    public async Task<PagedResult<PortfolioCategoryViewModel>> Handle(GetPortfolioCategoryListRequest request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<PortfolioCategoryViewModel>> Handle(GetPortfolioCategoryListRequest request, CancellationToken cancellationToken)
     {
         var portfolioCategoryList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>()
-                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllAsync( cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<PortfolioCategoryViewModel>>(portfolioCategoryList.Items);
+        var portfolioCategoryListViewModel = _mapper.Map<IReadOnlyList<PortfolioCategoryViewModel>>(portfolioCategoryList);
 
-        return new PagedResult<PortfolioCategoryViewModel>
-        {
-            Items = items,
-            Page = request.page,
-            PageSize = request.pageSize,
-            TotalCount = portfolioCategoryList.TotalCount,
-            TotalPages = portfolioCategoryList.TotalPages
-        };
+        return portfolioCategoryListViewModel;
     }
 
 }

@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.ReservationDate;
+using System.Collections.Generic;
 
 namespace Resume.Application.Features.ReservationDate.Requests.Queries;
 
-public record GetReservationDateListRequest(int page = 1, int pageSize = 10) : IRequest<PagedResult<ReservationDateViewModel>>
+public record GetReservationDateListRequest() : IRequest<IReadOnlyList<ReservationDateViewModel>>
 {
 }

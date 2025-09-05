@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Resume.Domain.ViewModels.Information;
 using Resume.Domain.ViewModels.Pagination;
+using System.Collections.Generic;
 
 namespace Resume.Application.Features.Information.Requests.Queries;
 
-public record GetInformationListRequest(int page = 1, int pageSize = 10) : IRequest<PagedResult<InformationViewModel>>
+public record GetInformationListRequest() : IRequest<IReadOnlyList<InformationViewModel>>
 {
 }

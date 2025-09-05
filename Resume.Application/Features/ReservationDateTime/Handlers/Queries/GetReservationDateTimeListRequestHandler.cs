@@ -2,7 +2,6 @@
 using MediatR;
 using Resume.Application.Features.ReservationDate.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.ReservationDateTime;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.ReservationDateTime.Handlers.Queries;
 
-public class GetReservationDateTimeListRequestHandler : IRequestHandler<GetReservationDateTimeListRequest, PagedResult<ReservationDateTimeViewModel>>
+public class GetReservationDateTimeListRequestHandler : IRequestHandler<GetReservationDateTimeListRequest, IReadOnlyList<ReservationDateTimeViewModel>>
 {
     #region Constructor
 
@@ -25,21 +24,14 @@ public class GetReservationDateTimeListRequestHandler : IRequestHandler<GetReser
 
     #endregion
 
-    public async Task<PagedResult<ReservationDateTimeViewModel>> Handle(GetReservationDateTimeListRequest request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<ReservationDateTimeViewModel>> Handle(GetReservationDateTimeListRequest request, CancellationToken cancellationToken)
     {
         var reservationDateTime = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>()
-                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
+                                             .GetAllAsync( cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<ReservationDateTimeViewModel>>(reservationDateTime.Items);
+        var reservationDateTimeViewModel = _mapper.Map<IReadOnlyList<ReservationDateTimeViewModel>>(reservationDateTime);
 
-        return new PagedResult<ReservationDateTimeViewModel>
-        {
-            Items = items,
-            Page = request.page,
-            PageSize = request.pageSize,
-            TotalCount = reservationDateTime.TotalCount,
-            TotalPages = reservationDateTime.TotalPages
-        };
+        return reservationDateTimeViewModel;
     }
 
 }
