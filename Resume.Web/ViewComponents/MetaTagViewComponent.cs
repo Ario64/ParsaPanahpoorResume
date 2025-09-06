@@ -6,9 +6,9 @@ namespace Resume.Web.ViewComponents
     public class MetaTagViewComponent : ViewComponent
     {
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public Task<IViewComponentResult> InvokeAsync()
         {
-            return  View("MetaTag");
+            return Task.FromResult<IViewComponentResult>(View("MetaTag"));
         }
     }
 }

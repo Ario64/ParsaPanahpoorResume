@@ -26,10 +26,10 @@
                 <div class="badge badge--gray">@Model.information.Job</div>
             }
 
-            @if (Model.SocialMedias != null && Model.SocialMedias.Items.Any())
+            @if (Model.SocialMedias != null && Model.SocialMedias.Any())
             {
                 <div class="social">
-                    @foreach (SocialMediaViewModel item in Model.SocialMedias.Items)
+                    @foreach (SocialMediaViewModel item in Model.SocialMedias)
                     {
                         <a class="social__link" href="@item.Link"><i class="font-icon icon-@item.Icon"></i></a>
                     }

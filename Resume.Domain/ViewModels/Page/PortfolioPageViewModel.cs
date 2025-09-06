@@ -7,6 +7,6 @@ namespace Resume.Domain.ViewModels.Page
     public class PortfolioPageViewModel
     {
         public PagedResult<PortfolioViewModel> Portfolios { get; set; }
-        public PagedResult<PortfolioCategoryViewModel> PortfolioCategories { get; set; }
+        public IReadOnlyList<PortfolioCategoryViewModel> PortfolioCategories { get; set; }
     }
 }

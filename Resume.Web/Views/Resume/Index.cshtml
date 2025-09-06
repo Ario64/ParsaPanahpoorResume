@@ -15,14 +15,14 @@
 }
 
 
-@if (Model.Experiences.Items != null && Model.Experiences.Items.Any())
+@if (Model.Experiences != null && Model.Experiences.Any())
 {
-    <partial name="_ExperiencesPartial" model="@Model.Experiences.Items" />
+    <partial name="_ExperiencesPartial" model="@Model.Experiences" />
 }
 
 
 
-@if (Model.Skills.Items != null && Model.Skills.Items.Any())
+@if (Model.Skills != null && Model.Skills.Any())
 {
-    <partial name="_SkillsPartial" model="@Model.Skills.Items" />
+    <partial name="_SkillsPartial" model="@Model.Skills" />
 }

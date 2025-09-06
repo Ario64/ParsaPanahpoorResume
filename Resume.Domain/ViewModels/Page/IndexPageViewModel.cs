@@ -1,6 +1,5 @@
 ﻿using Resume.Domain.ViewModels.CustomerFeedback;
 using Resume.Domain.ViewModels.CustomerLogo;
-using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.ThingIDo;
 using System.Collections.Generic;
 
@@ -8,7 +7,7 @@ namespace Resume.Domain.ViewModels.Page
 {
     public class IndexPageViewModel
     {
-        public PagedResult<ThingIdoViewModel> ThingIDoList { get; set; }
+        public IReadOnlyList<ThingIdoViewModel> ThingIDoList { get; set; }
 
         public IReadOnlyList<CustomerFeedbackViewModel> CustomerFeedbakcList { get; set; }
 

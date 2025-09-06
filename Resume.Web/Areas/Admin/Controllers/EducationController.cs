@@ -23,7 +23,7 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _meditor.Send(new GetEducationListRequest(1, 10)));
+            return View(await _meditor.Send(new GetEducationListRequest()));
         }
 
         public async Task<IActionResult> LoadEducationFormModal(long id)

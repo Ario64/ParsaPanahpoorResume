@@ -1,5 +1,6 @@
-﻿@model List<EducationViewModel>
+﻿@model Resume.Domain.ViewModels.Pagination.PagedResult<EducationViewModel>
 @using Resume.Domain.ViewModels.Education
+
 
 @{
     ViewData["Title"] = "لیست تحصیلات";
@@ -39,9 +40,9 @@
                             </thead>
                             <tbody>
 
-                                @if (Model != null && Model.Any())
+                                @if (Model != null && Model.Items.Any())
                                 {
-                                    @foreach (EducationViewModel item in Model)
+                                    @foreach (EducationViewModel item in Model.Items)
                                     {
                                         <tr id="ListItem-@(item.Id)">
                                             <td>@item.Title</td>

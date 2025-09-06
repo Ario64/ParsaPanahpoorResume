@@ -13,9 +13,9 @@
     </div>
 </div>
 
-@if (Model.ThingIDoList.Items != null && Model.ThingIDoList.Items.Any())
+@if (Model.ThingIDoList != null && Model.ThingIDoList.Any())
 {
-    <partial name="_ThingIDoPartial" model="@Model.ThingIDoList.Items" />
+    <partial name="_ThingIDoPartial" model="@Model.ThingIDoList" />
 }
 
 

@@ -1,4 +1,4 @@
-﻿@model PagedResult<ThingIdoViewModel>
+﻿@model IReadOnlyList<ThingIdoViewModel>
 @using Resume.Domain.ViewModels.Pagination
 @using Resume.Domain.ViewModels.ThingIDo
 
@@ -39,9 +39,9 @@
                             </thead>
                             <tbody>
 
-                                @if (Model != null && Model.Items.Any())
+                                @if (Model != null && Model.Any())
                                 {
-                                    @foreach (var item in Model.Items)
+                                    @foreach (var item in Model)
                                     {
                                         <tr id="ListItem-@(item.Id)">
                                             <td>@item.Title</td>

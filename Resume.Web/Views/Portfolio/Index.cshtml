@@ -17,7 +17,7 @@
         <ul class="filter">
             <li class="filter__item">دسته</li>
             <li class="filter__item active" data-filter="*"><a class="filter__link active" href="#filter">همه</a></li>
-            @foreach (PortfolioCategoryViewModel item in Model.PortfolioCategories.Items)
+            @foreach (PortfolioCategoryViewModel item in Model.PortfolioCategories)
             {
                 <li class="filter__item" data-filter=".category-@item.Name"><a class="filter__link" href="#filter">@item.Title</a></li>
             }
