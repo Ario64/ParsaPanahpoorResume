@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.Portfolio;
+using System.Collections.Generic;
 
 namespace Resume.Application.Features.Portfolio.Requests.Queries;
 
-public record GetPortfolioListRequest(int page = 1, int pageSize = 10) : IRequest<PortfolioPageResult>
+public record GetPortfolioListRequest() : IRequest<IReadOnlyList<PortfolioViewModel>>
 {
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Features.Portfolio.Requests.Commands;
 using Resume.Application.Features.Portfolio.Requests.Queries;
 using Resume.Application.Features.PortfolioCategory.Requests.Commands;
+using Resume.Application.Features.PortfolioCategory.Requests.Queries;
 using Resume.Domain.ViewModels.Portfolio;
 using Resume.Web.Areas.Controllers;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _mediator.Send(new GetPortfolioListRequest()));
+            return View(await _mediator.Send(new GetPortfolioCategoryListRequest()));
         }
 
         public async Task<IActionResult> LoadPortfolioCategoryFormModal(CreatePortfolioCategoryViewModel portolioCategory)

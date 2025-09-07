@@ -1,4 +1,4 @@
-﻿@model List<MessageViewModel>
+﻿@model Resume.Domain.ViewModels.Pagination.PagedResult<MessageViewModel>
 @using Resume.Domain.ViewModels.Message
 
 @{
@@ -36,9 +36,9 @@
                             </thead>
                             <tbody>
 
-                                @if (Model != null && Model.Any())
+                                @if (Model != null && Model.Items.Any())
                                 {
-                                    @foreach (MessageViewModel item in Model)
+                                    @foreach (MessageViewModel item in Model.Items)
                                     {
                                         <tr id="ListItem-@(item.Id)">
                                             <td>@item.Name</td>

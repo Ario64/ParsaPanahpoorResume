@@ -10,7 +10,7 @@
     <h1 class="title title--h1 title__separate">نمونه کارها</h1>
 </div>
 
-@if (Model.Portfolios.Items != null && Model.Portfolios.Items.Any())
+@if (Model.Portfolios != null && Model.Portfolios.Any())
 {
     <div class="select section">
         <span class="placeholder">دسته را انتخاب کنید</span>
@@ -27,13 +27,13 @@
 }
 
 
-@if (Model.Portfolios.Items != null && Model.Portfolios.Items.Any())
+@if (Model.Portfolios != null && Model.Portfolios.Any())
 {
 
     <div class="gallery-grid js-grid js-filter-container">
         <div class="gutter-sizer"></div>
 
-        @foreach (PortfolioViewModel item in Model.Portfolios.Items)
+        @foreach (PortfolioViewModel item in Model.Portfolios)
         {
             <figure class="gallery-grid__item category-@item.PortfolioCategoryName">
                 <div class="gallery-grid__image-wrap">

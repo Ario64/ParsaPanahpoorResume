@@ -62,10 +62,14 @@
                 <div class="col-md-4">
                     <label asp-for="PortfolioCategoryId"></label>
                     <select asp-for="PortfolioCategoryId" class="selectpicker">
-                        @foreach (var item in Model.PortfolioCategories)
+                        @if(Model.PortfolioCategories != null)
                         {
-                            <option value="@item.Id">@item.Name</option>
+                            @foreach (var item in Model.PortfolioCategories)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
                         }
+                    
                     </select>
                 </div>
 

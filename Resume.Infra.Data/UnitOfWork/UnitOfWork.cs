@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using Resume.Infra.Data.Repository;
+using Resume.Domain.IRepository.Portfolio;
 
 namespace Resume.Infra.Data.UnitOfWork;
 
@@ -23,6 +24,19 @@ public class UnitOfWork : IUnitOfWork
     #endregion
 
     private readonly ConcurrentDictionary<Type, object> _repositories = new();
+    private IPortfolioRepository _portfolioRepository;
+
+    public IPortfolioRepository PortfolioRepository 
+    {
+        get
+        {
+            if( _portfolioRepository == null)
+            {
+                _portfolioRepository = new PortfolioRepository(_context);
+            }
+            return _portfolioRepository;
+        }
+    }
 
     public IGenericRepository<T> GenericRepository<T>() where T : class
     {

@@ -4,13 +4,12 @@ using Resume.Application.Features.Portfolio.Requests.Queries;
 using Resume.Application.UnitOfWork;
 using Resume.Domain.ViewModels.Portfolio;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Portfolio.Handlers.Queries;
 
-public class GetPortfolioListRequestHandler : IRequestHandler<GetPortfolioListRequest, PortfolioPageResult>
+public class GetPortfolioListRequestHandler : IRequestHandler<GetPortfolioListRequest, IReadOnlyList<PortfolioViewModel>>
 {
     #region Constructor
 
@@ -25,30 +24,13 @@ public class GetPortfolioListRequestHandler : IRequestHandler<GetPortfolioListRe
 
     #endregion
 
-    public async Task<PortfolioPageResult> Handle(GetPortfolioListRequest request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<PortfolioViewModel>> Handle(GetPortfolioListRequest request, CancellationToken cancellationToken)
     {
-        var portfolioList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>()
-                                             .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
+        var portfolioList = await _unitOfWork.PortfolioRepository
+                                             .GatAllPortfolioAsync(cancellationToken);
 
-        var items = _mapper.Map<IReadOnlyList<PortfolioViewModel>>(portfolioList.Items);
+        var portfolioListViewModel = _mapper.Map<IReadOnlyList<PortfolioViewModel>>(portfolioList);
 
-        var categoryList = items.GroupBy(g => new { g.Id, g.PortfolioCategoryName })
-                                .Select(g => new PortfolioCategoryViewModel
-                                {
-                                    Id = g.Key.Id,
-                                    Name = g.Key.PortfolioCategoryName,
-                                    Title = g.First().PortfolioCategoryName
-                                }).ToList();
-
-
-        return new PortfolioPageResult
-        {
-            Items = items,
-            Page = request.page,
-            PageSize = request.pageSize,
-            TotalCount = portfolioList.TotalCount,
-            TotalPages = portfolioList.TotalPages,
-            CategoryList = categoryList
-        };
+        return portfolioListViewModel;
     }
 }
