@@ -31,7 +31,7 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetPortfolioListRequest()));
         }
 
-        public async Task<IActionResult> LoadPortfolioFormModal(long id)
+        public async Task<IActionResult> LoadPortfolioFormModal(long? id)
         {
 
             var result = await _mediator.Send(new GetPortfolioRequest(id));
@@ -39,10 +39,31 @@ namespace Resume.Web.Areas.Admin.Controllers
             return PartialView("_PortfolioFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitPortfolioFormModal(CreatePortfolioViewModel portfolio)
+        public async Task<IActionResult> SubmitPortfolioFormModal(EditPortfolioViewModel model)
         {
-            var result = await _mediator.Send(new CreatePortfolioCommandRequest(portfolio));
-    
+            var result = false;
+
+            if (model.Id == null || model.Id == 0)
+            {
+                var createModel = new CreatePortfolioViewModel()
+                {
+                    Image = model.Image,
+                    ImageAlt = model.ImageAlt,
+                    Link = model.Link,
+                    Order = model.Order,    
+                    PortfolioCategoryId = model.PortfolioCategoryId,
+                    Title = model.Title
+                    
+                };
+
+                result = await _mediator.Send(new CreatePortfolioCommandRequest(createModel));
+            }
+            else
+            {
+           
+                result = await _mediator.Send(new EditPortfolioCommandRequest(model.Id, model));
+            }
+
             if (result) return new JsonResult(new { status = "Success" });
 
             return new JsonResult(new { status = "Error" });
