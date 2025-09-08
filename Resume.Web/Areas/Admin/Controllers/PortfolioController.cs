@@ -33,14 +33,18 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> LoadPortfolioFormModal(long id)
         {
+
             var result = await _mediator.Send(new GetPortfolioRequest(id));
+
             return PartialView("_PortfolioFormModalPartial", result);
         }
 
         public async Task<IActionResult> SubmitPortfolioFormModal(CreatePortfolioViewModel portfolio)
         {
             var result = await _mediator.Send(new CreatePortfolioCommandRequest(portfolio));
+    
             if (result) return new JsonResult(new { status = "Success" });
+
             return new JsonResult(new { status = "Error" });
         }
 

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Resume.Domain.ViewModels.Common;
+﻿using Resume.Domain.ViewModels.Common;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Resume.Domain.ViewModels.Portfolio
 {
@@ -28,6 +30,10 @@ namespace Resume.Domain.ViewModels.Portfolio
         [Display(Name = "عنوان دسته بندی")]
         public string PortfolioCategoryName { get; set; }
 
+        [Display(Name = "عنوان دسته بندی")]
+        public long PortfolioCategoryId { get; set; }
 
+        [NotMapped]
+        public IReadOnlyList<PortfolioCategoryViewModel> PortfolioCategories { get; set; } = new List<PortfolioCategoryViewModel>();
     }
 }

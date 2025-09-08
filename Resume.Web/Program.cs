@@ -11,6 +11,7 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Resume.Application;
 using Resume.Infra.Data;
+using Serilog;
 
 namespace Resume.Web;
 
@@ -18,8 +19,16 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        Log.Logger = new LoggerConfiguration().MinimumLevel.Information()
+                                              .WriteTo
+                                              .Seq("http://localhost:5341/")
+                                              .CreateLogger();
+
+
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllersWithViews();
+
+        builder.Host.UseSerilog();
 
         #region Add DbContext
 

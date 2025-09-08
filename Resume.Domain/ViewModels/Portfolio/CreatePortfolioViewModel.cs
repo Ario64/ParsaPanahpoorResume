@@ -35,5 +35,5 @@ public class CreatePortfolioViewModel
 
 
     [NotMapped]
-    public List<PortfolioCategoryViewModel> PortfolioCategories { get; set; }
+    public List<PortfolioCategoryViewModel> PortfolioCategories { get; set; } = new List<PortfolioCategoryViewModel>();
 }

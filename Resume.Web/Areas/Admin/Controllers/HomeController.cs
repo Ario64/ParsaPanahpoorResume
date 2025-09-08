@@ -16,6 +16,4 @@ namespace Resume.Web.Areas.Controllers
             return View();
         }
     }
-
-
 }

@@ -26,6 +26,7 @@ public class CreatePortfolioCommandRequestHandler : IRequestHandler<CreatePortfo
     {
         var porfolio = _mapper.Map<Resume.Domain.Entity.Portfolio>(request.CreatePortfolioViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().Add(porfolio);
+
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
     }

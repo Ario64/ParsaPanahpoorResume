@@ -352,10 +352,8 @@ function LoadPortfolioCategoryFormModal(id) {
     $.ajax({
         url: "/Admin/PortfolioCategory/LoadPortfolioCategoryFormModal",
         type: "get",
-        data: {
-            id: id
-        },
-        beforSend: function () {
+        data: { id: id },
+        beforeSend: function () {
             StartLoading();
         },
         success: function (res) {
@@ -364,16 +362,16 @@ function LoadPortfolioCategoryFormModal(id) {
             $("#modal-left-content").html(res);
 
             $('#PortfolioCategoryForm').data('validator', null);
-            $.validator.unobtrusive.parse("#PortfolioCategorySkillForm");
+            $.validator.unobtrusive.parse("#PortfolioCategoryForm");
 
             $('#modal-left').modal('show');
-
         },
         error: function () {
             CloseLoading();
         }
     });
 }
+
 
 function PortfolioCategoryFormSubmited(res) {
     CloseLoading();
@@ -439,7 +437,7 @@ function LoadPortfolioFormModal(id) {
         data: {
             id: id
         },
-        beforSend: function () {
+        beforeSend: function () {
             StartLoading();
         },
         success: function (res) {
@@ -448,7 +446,7 @@ function LoadPortfolioFormModal(id) {
             $("#modal-left-content").html(res);
 
             $('#PortfolioForm').data('validator', null);
-            $.validator.unobtrusive.parse("#PortfolioSkillForm");
+            $.validator.unobtrusive.parse("#PortfolioForm");
 
             $('#modal-left').modal('show');
 
