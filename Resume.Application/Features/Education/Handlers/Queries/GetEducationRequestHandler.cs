@@ -29,6 +29,12 @@ public class GetEducationRequestHandler : IRequestHandler<GetEducationRequest, E
 
     public async Task<EducationViewModel> Handle(GetEducationRequest request, CancellationToken cancellationToken)
     {
+        if(request.Id == 0)
+        {
+            var newEducation = new EducationViewModel();
+            return newEducation;
+        }
+
         var cacheKey = $"Education:{request.Id}";
         var cachedEducation = await _cache.GetAsync<EducationViewModel>(cacheKey);
 

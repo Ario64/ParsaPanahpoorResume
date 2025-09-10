@@ -31,15 +31,37 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetCustomerFeedbackListRequest()));
         }
 
-        public async Task<IActionResult> LoadCustomrFeedbackFormModal(long id)
+        public async Task<IActionResult> LoadCustomrFeedbackFormModal(long? id)
         {
             var result = await _mediator.Send(new GetCustomerFeedbackRequest(id));
             return PartialView("_CustomerFeedbackFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitCustomerFeedbackFormModal(CreateCustomerFeedbackViewModel customerFeedback)
+        public async Task<IActionResult> SubmitCustomerFeedbackFormModal(EditCustomerFeedbackViewModel customerFeedback)
         {
-            var result = await _mediator.Send(new CreateCustomerFeedbackCommandRequest(customerFeedback));
+            bool result;
+
+            if(customerFeedback.Id == 0)
+            {
+                var createCustomerFeedback = new CreateCustomerFeedbackViewModel()
+                {
+                    Name = customerFeedback.Name,
+                    Avatar  = customerFeedback.Avatar,
+                    Description = customerFeedback.Description,
+                    Order = customerFeedback.Order
+                };
+
+                result = await _mediator.Send(new CreateCustomerFeedbackCommandRequest(createCustomerFeedback));
+
+                if (result)
+                {
+                    return new JsonResult(new { status = "Success" });
+                }
+
+                return new JsonResult(new { status = "Error" });
+            }
+
+             result = await _mediator.Send(new EditCustomerFeedbackCommandRequest(customerFeedback.Id, customerFeedback));
 
             if (result)
             {

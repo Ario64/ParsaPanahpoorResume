@@ -1,6 +1,7 @@
 ﻿using Resume.Application.ICacheService;
 using StackExchange.Redis;
 using System;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -38,6 +39,18 @@ public class CacheServices : ICacheServices
     {
         var db = _redis.GetDatabase();
         await db.KeyDeleteAsync(key);
+    }
+
+    public async Task RemoveByPatternAsync(string pattern)
+    {
+        var endpoints = _redis.GetEndPoints();
+        var server = _redis.GetServer(endpoints.First());
+
+        foreach (var key in server.Keys(pattern: $"{pattern}"))
+        {
+            var db = _redis.GetDatabase();
+            await db.KeyDeleteAsync(key);
+        }
     }
 
     public async Task SetAsync<T>(string key, T value, TimeSpan? expiry = null)

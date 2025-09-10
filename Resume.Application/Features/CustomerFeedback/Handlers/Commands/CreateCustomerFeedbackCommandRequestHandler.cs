@@ -40,7 +40,7 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
         await _cache.SetAsync<CustomerFeedbackViewModel>(cacheKey, customerFeedbackViewModel, TimeSpan.FromMinutes(5));
 
         //Remove list from cache to get updated list
-        await _cache.RemoveAsync("CustomerFeedbackList:List");
+        await _cache.RemoveAsync("CustomerFeedbackList");
 
         return true;
     }

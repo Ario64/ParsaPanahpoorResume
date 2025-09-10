@@ -103,7 +103,7 @@ function LoadEducationFormModal(id) {
         data: {
             id: id
         },
-        beforSend: function () {
+        beforeSend: function () {
             StartLoading();
         },
         success: function (res) {
@@ -186,7 +186,7 @@ function LoadCustomerFeedbackFormModal(id) {
         data: {
             id: id
         },
-        beforSend: function () {
+        beforeSend: function () {
             StartLoading();
         },
         success: function (res) {

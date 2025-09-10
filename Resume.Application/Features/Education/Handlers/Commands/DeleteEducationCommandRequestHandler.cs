@@ -29,8 +29,7 @@ public class DeleteEducationCommandRequestHandler : IRequestHandler<DeleteEducat
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         //Remove data from redis cache
-        var cacheKey = $"Education:{education.Id}";
-        await _cache.RemoveAsync(cacheKey);
+        await _cache.RemoveByPatternAsync("EducationList-*");
 
         return true;
     }

@@ -29,6 +29,12 @@ public class GetCustomerFeedbackRequestHandler : IRequestHandler<GetCustomerFeed
 
     public async Task<CustomerFeedbackViewModel> Handle(GetCustomerFeedbackRequest request, CancellationToken cancellationToken)
     {
+        if(request.Id == 0)
+        {
+            var newCustomerFeedbackViewModel = new CustomerFeedbackViewModel();
+            return newCustomerFeedbackViewModel;
+        }
+
         var cacheKey = $"CustomerFeedback:{request.Id}";
         var cacheCustomerFeedback = await _cache.GetAsync<CustomerFeedbackViewModel>(cacheKey);
 

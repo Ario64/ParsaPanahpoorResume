@@ -1,10 +1,14 @@
-﻿@model Resume.Domain.ViewModels.CustomerFeedback.CreateCustomerFeedbackViewModel
+﻿@model Resume.Domain.ViewModels.CustomerFeedback.CustomerFeedbackViewModel
+
+@{
+    bool isCreate = Model.Id == 0 ? true : false;
+}
 
 <form id="CustomerFeedbackForm" asp-area="Admin" asp-controller="CustomerFeedback" asp-action="SubmitCustomerFeedbackFormModal"
       data-ajax="true" data-ajax-begin="StartLoading()" data-ajax-success="CustomerFeedbackFormSubmited">
 
     <div class="modal-header">
-        <h5 class="modal-title">ایجاد)</h5>
+        <h5 class="modal-title">@(isCreate ? "ایجاد" : "ویرایش")</h5>
         <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -15,7 +19,10 @@
 
         <div class="row">
             <div class="col-12">
-
+                @if(!isCreate)
+                {
+                    <input type="hidden" asp-for="Id">
+                }
                 <input type="hidden" asp-for="Avatar">
 
                 <div class="form-group">
@@ -52,7 +59,7 @@
 
 
                 <div>
-                    <button type="submit" class="btn btn-bold btn-pure float-right btn-success">ایجاد</button>
+                    <button type="submit" class="btn btn-bold btn-pure float-right btn-success">@(isCreate ? "ایجاد" : "ویرایش")</button>
                 </div>
 
             </div>

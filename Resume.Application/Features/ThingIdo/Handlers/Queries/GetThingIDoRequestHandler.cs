@@ -25,7 +25,17 @@ public class GetThingIDoRequestHandler : IRequestHandler<GetThingIDoRequest, Thi
 
     public async Task<ThingIdoViewModel> Handle(GetThingIDoRequest request, CancellationToken cancellationToken)
     {
-        var thingIDo = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>().GetAsync(request.Id, cancellationToken);
-        return _mapper.Map<ThingIdoViewModel>(thingIDo);
+        if (request.Id == null || request.Id == 0)
+        {
+           var thingIdoViewModel = new ThingIdoViewModel();
+            return thingIdoViewModel;
+        }
+
+        var thingIDo = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>()
+                                        .GetAsync(request.Id, cancellationToken);
+
+        var mappedThingIDo =  _mapper.Map<ThingIdoViewModel>(thingIDo);
+
+        return mappedThingIDo;
     }
 }

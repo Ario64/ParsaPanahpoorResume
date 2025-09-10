@@ -11,7 +11,7 @@ namespace Resume.Domain.ViewModels.Portfolio
         public string Title { get; set; }
 
 
-        [Display(Name = "تاریخ شروع")]
+        [Display(Name = "لینک")]
         public string Link { get; set; }
 
 

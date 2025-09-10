@@ -26,16 +26,34 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetThingIDoListRequest()));
         }
 
-        public async Task<IActionResult> LoadThingIDoFormModal(long id)
+        public async Task<IActionResult> LoadThingIDoFormModal(long? id)
         {
-            var result = await _mediator.Send(new GetThingIDoRequest(id) );
+            var result = await _mediator.Send(new GetThingIDoRequest(id));
 
             return PartialView("_ThingIDoFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitThingIDoFormModal(CreateThingIDoViewModel thingIDo)
+        public async Task<IActionResult> SubmitThingIDoFormModal(EditThingIdoViewModel model)
         {
-            var result = await _mediator.Send(new CreateThingIDoCommandRequest(thingIDo));
+            bool result;
+
+            if (model.Id == 0)
+            {
+                var createModel = new CreateThingIDoViewModel()
+                {
+                    Title = model.Title,
+                    ColumnLg = model.ColumnLg,
+                    Description = model.Description,
+                    Icon = model.Icon,
+                    Order = model.Order
+                };
+
+                result = await _mediator.Send(new CreateThingIDoCommandRequest(createModel));
+            }
+            else
+            {
+                result = await _mediator.Send(new EditThingIDoCommandRequest(model, model.Id));
+            }
 
             if (result) return new JsonResult(new { status = "Success" });
 

@@ -29,10 +29,15 @@ public class EditEducationCommandRequestHandler : IRequestHandler<EditEducationC
 
     public async Task<bool> Handle(EditEducationCommandRequest request, CancellationToken cancellationToken)
     {
-        var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().GetAsync(request.Id);
+        var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>()
+                                         .GetAsync(request.Id);
+
         var editedEducation = _mapper.Map(request.EditEducationViewModel, education);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().Update(editedEducation);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        //Remove list to update it
+        await _cache.RemoveByPatternAsync("EducationList-*");
 
         //Set newly updated data in cache
         var cahceKey = $"Education:{request.Id}";

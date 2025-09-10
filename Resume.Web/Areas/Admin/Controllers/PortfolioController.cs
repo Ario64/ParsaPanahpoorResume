@@ -41,9 +41,9 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> SubmitPortfolioFormModal(EditPortfolioViewModel model)
         {
-            var result = false;
+            bool result ;
 
-            if (model.Id == null || model.Id == 0)
+            if (model.Id == 0)
             {
                 var createModel = new CreatePortfolioViewModel()
                 {
