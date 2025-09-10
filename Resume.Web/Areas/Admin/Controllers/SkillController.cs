@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Resume.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class SkillController : AdminBaseController
     {
         #region Constructor
@@ -26,18 +27,32 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetSkillListRequest()));
         }
 
-        public async Task<IActionResult> LoadSkillFormModal(long id)
+        public async Task<IActionResult> LoadSkillFormModal(long? id)
         {
             var resutlt = await _mediator.Send(new GetSkillRequest(id));
             return PartialView("_SkillFormModalPartial", resutlt);
         }
 
-        public async Task<IActionResult> SubmitSkillFormModal(CreateSkillViewModel skill)
+        [HttpPost]
+        public async Task<IActionResult> SubmitSkillFormModal(EditSkillViewModel skill)
         {
-            var result = await _mediator.Send(new CreateSkillCommandRequest(skill));
+            bool result;
+            if (skill.Id == 0)
+            {
+                var createSkill = new CreateSkillViewModel()
+                {
+                    Title = skill.Title,
+                    Percent = skill.Percent,
+                    Order = skill.Order
+                };
 
+                result = await _mediator.Send(new CreateSkillCommandRequest(createSkill));
+                if (result) return new JsonResult(new { status = "Success" });
+                return new JsonResult(new { status = "Error" });
+            }
+
+            result = await _mediator.Send(new EditSkillCommandRequest(skill.Id, skill));
             if (result) return new JsonResult(new { status = "Success" });
-
             return new JsonResult(new { status = "Error" });
         }
 

@@ -25,7 +25,15 @@ public class GetSkillRequestHandler : IRequestHandler<GetSkillRequest, SkillView
 
     public async Task<SkillViewModel> Handle(GetSkillRequest request, CancellationToken cancellationToken)
     {
-        var skill = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().GetAsync(request.Id, cancellationToken);
+        if(request.Id == 0)
+        {
+            SkillViewModel newSkill = new SkillViewModel();
+            return newSkill;
+        }
+
+        var skill = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>()
+                                     .GetAsync(request.Id, cancellationToken);
+
         return _mapper.Map<SkillViewModel>(skill);
     }
 }
