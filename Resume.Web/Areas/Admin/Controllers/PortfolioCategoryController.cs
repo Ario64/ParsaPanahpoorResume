@@ -28,15 +28,34 @@ namespace Resume.Web.Areas.Admin.Controllers
             return View(await _mediator.Send(new GetPortfolioCategoryListRequest()));
         }
 
-        public async Task<IActionResult> LoadPortfolioCategoryFormModal(CreatePortfolioCategoryViewModel portolioCategory)
+        public async Task<IActionResult> LoadPortfolioCategoryFormModal(long? id)
         {
-            var result = await _mediator.Send(new CreatePortfolioCategoryCommandRequest(portolioCategory));
-            return PartialView("_PortfolioCategorFormModalPartial", result);
+            var result = await _mediator.Send(new GetPortfolioCategoryRequest(id));
+            return PartialView("_PortfolioCategoryFormModalPartial", result);
         }
 
-        public async Task<IActionResult> SubmitPortfolioCategoryFormModal(long id, EditPortfolioCategoryViewModel portfolioCategory)
+        [HttpPost]
+        public async Task<IActionResult> SubmitPortfolioCategoryFormModal(EditPortfolioCategoryViewModel portfolioCategory)
         {
-            var result = await _mediator.Send(new EditPortfolioCategoryCommandRequest(id, portfolioCategory));
+            bool result;
+
+            if(portfolioCategory.Id == 0)
+            {
+                var createPortfolio = new CreatePortfolioCategoryViewModel()
+                {
+                    Name = portfolioCategory.Name,
+                    Title = portfolioCategory.Title,
+                    Order = portfolioCategory.Order
+                };
+
+                 result = await _mediator.Send(new CreatePortfolioCategoryCommandRequest(createPortfolio));
+
+                if (result) return new JsonResult(new { status = "Success" });
+
+                return new JsonResult(new { status = "Error" });
+            }
+
+            result = await _mediator.Send(new EditPortfolioCategoryCommandRequest(portfolioCategory.Id, portfolioCategory));
 
             if (result) return new JsonResult(new { status = "Success" });
 

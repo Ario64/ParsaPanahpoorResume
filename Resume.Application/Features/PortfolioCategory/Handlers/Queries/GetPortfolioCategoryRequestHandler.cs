@@ -25,6 +25,12 @@ public class GetPortfolioCategoryRequestHandler : IRequestHandler<GetPortfolioCa
 
     public async Task<PortfolioCategoryViewModel> Handle(GetPortfolioCategoryRequest request, CancellationToken cancellationToken)
     {
+        if(request.Id == 0)
+        {
+            var newPortfolioCategory = new PortfolioCategoryViewModel();
+            return newPortfolioCategory;
+        }
+
         var portfolioCategory = await _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>()
                                                  .GetAsync(request.Id, cancellationToken);
 
