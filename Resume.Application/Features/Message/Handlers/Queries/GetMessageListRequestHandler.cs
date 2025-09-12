@@ -2,8 +2,8 @@
 using MediatR;
 using Resume.Application.Features.Message.Requests.Queries;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Pagination;
 using Resume.Domain.ViewModels.Message;
-using Resume.Domain.ViewModels.Pagination;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

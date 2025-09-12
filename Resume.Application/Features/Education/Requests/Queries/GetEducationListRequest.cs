@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using Resume.Application.ViewModels.Pagination;
 using Resume.Domain.ViewModels.Education;
-using Resume.Domain.ViewModels.Pagination;
 
 namespace Resume.Application.Features.Education.Requests.Queries;
 

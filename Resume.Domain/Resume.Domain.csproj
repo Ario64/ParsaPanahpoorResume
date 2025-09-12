@@ -13,8 +13,6 @@
     <Folder Include="IRepository\ReservationDate\" />
     <Folder Include="IRepository\Portfolio\" />
     <Folder Include="IRepository\PersonSelectedReservation\" />
-    <Folder Include="ViewModels\ReservationDateTime\" />
-    <Folder Include="ViewModels\ReservationDate\" />
   </ItemGroup>
 
 </Project>

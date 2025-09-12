@@ -1,4 +1,4 @@
-﻿using Resume.Domain.ViewModels.Pagination;
+﻿using Resume.Application.ViewModels.Pagination;
 using System.Collections.Generic;
 
 namespace Resume.Domain.ViewModels.Portfolio;

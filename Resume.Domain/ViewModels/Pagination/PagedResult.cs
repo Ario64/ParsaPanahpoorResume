@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Resume.Domain.ViewModels.Pagination;
+namespace Resume.Application.ViewModels.Pagination;
 
 public record PagedResult<T>
 {

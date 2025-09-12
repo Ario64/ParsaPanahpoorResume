@@ -1,6 +1,6 @@
-﻿using Resume.Domain.ViewModels.Education;
+﻿using Resume.Application.ViewModels.Pagination;
+using Resume.Domain.ViewModels.Education;
 using Resume.Domain.ViewModels.Experience;
-using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.Skill;
 using System.Collections.Generic;
 

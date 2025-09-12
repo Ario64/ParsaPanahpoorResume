@@ -1,4 +1,4 @@
-﻿using Resume.Domain.ViewModels.Pagination;
+﻿using Resume.Application.ViewModels.Pagination;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

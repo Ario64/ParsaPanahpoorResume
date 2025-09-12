@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Resume.Application.ViewModels.Pagination;
 using Resume.Domain.IRepository.GenericRepository;
-using Resume.Domain.ViewModels.Pagination;
 using Resume.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Resume.Infra.Data\Resume.Infra.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\site\styles\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
