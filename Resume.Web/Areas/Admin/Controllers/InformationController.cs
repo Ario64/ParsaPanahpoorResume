@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Eetensions;
 using Resume.Application.Features.Information.Requests.Commands;
+using Resume.Application.Features.Information.Requests.Queries;
 using Resume.Application.Generator;
 using Resume.Application.StaticTools;
 using Resume.Domain.ViewModels.Information;
@@ -26,15 +27,15 @@ namespace Resume.Web.Areas.Admin.Controllers
         #endregion
 
 
-        public async Task<IActionResult> LoadInformationFormModal(CreateInformationViewModel information)
+        public async Task<IActionResult> LoadInformationFormModal()
         {
-            var result = await _mediator.Send(new CreateInformationCommandRequest(information));
+            var result = await _mediator.Send(new GetInformationRequest());
             return View("_InformationFormModalPartial", result);
         }
 
         public async Task<IActionResult> SubmitInformationFormModal(long id, EditInformationViewModel information)
         {
-            var result = await _mediator.Send(new EditInformationCommandRequest(id, information) );
+            var result = await _mediator.Send(new EditInformationCommandRequest(id, information));
 
             if (result) return new JsonResult(new { status = "Success" });
 

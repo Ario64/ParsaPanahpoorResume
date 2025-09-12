@@ -1,5 +1,5 @@
-﻿using Resume.Domain.IRepository.Information;
-using Resume.Domain.Entity;
+﻿using Resume.Domain.Entity;
+using Resume.Domain.IRepository.Information;
 using Resume.Infra.Data.Context;
 
 namespace Resume.Infra.Data.Repository;

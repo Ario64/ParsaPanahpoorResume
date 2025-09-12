@@ -5,5 +5,5 @@ namespace Resume.Application.Features.Information.Requests.Queries;
 
 public record GetInformationRequest() : IRequest<InformationViewModel>
 {
-    public long? Id { get; set; }
+   
 }

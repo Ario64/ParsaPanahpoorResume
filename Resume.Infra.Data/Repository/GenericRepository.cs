@@ -5,6 +5,7 @@ using Resume.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -57,6 +58,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             TotalCount = totalCount,
             PageSize = pageSize
         };
+    }
+
+    #endregion
+
+    #region First or default
+
+    public async Task<T> FirstOrDefaultAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Set<T>().FirstOrDefaultAsync(cancellationToken);
     }
 
     #endregion

@@ -8,8 +8,6 @@
     <h2 class="title title--h2">مشتریان می گویند</h2>
     <div class="swiper-container js-carousel-review">
         <div class="swiper-wrapper">
-
-
             @foreach (CustomerFeedbackViewModel item in Model)
             {
                 <div class="swiper-slide review-item">
@@ -22,9 +20,7 @@
                     <p class="review-item__caption">@item.Description</p>
                 </div>
             }
-
         </div>
-
         <div class="swiper-pagination"></div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-﻿@model Resume.Domain.ViewModels.Information.EditInformationViewModel
+﻿@model Resume.Domain.ViewModels.Information.InformationViewModel
 
 @{
     Layout = "";
@@ -135,7 +135,7 @@
 
             $.ajax({
                 type: "Post",
-                url: "/Admin/Imformation/UploadInformationAvatarAjax",
+                url: "/Admin/Information/UploadInformationAvatarAjax",
                 enctype: "multipart/form-data",
                 data: fd,
                 beforeSend: function () {

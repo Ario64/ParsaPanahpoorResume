@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.Pagination;
 using Resume.Domain.ViewModels.SocialMedia;
 using System.Collections.Generic;
 

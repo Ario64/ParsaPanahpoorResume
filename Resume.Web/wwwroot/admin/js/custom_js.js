@@ -520,7 +520,7 @@ function LoadInformationFormModal() {
         type: "get",
         data: {
         },
-        beforSend: function () {
+        beforeSend: function () {
             StartLoading();
         },
         success: function (res) {

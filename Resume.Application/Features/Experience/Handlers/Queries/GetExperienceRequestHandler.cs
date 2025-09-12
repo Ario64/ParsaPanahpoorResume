@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Resume.Application.Features.Experience.Handlers.Queries;
 
-public class GetInformationRequestHandler : IRequestHandler<GetInformationRequest, ExperienceViewModel>
+public class GetExperienceRequestHandler : IRequestHandler<GetExperienceRequest, ExperienceViewModel>
 {
     #region Constructor
 
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public GetInformationRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetExperienceRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -23,7 +23,7 @@ public class GetInformationRequestHandler : IRequestHandler<GetInformationReques
 
     #endregion
 
-    public async Task<ExperienceViewModel> Handle(GetInformationRequest request, CancellationToken cancellationToken)
+    public async Task<ExperienceViewModel> Handle(GetExperienceRequest request, CancellationToken cancellationToken)
     {
         var experience = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>()
                                           .GetAsync(request.Id);
