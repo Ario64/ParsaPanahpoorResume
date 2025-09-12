@@ -6,7 +6,7 @@ using MediatR;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.CustomerFeedback;
+using Resume.Application.ViewModels.CustomerFeedback;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 

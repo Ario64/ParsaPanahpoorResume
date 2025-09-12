@@ -3,6 +3,7 @@ using MediatR;
 using Resume.Application.Features.Education.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Education;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ public class CreateEducationCommandRequestHandler : IRequestHandler<CreateEducat
 
         //Set data in redis cache
         var cacheKey = $"Education:{education.Id}";
-        var educationViewModel = _mapper.Map<Domain.ViewModels.Education.EducationViewModel>(education);
+        var educationViewModel = _mapper.Map<EducationViewModel>(education);
         await _cache.SetAsync(cacheKey, educationViewModel, System.TimeSpan.FromMinutes(10));
 
         return true;

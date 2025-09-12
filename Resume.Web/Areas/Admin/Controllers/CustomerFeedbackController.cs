@@ -6,7 +6,7 @@ using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.Features.CustomerFeedback.Requests.Queries;
 using Resume.Application.Generator;
 using Resume.Application.StaticTools;
-using Resume.Domain.ViewModels.CustomerFeedback;
+using Resume.Application.ViewModels.CustomerFeedback;
 using Resume.Web.Areas.Controllers;
 using System.IO;
 using System.Threading.Tasks;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Features.Education.Requests.Commands;
 using Resume.Application.Features.Education.Requests.Queries;
-using Resume.Domain.ViewModels.Education;
+using Resume.Application.ViewModels.Education;
 using Resume.Web.Areas.Controllers;
 using System.Threading.Tasks;
 

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.ThingIDo;
+using Resume.Application.ViewModels.ThingIDo;
 
 namespace Resume.Application.Features.ThingIdo.Requests.Queries;
 

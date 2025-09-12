@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.PersonSelectedReservation;
+using Resume.Application.ViewModels.PersonSelectedReservation;
 using System.Collections.Generic;
 
 namespace Resume.Application.Features.PersonSelectedReservation.Requests.Queries;

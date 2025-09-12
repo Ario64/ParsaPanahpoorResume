@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using Resume.Application.ViewModels.Message;
 using Resume.Application.ViewModels.Pagination;
-using Resume.Domain.ViewModels.Message;
 
 namespace Resume.Application.Features.Message.Requests.Queries;
 

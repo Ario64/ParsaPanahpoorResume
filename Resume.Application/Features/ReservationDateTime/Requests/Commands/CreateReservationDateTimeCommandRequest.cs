@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.ReservationDateTime;
+using Resume.Application.ViewModels.ReservationDateTime;
 
 namespace Resume.Application.Features.ReservationDateTime.Requests.Commands;
 

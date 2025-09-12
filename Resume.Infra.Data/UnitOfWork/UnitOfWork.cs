@@ -1,12 +1,14 @@
-﻿using Resume.Application.UnitOfWork;
+﻿using Resume.Application.Interface;
+using Resume.Application.Interfaces;
+using Resume.Application.UnitOfWork;
 using Resume.Domain.IRepository.GenericRepository;
+using Resume.Domain.IRepository.Portfolio;
 using Resume.Infra.Data.Context;
+using Resume.Infra.Data.Repository;
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using Resume.Infra.Data.Repository;
-using Resume.Domain.IRepository.Portfolio;
 
 namespace Resume.Infra.Data.UnitOfWork;
 
@@ -23,14 +25,20 @@ public class UnitOfWork : IUnitOfWork
 
     #endregion
 
+    //generic repository
     private readonly ConcurrentDictionary<Type, object> _repositories = new();
-    private IPortfolioRepository _portfolioRepository;
+    public IGenericRepository<T> GenericRepository<T>() where T : class
+    {
+        return (IGenericRepository<T>)_repositories.GetOrAdd(typeof(T), _ = new GenericRepository<T>(_context));
+    }
 
-    public IPortfolioRepository PortfolioRepository 
+    //portfolio repository
+    private IPortfolioRepository _portfolioRepository;
+    public IPortfolioRepository PortfolioRepository
     {
         get
         {
-            if( _portfolioRepository == null)
+            if (_portfolioRepository == null)
             {
                 _portfolioRepository = new PortfolioRepository(_context);
             }
@@ -38,10 +46,25 @@ public class UnitOfWork : IUnitOfWork
         }
     }
 
-    public IGenericRepository<T> GenericRepository<T>() where T : class
+    //education repository
+    private IEducationReadRepository _educationReadRepository;
+    public IEducationReadRepository EducationReadRepository
     {
-        return (IGenericRepository<T>)_repositories.GetOrAdd(typeof(T), _ = new GenericRepository<T>(_context));
+        get
+        {
+            if (_educationReadRepository == null)
+            {
+                _educationReadRepository = new EducationReadRepository(_context);
+            }
+
+            return _educationReadRepository;
+        }
     }
+
+    //message repository
+    private IMessageReadRepository _messageReadRepository;
+    public IMessageReadRepository MessageReadRepository 
+        => _messageReadRepository ??= new MessageReadRepository(_context);
 
     #region Save Changes
 

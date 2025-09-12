@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Features.Information.Requests.Queries;
 using Resume.Application.Features.Message.Requests.Commands;
-using Resume.Domain.ViewModels.Message;
+using Resume.Application.ViewModels.Message;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Controllers

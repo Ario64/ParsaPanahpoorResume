@@ -1,7 +1,7 @@
 ﻿using Resume.Application.ViewModels.Common;
 using System.ComponentModel.DataAnnotations;
 
-namespace Resume.Domain.ViewModels.Message
+namespace Resume.Application.ViewModels.Message
 {
     public class CreateMessageViewModel : GoogleRecaptchaViewModel
     {

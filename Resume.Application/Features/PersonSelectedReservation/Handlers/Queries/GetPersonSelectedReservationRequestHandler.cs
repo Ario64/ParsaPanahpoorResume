@@ -2,7 +2,7 @@
 using MediatR;
 using Resume.Application.Features.PersonSelectedReservation.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.PersonSelectedReservation;
+using Resume.Application.ViewModels.PersonSelectedReservation;
 using System.Threading;
 using System.Threading.Tasks;
 

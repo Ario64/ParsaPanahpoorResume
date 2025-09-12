@@ -2,8 +2,8 @@
 using MediatR;
 using Resume.Application.Features.Message.Requests.Queries;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Message;
 using Resume.Application.ViewModels.Pagination;
-using Resume.Domain.ViewModels.Message;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +27,7 @@ public class GetMessageListRequestHandler : IRequestHandler<GetMessageListReques
 
     public async Task<PagedResult<MessageViewModel>> Handle(GetMessageListRequest request, CancellationToken cancellationToken)
     {
-        var messages = await _unitOfWork.GenericRepository<Domain.Entity.Message>()
+        var messages = await _unitOfWork.MessageReadRepository
                                         .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var  items = _mapper.Map<IReadOnlyList<MessageViewModel>>(messages.Items);

@@ -2,7 +2,7 @@
 using MediatR;
 using Resume.Application.Features.ReservationDate.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.ReservationDateTime;
+using Resume.Application.ViewModels.ReservationDateTime;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

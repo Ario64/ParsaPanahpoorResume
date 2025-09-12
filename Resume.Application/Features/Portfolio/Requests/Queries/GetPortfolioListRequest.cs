@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.Portfolio;
+using Resume.Application.ViewModels.Portfolio;
 using System.Collections.Generic;
 
 namespace Resume.Application.Features.Portfolio.Requests.Queries;

@@ -4,7 +4,7 @@ using Resume.Application.Features.CustomerLog.Requests.Queries;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Domain.Entity;
-using Resume.Domain.ViewModels.CustomerLogo;
+using Resume.Application.ViewModels.CustomerLogo;
 using System;
 using System.Collections.Generic;
 using System.Threading;

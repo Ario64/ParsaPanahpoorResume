@@ -2,7 +2,7 @@
 using MediatR;
 using Resume.Application.Features.ThingIdo.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.ThingIDo;
+using Resume.Application.ViewModels.ThingIDo;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

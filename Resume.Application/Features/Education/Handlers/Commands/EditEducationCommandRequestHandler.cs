@@ -3,7 +3,7 @@ using MediatR;
 using Resume.Application.Features.Education.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.Education;
+using Resume.Application.ViewModels.Education;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

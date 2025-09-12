@@ -3,8 +3,8 @@ using MediatR;
 using Resume.Application.Features.Education.Requests.Queries;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Education;
 using Resume.Application.ViewModels.Pagination;
-using Resume.Domain.ViewModels.Education;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,8 +45,8 @@ public class GetEducationListRequestHandler : IRequestHandler<GetEducationListRe
             };
         }
 
-        var educationList = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>()
-                                       .GetAllPagedAsync(request.page, request.pageSize, cancellationToken);
+        var educationList = await _unitOfWork.EducationReadRepository
+                                             .GetAllEducationPagedAsync(request.page, request.pageSize, cancellationToken);
 
         var items = _mapper.Map<IReadOnlyList<EducationViewModel>>(educationList.Items);
 

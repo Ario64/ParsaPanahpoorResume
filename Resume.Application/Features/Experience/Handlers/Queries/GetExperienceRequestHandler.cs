@@ -2,7 +2,7 @@
 using MediatR;
 using Resume.Application.Features.Experience.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.Experience;
+using Resume.Application.ViewModels.Experience;
 using System.Threading;
 using System.Threading.Tasks;
 

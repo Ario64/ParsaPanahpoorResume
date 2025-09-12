@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Features.Skill.Requests.Commands;
 using Resume.Application.Features.Skill.Requests.Queries;
-using Resume.Domain.ViewModels.Skill;
+using Resume.Application.ViewModels.Skill;
 using Resume.Web.Areas.Controllers;
 using System.Threading.Tasks;
 

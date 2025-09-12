@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.CustomerLogo;
+using Resume.Application.ViewModels.CustomerLogo;
 
 namespace Resume.Application.Features.CustomerLog.Requests.Commands;
 

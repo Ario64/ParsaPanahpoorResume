@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Resume.Domain.Entity;
-using Resume.Domain.ViewModels.ReservationDateTime;
+using Resume.Application.ViewModels.ReservationDateTime;
 
 namespace Resume.Application.Profiles;
 

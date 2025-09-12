@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Resume.Domain.Entity.Reservation;
+using Resume.Application.ViewModels.PersonSelectedReservation;
 using Resume.Domain.ViewModels.PersonSelectedReservation;
 
 namespace Resume.Application.Profiles;

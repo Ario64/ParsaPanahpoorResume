@@ -3,7 +3,7 @@ using MediatR;
 using Resume.Application.Features.CustomerFeedback.Requests.Queries;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.CustomerFeedback;
+using Resume.Application.ViewModels.CustomerFeedback;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

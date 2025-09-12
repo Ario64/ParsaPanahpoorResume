@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Features.ThingIdo.Requests.Commands;
 using Resume.Application.Features.ThingIdo.Requests.Queries;
-using Resume.Domain.ViewModels.ThingIDo;
+using Resume.Application.ViewModels.ThingIDo;
 using Resume.Web.Areas.Controllers;
 using System.Threading.Tasks;
 

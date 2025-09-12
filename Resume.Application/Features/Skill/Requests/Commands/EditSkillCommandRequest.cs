@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.Skill;
+using Resume.Application.ViewModels.Skill;
 
 namespace Resume.Application.Features.Skill.Requests.Commands;
 

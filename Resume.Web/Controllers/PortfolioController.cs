@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Features.Portfolio.Requests.Queries;
 using Resume.Application.Features.PortfolioCategory.Requests.Queries;
-using Resume.Domain.ViewModels.Page;
+using Resume.Application.ViewModels.Page;
 using System.Threading.Tasks;
 
 namespace Resume.Web.Controllers

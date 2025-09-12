@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.Experience;
+using Resume.Application.ViewModels.Experience;
 
 namespace Resume.Application.Features.Experience.Requests.Queries;
 

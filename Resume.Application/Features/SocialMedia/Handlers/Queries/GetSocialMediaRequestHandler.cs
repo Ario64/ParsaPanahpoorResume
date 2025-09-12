@@ -2,7 +2,7 @@
 using MediatR;
 using Resume.Application.Features.SocialMedia.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.SocialMedia;
+using Resume.Application.ViewModels.SocialMedia;
 using System.Threading;
 using System.Threading.Tasks;
 

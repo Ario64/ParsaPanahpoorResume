@@ -6,7 +6,7 @@ using Resume.Application.Features.Information.Requests.Commands;
 using Resume.Application.Features.Information.Requests.Queries;
 using Resume.Application.Generator;
 using Resume.Application.StaticTools;
-using Resume.Domain.ViewModels.Information;
+using Resume.Application.ViewModels.Information;
 using Resume.Web.Areas.Controllers;
 using System.IO;
 using System.Threading.Tasks;

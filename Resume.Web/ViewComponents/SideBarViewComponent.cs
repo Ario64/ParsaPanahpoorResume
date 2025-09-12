@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Resume.Application.Features.Information.Requests.Queries;
 using Resume.Application.Features.SocialMedia.Requests.Queries;
-using Resume.Domain.ViewModels.ViewComponent;
+using Resume.Application.ViewModels.ViewComponent;
 using System.Threading.Tasks;
 
 namespace Resume.Web.ViewComponents

@@ -1,10 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Resume.Application.Features.Portfolio.Requests.Commands;
-using Resume.Application.Features.Portfolio.Requests.Queries;
 using Resume.Application.Features.PortfolioCategory.Requests.Commands;
 using Resume.Application.Features.PortfolioCategory.Requests.Queries;
-using Resume.Domain.ViewModels.Portfolio;
+using Resume.Application.ViewModels.Portfolio;
 using Resume.Web.Areas.Controllers;
 using System.Threading.Tasks;
 

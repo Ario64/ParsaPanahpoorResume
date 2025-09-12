@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Resume.Application.ViewModels.Pagination;
 using Resume.Domain.IRepository.GenericRepository;
 using Resume.Infra.Data.Context;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,34 +26,6 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         var entities = await _context.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
         return entities;
-    }
-
-    #endregion
-
-    #region Get All Async with pagination
-
-    public async Task<PagedResult<T>> GetAllPagedAsync(int page, int pageSize, CancellationToken cancellationToken = default)
-    {
-        int skip = (page - 1) * pageSize;
-        int take = pageSize;
-
-        var query = _context.Set<T>().AsQueryable();
-
-        var totalCount = await query.CountAsync(cancellationToken);
-        var totalPages = (int)Math.Ceiling(totalCount / (double)take);
-
-        var items = await query.Skip(skip)
-                               .Take(take)
-                               .ToListAsync(cancellationToken);
-
-        return new PagedResult<T>()
-        {
-            Items = items,
-            TotalPages = totalPages,
-            Page = page,
-            TotalCount = totalCount,
-            PageSize = pageSize
-        };
     }
 
     #endregion

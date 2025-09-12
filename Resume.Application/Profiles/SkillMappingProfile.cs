@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Resume.Domain.Entity;
-using Resume.Domain.ViewModels.Skill;
+using Resume.Application.ViewModels.Skill;
 
 namespace Resume.Application.Profiles;
 

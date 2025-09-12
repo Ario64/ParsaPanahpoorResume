@@ -2,7 +2,7 @@
 using MediatR;
 using Resume.Application.Features.Portfolio.Requests.Queries;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.Portfolio;
+using Resume.Application.ViewModels.Portfolio;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

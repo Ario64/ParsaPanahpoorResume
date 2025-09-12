@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Resume.Domain.ViewModels.SocialMedia;
+using Resume.Application.ViewModels.SocialMedia;
 
 namespace Resume.Application.Features.SocialMedia.Requests.Queries;
 

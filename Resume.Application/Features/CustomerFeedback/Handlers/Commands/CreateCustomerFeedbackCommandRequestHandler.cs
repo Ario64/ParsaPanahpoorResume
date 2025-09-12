@@ -3,7 +3,7 @@ using MediatR;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.ViewModels.CustomerFeedback;
+using Resume.Application.ViewModels.CustomerFeedback;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,7 +34,7 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         //Map to view model to save in cache
-        var customerFeedbackViewModel = _mapper.Map<Domain.ViewModels.CustomerFeedback.CustomerFeedbackViewModel>(customerFeedback);
+        var customerFeedbackViewModel = _mapper.Map<CustomerFeedbackViewModel>(customerFeedback);
 
         var cacheKey = $"CustomerFeedback:{customerFeedback.Id}";
         await _cache.SetAsync<CustomerFeedbackViewModel>(cacheKey, customerFeedbackViewModel, TimeSpan.FromMinutes(5));
