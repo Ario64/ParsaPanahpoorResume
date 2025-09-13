@@ -2,6 +2,9 @@
 using MediatR;
 using Resume.Application.Features.Information.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Information;
+using Resume.Application.ViewModels.Information.Validators;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +27,13 @@ public class CreateInformationCommandRequestHandler : IRequestHandler<CreateInfo
 
     public async Task<bool> Handle(CreateInformationCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new CreateInformationValidator();
+        var validationResult = await validator.ValidateAsync(request.CreateInformationViewModel, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var information = _mapper.Map<Resume.Domain.Entity.Information>(request.CreateInformationViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().Add(information);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

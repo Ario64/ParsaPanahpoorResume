@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Resume.Domain.IRepository.GenericRepository;
 using Resume.Infra.Data.Context;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -76,4 +79,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     #endregion
 
+    #region Is Exist
+
+    public async Task<bool> IsExist(long key, CancellationToken cancellationToken = default)
+    {
+        var entityType = _context.Model.FindEntityType(typeof(T));
+        var keyProperty = entityType.FindPrimaryKey().Properties.First();
+        var keyName = keyProperty.Name;
+        return await _context.Set<T>().AnyAsync(k => EF.Property<long>(k, keyName) == key, cancellationToken);
+    }
+
+    #endregion
 }

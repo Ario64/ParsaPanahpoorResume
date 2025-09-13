@@ -2,6 +2,8 @@
 using MediatR;
 using Resume.Application.Features.PersonSelectedReservation.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.PersonSelectedReservation.Validator;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +26,13 @@ public class CreatePersonSelectedReservationCommandRequestHandler : IRequestHand
 
     public async Task<bool> Handle(CreatePersonSelectedReservationCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new CreatePersonSelectedReservationValidator();
+        var validationResult = await validator.ValidateAsync(request.CreatePersonSelectedReservation, cancellationToken);
+        if(validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var person = _mapper.Map<Resume.Domain.Entity.Reservation.PersonSelectedReservation>(request.CreatePersonSelectedReservation);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Reservation.PersonSelectedReservation>().Add(person);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using System;
 using MediatR;
 using Resume.Application.Features.ThingIdo.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.ThingIDo.Validators;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +26,13 @@ public class CreateThingIDoCommandRequestHandler : IRequestHandler<CreateThingID
 
     public async Task<bool> Handle(CreateThingIDoCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new CreateThingIDoValidator();
+        var validationResult = await validator.ValidateAsync(request.CreateThingIDoViewModel, cancellationToken);
+        if (validationResult.IsValid == false) 
+        {
+            throw new Exception();
+        }
+
         var thingIDo = _mapper.Map<Resume.Domain.Entity.ThingIDo>(request.CreateThingIDoViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.ThingIDo>().Add(thingIDo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

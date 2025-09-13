@@ -4,6 +4,7 @@ using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.CustomerFeedback;
+using Resume.Application.ViewModels.CustomerFeedback.Validators;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,6 +30,14 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
 
     public async Task<bool> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new CreateCustomerFeedbackValidator();
+        var validationResult = await validator.ValidateAsync(request.CreateCustomerFeedbackViewModel, cancellationToken);
+
+        if (validationResult.IsValid == false) 
+        {
+            throw new Exception();
+        }
+
         var customerFeedback = _mapper.Map<Domain.Entity.CustomerFeedback>(request.CreateCustomerFeedbackViewModel);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Add(customerFeedback);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

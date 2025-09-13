@@ -46,7 +46,7 @@ public class UnitOfWork : IUnitOfWork
         }
     }
 
-    //education repository
+    //education repository with partitioning
     private IEducationReadRepository _educationReadRepository;
     public IEducationReadRepository EducationReadRepository
     {
@@ -61,7 +61,7 @@ public class UnitOfWork : IUnitOfWork
         }
     }
 
-    //message repository
+    //message repository with partitioning
     private IMessageReadRepository _messageReadRepository;
     public IMessageReadRepository MessageReadRepository 
         => _messageReadRepository ??= new MessageReadRepository(_context);

@@ -3,8 +3,9 @@ using MediatR;
 using Resume.Application.Features.CustomerLog.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
-using Resume.Domain.Entity;
 using Resume.Application.ViewModels.CustomerLogo;
+using Resume.Application.ViewModels.CustomerLogo.Validators;
+using Resume.Domain.Entity;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,6 +31,14 @@ public class CreateCustomerLogoCommandRequestHandler : IRequestHandler<CreateCus
 
     public async Task<bool> Handle(CreateCustomerLogoCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new CreateCustomerLogoValidator();
+        var validationResult = await validator.ValidateAsync(request.CustomerLogoViewModel, cancellationToken);
+
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var customerLogo = _mapper.Map<CustomerLogo>(request.CustomerLogoViewModel);
         _unitOfWork.GenericRepository<CustomerLogo>().Add(customerLogo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

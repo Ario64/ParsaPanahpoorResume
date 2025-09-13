@@ -5,4 +5,5 @@ public class CreateReservationDateTimeViewModel
     public string StartTime { get; set; }
     public string EndTime { get; set; }
     public bool IsReserved { get; set; }
+    public long ReservationDateId { get; set; }
 }
