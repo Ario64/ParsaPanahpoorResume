@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using Resume.Application.Features.PersonSelectedReservation.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.PersonSelectedReservation.Validators;
+using Resume.Domain.ViewModels.PersonSelectedReservation;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,7 +28,14 @@ public class DeletePersonSelectedReservationCommandRequestHandler : IRequestHand
 
     public async Task<bool> Handle(DeletePersonSelectedReservationCommandRequest request, CancellationToken cancellationToken)
     {
-       var person = await _unitOfWork.GenericRepository<Domain.Entity.Reservation.PersonSelectedReservation>()
+        var validator = new DeletePersonSelectedReservationValidator();
+        var validationResult = await validator.ValidateAsync(new DeletePersonSelectedReservationViewModel() { Id = request.Id}, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
+        var person = await _unitOfWork.GenericRepository<Domain.Entity.Reservation.PersonSelectedReservation>()
                                      .GetAsync(request.Id, cancellationToken);
 
         _unitOfWork.GenericRepository<Domain.Entity.Reservation.PersonSelectedReservation>().Delete(person);

@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
+using Resume.Domain.ViewModels.PersonSelectedReservation;
 
 namespace Resume.Application.ViewModels.PersonSelectedReservation.Validators;
 
-public class DeletePersonSelectedReservationValidator : AbstractValidator<EditPersonSelectedReservationViewModel>
+public class DeletePersonSelectedReservationValidator : AbstractValidator<DeletePersonSelectedReservationViewModel>
 {
     public DeletePersonSelectedReservationValidator()
     {
