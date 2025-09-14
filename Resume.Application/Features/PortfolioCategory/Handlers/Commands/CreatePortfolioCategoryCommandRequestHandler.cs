@@ -2,6 +2,8 @@
 using MediatR;
 using Resume.Application.Features.PortfolioCategory.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Portfolio.Validators;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +26,13 @@ public class CreatePortfolioCategoryCommandRequestHandler : IRequestHandler<Crea
 
     public async Task<bool> Handle(CreatePortfolioCategoryCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new CreatePortfolioCategoryValidator();
+        var validationResult = await validator.ValidateAsync(request.CreatePortfolioCategoryViewModel, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var porfolio = _mapper.Map<Resume.Domain.Entity.PortfolioCategory>(request.CreatePortfolioCategoryViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().Add(porfolio);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

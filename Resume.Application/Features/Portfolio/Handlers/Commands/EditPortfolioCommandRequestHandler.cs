@@ -33,10 +33,13 @@ public class EditPortfolioCommandRequestHandler : IRequestHandler<EditPortfolioC
             throw new Exception();
         }
 
-        var portfolio = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().GetAsync(request.Id, cancellationToken);
+        var portfolio = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>()
+                                         .GetAsync(request.Id, cancellationToken);
+
         _mapper.Map(request.EditPortfolioViewModel, portfolio);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().Update(portfolio);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
         return true;
     }
 }
