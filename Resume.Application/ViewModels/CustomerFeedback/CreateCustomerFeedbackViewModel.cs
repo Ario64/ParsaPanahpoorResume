@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Resume.Application.ViewModels.Common;
 
 namespace Resume.Application.ViewModels.CustomerFeedback
 {
-    public class CreateCustomerFeedbackViewModel 
+    public class CreateCustomerFeedbackViewModel : ICustomerFeedbackViewModel
     {
         [Display(Name = "آواتار")]
         public string Avatar { get; set; }
@@ -23,6 +22,7 @@ namespace Resume.Application.ViewModels.CustomerFeedback
 
         [Display(Name = "الویت")]
         public int Order { get; set; }
+     
     }
 
 }

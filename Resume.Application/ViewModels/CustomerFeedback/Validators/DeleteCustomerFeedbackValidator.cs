@@ -2,12 +2,10 @@
 
 namespace Resume.Application.ViewModels.CustomerFeedback.Validators;
 
-public class EditCustomerFeedbackValidator : AbstractValidator<EditCustomerFeedbackViewModel>
+public class DeleteCustomerFeedbackValidator : AbstractValidator<DeleteCustomerFeedbackViewModel>
 {
-    public EditCustomerFeedbackValidator()
+    public DeleteCustomerFeedbackValidator()
     {
-        Include(new CustomerFeedbackValidator());
-
         RuleFor(r => r.Id).NotEmpty()
                           .WithMessage("{PropertyName} را وارد کنید !")
                           .GreaterThan(0)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Application.ViewModels.CustomerFeedback;
 
-public class EditCustomerFeedbackViewModel : BaseViewModel<long>
+public class EditCustomerFeedbackViewModel : BaseViewModel<long>, ICustomerFeedbackViewModel
 {
     [Display(Name = "آواتار")]
     public string Avatar { get; set; }
