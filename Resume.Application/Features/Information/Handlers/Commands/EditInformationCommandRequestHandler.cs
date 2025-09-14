@@ -2,7 +2,6 @@
 using MediatR;
 using Resume.Application.Features.Information.Requests.Commands;
 using Resume.Application.UnitOfWork;
-using Resume.Application.ViewModels.Information;
 using Resume.Application.ViewModels.Information.Validators;
 using System;
 using System.Threading;

@@ -2,6 +2,8 @@
 using MediatR;
 using Resume.Application.Features.Message.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Message.Validators;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +26,13 @@ public class EditMessageCommandRequestHandler : IRequestHandler<EditMessageComma
 
     public async Task<bool> Handle(EditMessageCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new EditMessageValidator();
+        var validationResult = await validator.ValidateAsync(request.EditMessageViewModel, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var message = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditMessageViewModel, message);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().Update(message);

@@ -32,6 +32,7 @@ public class CreateMessageCommandRequestHandler : IRequestHandler<CreateMessageC
         {
             throw new Exception();
         }
+
         var message = _mapper.Map<Domain.Entity.Message>(request.CreateMessageViewModel);
         _unitOfWork.GenericRepository<Domain.Entity.Message>().Add(message);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using Resume.Application.Features.Message.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Message.Validators;
+using Resume.Application.ViewModels.Message;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,9 +24,16 @@ public class DeleteMessageCommandRequestHandler : IRequestHandler<DeleteMessageC
 
     public async Task<bool> Handle(DeleteMessageCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new DeleteMessageValidator();
+        var validationResult = await validator.ValidateAsync(new DeleteMessageViewModel() { Id = request.Id }, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var message = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().Delete(message);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);  
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
     }
 }
