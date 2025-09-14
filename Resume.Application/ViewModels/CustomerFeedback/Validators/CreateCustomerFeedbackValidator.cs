@@ -6,6 +6,6 @@ public class CreateCustomerFeedbackValidator : AbstractValidator<CreateCustomerF
 {
     public CreateCustomerFeedbackValidator()
     {
-        Include(new CustomerFeedbackValidator());
+        Include(new ICustomerFeedbackValidator());
     }
 }

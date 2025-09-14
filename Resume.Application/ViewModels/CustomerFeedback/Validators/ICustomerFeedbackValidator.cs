@@ -2,9 +2,9 @@
 
 namespace Resume.Application.ViewModels.CustomerFeedback.Validators;
 
-public class CustomerFeedbackValidator : AbstractValidator<ICustomerFeedbackViewModel>
+public class ICustomerFeedbackValidator : AbstractValidator<ICustomerFeedbackViewModel>
 {
-    public CustomerFeedbackValidator()
+    public ICustomerFeedbackValidator()
     {
         RuleFor(r => r.Name).NotEmpty()
                             .WithMessage("{PropertyName} را پر کنید !")

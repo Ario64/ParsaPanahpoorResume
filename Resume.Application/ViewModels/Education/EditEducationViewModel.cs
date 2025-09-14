@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Application.ViewModels.Education;
 
-public class EditEducationViewModel : BaseViewModel<long>
+public class EditEducationViewModel : BaseViewModel<long>, IEducationViewModel
 {
     [Display(Name = "عنوان")]
     [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

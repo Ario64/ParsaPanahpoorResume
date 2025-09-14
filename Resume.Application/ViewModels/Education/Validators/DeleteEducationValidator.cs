@@ -1,13 +1,11 @@
 ﻿using FluentValidation;
 
-namespace Resume.Application.ViewModels.CustomerFeedback.Validators;
+namespace Resume.Application.ViewModels.Education.Validators;
 
-public class EditCustomerFeedbackValidator : AbstractValidator<EditCustomerFeedbackViewModel>
+public class DeleteEducationValidator : AbstractValidator<DeleteEducationViewModel>
 {
-    public EditCustomerFeedbackValidator()
+    public DeleteEducationValidator()
     {
-        Include(new ICustomerFeedbackValidator());
-
         RuleFor(r => r.Id).NotEmpty()
                           .WithMessage("{PropertyName} را وارد کنید !")
                           .GreaterThan(0)

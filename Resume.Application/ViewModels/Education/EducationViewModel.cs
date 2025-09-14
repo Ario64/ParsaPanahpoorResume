@@ -1,26 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.VisualBasic.CompilerServices;
-using Resume.Application.ViewModels.Common;
+﻿using Resume.Application.ViewModels.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Application.ViewModels.Education
 {
-    public class EducationViewModel : BaseViewModel<long>
+    public class EducationViewModel : BaseViewModel<long>, IEducationViewModel
     {
         [Display(Name = "عنوان")]
         public string Title { get; set; }
 
-
         [Display(Name = "تاریخ شروع")]
         public string StartDate { get; set; }
-
 
         [Display(Name = "تاریخ پایان")]
         public string EndDate { get; set; }
 
-
         [Display(Name = "توضیحات")]
         public string Description { get; set; }
-
 
         [Display(Name = "الویت")]
         public int Order { get; set; }
