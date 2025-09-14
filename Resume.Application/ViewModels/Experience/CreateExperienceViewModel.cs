@@ -2,7 +2,7 @@
 
 namespace Resume.Application.ViewModels.Experience
 {
-    public class CreateExperienceViewModel
+    public class CreateExperienceViewModel : IExperienceViewModel
     {
         [Display(Name = "عنوان")]
         public string Title { get; set; }
