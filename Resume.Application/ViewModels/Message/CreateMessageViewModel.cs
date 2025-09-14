@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Application.ViewModels.Message
 {
-    public class CreateMessageViewModel : GoogleRecaptchaViewModel
+    public class CreateMessageViewModel : GoogleRecaptchaViewModel, IMessageViewModel
     {
 
         [Display(Name = " نام و نام خانوادگی")]
