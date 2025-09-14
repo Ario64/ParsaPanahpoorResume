@@ -2,7 +2,7 @@
 
 namespace Resume.Application.ViewModels.ReservationDate;
 
-public class CreateReservationDateViewModel : IReservationDateViewModel
+public interface IReservationDateViewModel
 {
     public DateTime Date { get; set; }
 }

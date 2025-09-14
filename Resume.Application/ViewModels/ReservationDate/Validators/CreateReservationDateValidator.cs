@@ -6,7 +6,6 @@ public class CreateReservationDateValidator : AbstractValidator<CreateReservatio
 {
     public CreateReservationDateValidator()
     {
-        RuleFor(r=>r.Date).NotEmpty()
-                          .WithMessage("{PropertyName} را وارد کنید !");
+       Include(new IReservationDateValidator());
     }
 }

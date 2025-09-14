@@ -3,7 +3,7 @@ using System;
 
 namespace Resume.Application.ViewModels.ReservationDate;
 
-public class EditReservationDateViewModel : BaseViewModel<long>
+public class EditReservationDateViewModel : BaseViewModel<long>, IReservationDateViewModel
 {
     public DateTime Date { get; set; }
 }
