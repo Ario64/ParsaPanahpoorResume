@@ -2,7 +2,7 @@
 
 namespace Resume.Application.ViewModels.CustomerLogo
 {
-    public class CreateCustomerLogoViewModel
+    public class CreateCustomerLogoViewModel : ICustomerLogoViewModel
     {
         [Display(Name = "لوگو")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
