@@ -4,6 +4,7 @@ using Resume.Application.Features.Education.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Education;
+using Resume.Application.ViewModels.Education.Validators;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,6 +30,13 @@ public class EditEducationCommandRequestHandler : IRequestHandler<EditEducationC
 
     public async Task<bool> Handle(EditEducationCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new EditEducationValidator();
+        var validationResult = await validator.ValidateAsync(request.EditEducationViewModel, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>()
                                          .GetAsync(request.Id);
 
@@ -41,7 +49,7 @@ public class EditEducationCommandRequestHandler : IRequestHandler<EditEducationC
 
         //Set newly updated data in cache
         var cahceKey = $"Education:{request.Id}";
-        var updatedEducation =  _mapper.Map<EducationViewModel>(education);
+        var updatedEducation = _mapper.Map<EducationViewModel>(education);
         await _cache.SetAsync<EducationViewModel>(cahceKey, updatedEducation, TimeSpan.FromMinutes(10));
 
         return true;

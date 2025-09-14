@@ -2,6 +2,9 @@
 using Resume.Application.Features.Education.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Education;
+using Resume.Application.ViewModels.Education.Validators;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +27,13 @@ public class DeleteEducationCommandRequestHandler : IRequestHandler<DeleteEducat
 
     public async Task<bool> Handle(DeleteEducationCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new DeleteEducationValidator();
+        var validationResult = await validator.ValidateAsync(new DeleteEducationViewModel() {Id = request.Id }, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().GetAsync(request.Id);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().Delete(education);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
