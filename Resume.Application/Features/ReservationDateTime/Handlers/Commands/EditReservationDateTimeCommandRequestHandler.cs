@@ -2,7 +2,6 @@
 using MediatR;
 using Resume.Application.Features.ReservationDateTime.Requests.Commands;
 using Resume.Application.UnitOfWork;
-using Resume.Application.ViewModels.ReservationDateTime;
 using Resume.Application.ViewModels.ReservationDateTime.Validators;
 using System;
 using System.Threading;

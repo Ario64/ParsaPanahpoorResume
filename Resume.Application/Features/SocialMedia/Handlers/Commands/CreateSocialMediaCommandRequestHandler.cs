@@ -32,6 +32,7 @@ public class CreateSocialMediaCommandRequestHandler : IRequestHandler<CreateSoci
         {
             throw new Exception();
         }
+
         var social = _mapper.Map<Resume.Domain.Entity.SocialMedia>(request.SocialMediaViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().Add(social);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
