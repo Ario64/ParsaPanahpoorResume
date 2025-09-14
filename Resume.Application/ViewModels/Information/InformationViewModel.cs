@@ -3,7 +3,7 @@ using Resume.Application.ViewModels.Common;
 
 namespace Resume.Application.ViewModels.Information
 {
-    public class InformationViewModel :BaseViewModel<long>
+    public class InformationViewModel : BaseViewModel<long>, IInformationViewModel
     {
         [Display(Name = "آواتار")]
         public string Avatar { get; set; }

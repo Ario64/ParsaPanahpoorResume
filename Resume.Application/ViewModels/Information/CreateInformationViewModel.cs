@@ -2,7 +2,7 @@
 
 namespace Resume.Application.ViewModels.Information;
 
-public class CreateInformationViewModel
+public class CreateInformationViewModel : IInformationViewModel
 {
     [Display(Name = "آواتار")]
     public string Avatar { get; set; }
