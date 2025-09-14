@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Resume.Application.ViewModels.ReservationDateTime.Validators;
+namespace Resume.Application.ViewModels.ThingIDo.Validators;
 
-public class DeleteReservationDateTimeValidator : AbstractValidator<DeleteReservationDateTimeViewModel>
+public class DeleteThingIDoValidator : AbstractValidator<DeleteThingIdoViewModel>
 {
-    public DeleteReservationDateTimeValidator()
+    public DeleteThingIDoValidator()
     {
         RuleFor(r => r.Id).NotEmpty()
                           .WithMessage("{PropertyName} را وارد کنید !")

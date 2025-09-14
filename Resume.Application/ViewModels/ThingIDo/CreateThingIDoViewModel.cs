@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Application.ViewModels.ThingIDo
 {
-    public class CreateThingIDoViewModel
+    public class CreateThingIDoViewModel : IThingIDoViewModel
     {
         #region Properties
 

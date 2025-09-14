@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Application.ViewModels.ThingIDo;
 
-public class ThingIdoViewModel : BaseViewModel<long>
+public class ThingIdoViewModel : BaseViewModel<long>, IThingIDoViewModel
 {
     [Display(Name = "آیکون")]
     [MaxLength(50, ErrorMessage = "{0} نمیتواند بیشتر از {1} کاراکتر باشد")]
