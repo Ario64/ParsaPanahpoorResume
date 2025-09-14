@@ -2,7 +2,7 @@
 
 namespace Resume.Application.ViewModels.ReservationDateTime;
 
-public class ReservationDateTimeViewModel : BaseViewModel<long>
+public class ReservationDateTimeViewModel : BaseViewModel<long>, IReservationDateTimeViewModel
 {
     public string StartTime { get; set; }
     public string EndTime { get; set; }

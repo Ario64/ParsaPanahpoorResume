@@ -4,5 +4,5 @@ namespace Resume.Application.ViewModels.ReservationDateTime;
 
 public class DeleteReservationDateTimeViewModel : BaseViewModel<long>
 {
-    
+
 }
