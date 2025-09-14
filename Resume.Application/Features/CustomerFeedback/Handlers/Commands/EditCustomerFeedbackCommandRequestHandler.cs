@@ -1,12 +1,13 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.CustomerFeedback;
+using Resume.Application.ViewModels.CustomerFeedback.Validators;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 
@@ -29,7 +30,14 @@ public class EditCustomerFeedbackCommandRequestHandler : IRequestHandler<EditCus
 
     public async Task<bool> Handle(EditCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
-      
+        var validator = new EditCustomerFeedbackValidator();
+        var validationResult = await validator.ValidateAsync(request.CustomerFeedbackViewModel, cancellationToken);
+
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
                                                 .GetAsync(request.Id, cancellationToken);
 

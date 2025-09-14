@@ -2,6 +2,9 @@
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.CustomerFeedback;
+using Resume.Application.ViewModels.CustomerFeedback.Validators;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +27,14 @@ public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<Delet
 
     public async Task<bool> Handle(DeleteCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new DeleteCustomerFeedbackValidator();
+        var validationResult = await validator.ValidateAsync(new DeleteCustomerFeedbackViewModel() { Id = request.Id }, cancellationToken);
+
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
                                                 .GetAsync(request.Id, cancellationToken);
 
