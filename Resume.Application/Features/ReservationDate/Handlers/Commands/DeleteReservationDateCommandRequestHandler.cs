@@ -2,6 +2,9 @@
 using MediatR;
 using Resume.Application.Features.ReservationDate.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.ReservationDate.Validators;
+using Resume.Application.ViewModels.ReservationDate;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +28,13 @@ public class DeleteReservationDateTimeCommandRequestHandler : IRequestHandler<De
 
     public async Task<bool> Handle(DeleteReservationDateTimeCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new DeleteReservationDateValidator();
+        var validationResult = await validator.ValidateAsync(new DeleteReservationDateViewModel() { Id = request.Id}, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var reservationDate = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDate>().Delete(reservationDate);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
