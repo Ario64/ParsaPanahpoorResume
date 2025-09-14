@@ -2,6 +2,8 @@
 using MediatR;
 using Resume.Application.Features.Portfolio.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Portfolio.Validators;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +26,13 @@ public class EditPortfolioCommandRequestHandler : IRequestHandler<EditPortfolioC
 
     public async Task<bool> Handle(EditPortfolioCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new EditPortfolioValidator(_unitOfWork);
+        var validationResult = await validator.ValidateAsync(request.EditPortfolioViewModel, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var portfolio = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditPortfolioViewModel, portfolio);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Portfolio>().Update(portfolio);
