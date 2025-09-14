@@ -8,6 +8,7 @@ using Resume.Application.ViewModels.CustomerLogo;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Resume.Application.ViewModels.CustomerLogo.Validators;
 
 namespace Resume.Application.Features.CustomerLog.Handlers.Commands;
 
@@ -30,6 +31,13 @@ public class EditCustomerLogoCommandRequestHandler : IRequestHandler<EditCustome
 
     public async Task<bool> Handle(EditCustomerLogoCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new EditCustomerLogoValidator();
+        var validationResult = await validator.ValidateAsync(request.EditCustomerLogoViewModel, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var customerLogo = await _unitOfWork.GenericRepository<CustomerLogo>().GetAsync(request.Id);
         _mapper.Map(request.EditCustomerLogoViewModel, customerLogo);
         _unitOfWork.GenericRepository<CustomerLogo>().Update(customerLogo);

@@ -2,6 +2,9 @@
 using Resume.Application.Features.CustomerLog.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.CustomerLogo;
+using Resume.Application.ViewModels.CustomerLogo.Validators;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +27,13 @@ public class DeleteCustomerLogoCommandRequestHandler : IRequestHandler<DeleteCus
 
     public async Task<bool> Handle(DeleteCustomerLogoCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new DeleteCustomerLogoValidator();
+        var validationResult = await validator.ValidateAsync(new DeleteCustomerLogoViewModel() { Id = request.id }, cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var customerLogo = await _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().GetAsync(request.id);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().Delete(customerLogo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
