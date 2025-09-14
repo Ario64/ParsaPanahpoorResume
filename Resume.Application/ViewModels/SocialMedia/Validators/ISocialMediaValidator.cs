@@ -2,9 +2,9 @@
 
 namespace Resume.Application.ViewModels.SocialMedia.Validators;
 
-public class SocialMediaValidator : AbstractValidator<SocialMediaViewModel>
+public class ISocialMediaValidator : AbstractValidator<ISocialMediViewModel>
 {
-    public SocialMediaValidator()
+    public ISocialMediaValidator()
     {
         RuleFor(r => r.Link).NotEmpty()
                             .WithMessage("{PropertyName} را وارد کنید !")

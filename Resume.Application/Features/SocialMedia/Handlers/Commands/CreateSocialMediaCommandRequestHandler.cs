@@ -26,7 +26,7 @@ public class CreateSocialMediaCommandRequestHandler : IRequestHandler<CreateSoci
 
     public async Task<bool> Handle(CreateSocialMediaCommandRequest request, CancellationToken cancellationToken)
     {
-        var validator = new SocialMediaValidator();
+        var validator = new CreateSocialMediaValidator();
         var validationResult = await  validator.ValidateAsync(request.SocialMediaViewModel, cancellationToken);
         if (validationResult.IsValid == false)
         {
