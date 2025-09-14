@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Resume.Application.ViewModels.Portfolio
 {
-    public class PortfolioViewModel : BaseViewModel<long>
+    public class PortfolioViewModel : BaseViewModel<long>, IPortfolioViewModel
     {
         [Display(Name = "عنوان")]
         public string Title { get; set; }

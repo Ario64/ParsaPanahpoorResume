@@ -2,7 +2,7 @@
 
 namespace Resume.Application.ViewModels.Portfolio;
 
-public class CreatePortfolioCategoryViewModel
+public class CreatePortfolioCategoryViewModel : IPortfolioCategoryViewModel
 {
     [Display(Name = "عنوان")]
     [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

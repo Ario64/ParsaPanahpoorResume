@@ -3,7 +3,7 @@ using Resume.Application.ViewModels.Common;
 
 namespace Resume.Application.ViewModels.Portfolio
 {
-    public class EditPortfolioCategoryViewModel : BaseViewModel<long>
+    public class EditPortfolioCategoryViewModel : BaseViewModel<long>, IPortfolioCategoryViewModel
     {
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]
