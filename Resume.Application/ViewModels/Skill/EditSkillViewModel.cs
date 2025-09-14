@@ -3,7 +3,7 @@ using Resume.Application.ViewModels.Common;
 
 namespace Resume.Application.ViewModels.Skill
 {
-    public class EditSkillViewModel : BaseViewModel<long>
+    public class EditSkillViewModel : BaseViewModel<long>, ISkillViewModel
     {
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

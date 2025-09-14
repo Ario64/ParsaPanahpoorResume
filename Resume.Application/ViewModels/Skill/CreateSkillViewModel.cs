@@ -2,7 +2,7 @@
 
 namespace Resume.Application.ViewModels.Skill;
 
-public class CreateSkillViewModel
+public class CreateSkillViewModel: ISkillViewModel
 {
     [Display(Name = "عنوان")]
     [Required(ErrorMessage = "لطفا {0} را وارد نمایید")]

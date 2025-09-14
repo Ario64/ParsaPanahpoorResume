@@ -6,17 +6,6 @@ public class CreateSkillValidator : AbstractValidator<CreateSkillViewModel>
 {
     public CreateSkillValidator()
     {
-        RuleFor(r => r.Title).NotEmpty()
-                             .WithMessage("{PropertyName} را وارد کنید !")
-                             .MaximumLength(100)
-                             .WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد !");
-
-        RuleFor(r => r.Percent).NotEmpty()
-                               .WithMessage("{PropertyName} را وارد کنید !")
-                               .MaximumLength(200)
-                               .WithMessage("{PropertyName} نباید بیشتر از {MaxLength} کاراکتر باشد !");
-
-        RuleFor(r => r.Order).NotEmpty()
-                             .WithMessage("{PropertyName} را وارد کنید !");
+        Include(new ISkillValidator());
     }
 }
