@@ -2,6 +2,8 @@
 using MediatR;
 using Resume.Application.Features.Experience.Requests.Commands;
 using Resume.Application.UnitOfWork;
+using Resume.Application.ViewModels.Experience.Validators;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +26,13 @@ public class EditExperienceCommandRequestHandler : IRequestHandler<EditExperienc
 
     public async Task<bool> Handle(EditExperienceCommandRequest request, CancellationToken cancellationToken)
     {
+        var validator = new EditExperienceValidator();
+        var validationResult = await validator.ValidateAsync(request.EditExperienceViewModel , cancellationToken);
+        if (validationResult.IsValid == false)
+        {
+            throw new Exception();
+        }
+
         var experience = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditExperienceViewModel, experience);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>().Update(experience);
