@@ -2,7 +2,7 @@
 
 namespace Resume.Application.ViewModels.PersonSelectedReservation;
 
-public class EditPersonSelectedReservationViewModel : BaseViewModel<long>
+public class EditPersonSelectedReservationViewModel : BaseViewModel<long>, IPersonSelectedReservationViewModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

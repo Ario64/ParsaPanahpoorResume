@@ -1,6 +1,6 @@
 ﻿namespace Resume.Application.ViewModels.PersonSelectedReservation;
 
-public class PersonSelectedReservationListViewModel:IPersonSelectedReservationViewModel
+public interface IPersonSelectedReservationViewModel 
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
