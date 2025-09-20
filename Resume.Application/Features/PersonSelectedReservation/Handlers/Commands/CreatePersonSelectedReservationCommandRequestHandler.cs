@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.PersonSelectedReservation.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.PersonSelectedReservation.Validator;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,9 +29,7 @@ public class CreatePersonSelectedReservationCommandRequestHandler : IRequestHand
         var validator = new CreatePersonSelectedReservationValidator();
         var validationResult = await validator.ValidateAsync(request.CreatePersonSelectedReservation, cancellationToken);
         if(validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var person = _mapper.Map<Resume.Domain.Entity.Reservation.PersonSelectedReservation>(request.CreatePersonSelectedReservation);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Reservation.PersonSelectedReservation>().Add(person);
