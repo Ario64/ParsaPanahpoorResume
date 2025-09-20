@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Information.Requests.Commands;
 using Resume.Application.UnitOfWork;
-using Resume.Application.ViewModels.Information;
 using Resume.Application.ViewModels.Information.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,9 +29,8 @@ public class CreateInformationCommandRequestHandler : IRequestHandler<CreateInfo
         var validator = new CreateInformationValidator();
         var validationResult = await validator.ValidateAsync(request.CreateInformationViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
+
 
         var information = _mapper.Map<Resume.Domain.Entity.Information>(request.CreateInformationViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().Add(information);

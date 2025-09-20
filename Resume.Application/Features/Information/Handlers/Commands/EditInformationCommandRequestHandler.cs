@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Information.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Information.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,9 +29,7 @@ public class EditInformationCommandRequestHandler : IRequestHandler<EditInformat
         var validator = new EditInformationValidator();
         var validationResult = await validator.ValidateAsync( request.EditInformationViewModel , cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var information = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Information>().GetAsync(request.Id, cancellationToken);
         _mapper.Map( request.EditInformationViewModel, information);
