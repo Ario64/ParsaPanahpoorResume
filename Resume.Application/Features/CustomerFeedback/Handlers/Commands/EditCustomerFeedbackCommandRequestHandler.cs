@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
@@ -34,9 +35,9 @@ public class EditCustomerFeedbackCommandRequestHandler : IRequestHandler<EditCus
         var validationResult = await validator.ValidateAsync(request.CustomerFeedbackViewModel, cancellationToken);
 
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+
+            throw new ValidationException(validationResult);
+        
 
         var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
                                                 .GetAsync(request.Id, cancellationToken);

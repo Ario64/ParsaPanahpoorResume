@@ -1,10 +1,10 @@
 ﻿using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.CustomerFeedback;
 using Resume.Application.ViewModels.CustomerFeedback.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,9 +31,8 @@ public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<Delet
         var validationResult = await validator.ValidateAsync(new DeleteCustomerFeedbackViewModel() { Id = request.Id }, cancellationToken);
 
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
+       
 
         var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
                                                 .GetAsync(request.Id, cancellationToken);

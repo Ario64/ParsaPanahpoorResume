@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Resume.Application.Exceptions;
 
@@ -10,9 +10,9 @@ public class ValidationException : ApplicationException
 
     public ValidationException(ValidationResult result)
     {
-        foreach (var exc in result.ErrorMessage)
+        foreach (var err in result.Errors)
         {
-            Exceptions.Add(exc.ToString());
+            Exceptions.Add(err.ErrorMessage);
         }
     }
 }

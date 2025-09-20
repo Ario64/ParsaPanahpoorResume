@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
@@ -33,10 +34,9 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
         var validator = new CreateCustomerFeedbackValidator();
         var validationResult = await validator.ValidateAsync(request.CreateCustomerFeedbackViewModel, cancellationToken);
 
-        if (validationResult.IsValid == false) 
-        {
-            throw new Exception();
-        }
+        if (validationResult.IsValid == false)
+            throw new ValidationException(validationResult);
+
 
         var customerFeedback = _mapper.Map<Domain.Entity.CustomerFeedback>(request.CreateCustomerFeedbackViewModel);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Add(customerFeedback);
