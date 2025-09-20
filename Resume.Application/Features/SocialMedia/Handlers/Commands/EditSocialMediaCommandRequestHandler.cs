@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.SocialMedia.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.SocialMedia.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,9 +29,7 @@ public class EditSocialMediaCommandRequestHandler : IRequestHandler<EditSocialMe
         var validator = new EditSocialMediaValidator();
         var validationResult = await validator.ValidateAsync(request.EditSocialMediaViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var socialMedia = await _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditSocialMediaViewModel, socialMedia);

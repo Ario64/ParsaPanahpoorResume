@@ -1,9 +1,9 @@
 ﻿using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.SocialMedia.Requests.Commands;
 using Resume.Application.UnitOfWork;
-using Resume.Application.ViewModels.SocialMedia.Validators;
 using Resume.Application.ViewModels.SocialMedia;
-using System;
+using Resume.Application.ViewModels.SocialMedia.Validators;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,9 +27,7 @@ public class DeleteSocialCommandRequestHandler : IRequestHandler<DeleteSocialCom
         var validator = new DeleteSocialMediaValidator();
         var validationResult = await validator.ValidateAsync(new DeleteSocialMediaViewModel() { Id = request.Id}, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var socialMedia = await _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.SocialMedia>().Delete(socialMedia);
