@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Education.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Education;
 using Resume.Application.ViewModels.Education.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,9 +33,7 @@ public class CreateEducationCommandRequestHandler : IRequestHandler<CreateEducat
         var validator = new CreateEducationValidator();
         var validationResult = await validator.ValidateAsync(request.CreateEducationViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var education = _mapper.Map<Resume.Domain.Entity.Education>(request.CreateEducationViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>().Add(education);

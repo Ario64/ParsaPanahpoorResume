@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Education.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
@@ -33,9 +34,7 @@ public class EditEducationCommandRequestHandler : IRequestHandler<EditEducationC
         var validator = new EditEducationValidator();
         var validationResult = await validator.ValidateAsync(request.EditEducationViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var education = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Education>()
                                          .GetAsync(request.Id);

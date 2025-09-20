@@ -5,7 +5,6 @@ using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.CustomerLogo;
 using Resume.Application.ViewModels.CustomerLogo.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
