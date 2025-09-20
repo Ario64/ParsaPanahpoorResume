@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Experience.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Experience;
 using Resume.Application.ViewModels.Experience.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,9 +30,7 @@ public class DeleteExperienceCommandRequestHandler : IRequestHandler<DeleteExper
         var validator = new DeleteExperienceValidator();
         var validationResult = await validator.ValidateAsync(new DeleteExperienceViewModel() { Id = request.Id }, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var experience = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>().Delete(experience);

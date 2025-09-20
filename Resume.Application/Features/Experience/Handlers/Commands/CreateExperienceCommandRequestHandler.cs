@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using System;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Experience.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Experience.Validators;
@@ -28,10 +28,8 @@ public class CreateExperienceCommandRequestHandler : IRequestHandler<CreateExper
     {
         var validator = new CreateExperienceValidator();
         var validationResult = await validator.ValidateAsync(request.CreateExperienceViewModel, cancellationToken);
-        if (validationResult.IsValid == false) 
-        {
-            throw new Exception();
-        }
+        if (validationResult.IsValid == false)
+            throw new ValidationException(validationResult);
 
         var experinece = _mapper.Map<Resume.Domain.Entity.Experience>(request.CreateExperienceViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Experience>().Add(experinece);
