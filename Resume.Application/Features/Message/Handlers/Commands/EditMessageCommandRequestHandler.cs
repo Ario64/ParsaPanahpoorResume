@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Message.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Message.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,9 +29,7 @@ public class EditMessageCommandRequestHandler : IRequestHandler<EditMessageComma
         var validator = new EditMessageValidator();
         var validationResult = await validator.ValidateAsync(request.EditMessageViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var message = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditMessageViewModel, message);

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Message.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Message.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,9 +29,7 @@ public class CreateMessageCommandRequestHandler : IRequestHandler<CreateMessageC
         var validator = new CreateMessageValidator();
         var validationResult = await validator.ValidateAsync(request.CreateMessageViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var message = _mapper.Map<Domain.Entity.Message>(request.CreateMessageViewModel);
         _unitOfWork.GenericRepository<Domain.Entity.Message>().Add(message);

@@ -1,9 +1,9 @@
 ﻿using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Message.Requests.Commands;
 using Resume.Application.UnitOfWork;
-using Resume.Application.ViewModels.Message.Validators;
 using Resume.Application.ViewModels.Message;
-using System;
+using Resume.Application.ViewModels.Message.Validators;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,9 +27,7 @@ public class DeleteMessageCommandRequestHandler : IRequestHandler<DeleteMessageC
         var validator = new DeleteMessageValidator();
         var validationResult = await validator.ValidateAsync(new DeleteMessageViewModel() { Id = request.Id }, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var message = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Message>().Delete(message);
