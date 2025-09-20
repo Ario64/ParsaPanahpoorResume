@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Skill.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Skill.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,9 +29,7 @@ public class CreateSkillCommandRequestHandler : IRequestHandler<CreateSkillComma
         var validator = new CreateSkillValidator();
         var validationResult = await validator.ValidateAsync(request.CreateSkillViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception(); 
-        }
+            throw new ValidationException(validationResult);
 
         var skill = _mapper.Map<Resume.Domain.Entity.Skill>(request.CreateSkillViewModel);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().Add(skill);

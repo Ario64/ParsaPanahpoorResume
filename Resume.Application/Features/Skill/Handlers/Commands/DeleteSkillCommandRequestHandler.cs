@@ -1,9 +1,9 @@
 ﻿using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.Skill.Requests.Commands;
 using Resume.Application.UnitOfWork;
-using Resume.Application.ViewModels.Skill.Validators;
 using Resume.Application.ViewModels.Skill;
-using System;
+using Resume.Application.ViewModels.Skill.Validators;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,9 +27,7 @@ public class DeleteSkillCommandRequestHandler : IRequestHandler<DeleteSkillComma
         var validator = new DeleteSkillValidator();
         var validationResult = await validator.ValidateAsync(new DeleteSkillViewModel() { Id = request.Id }, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var skill = await _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.Skill>().Delete(skill);
