@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.ReservationDateTime.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.ReservationDateTime.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,9 +30,7 @@ public class EditReservationDateTimeCommandRequestHandler : IRequestHandler<Edit
         var validator = new EditReservationDateTimeValidator(_unitOfWork);
         var validationResult = await validator.ValidateAsync(request.EditReservationDateTimeViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var reservationDateTime = await _unitOfWork.GenericRepository<Resume.Domain.Entity.ReservationDateTime>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditReservationDateTimeViewModel, reservationDateTime);
