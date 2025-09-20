@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.PortfolioCategory.Requests.Commands;
 using Resume.Application.UnitOfWork;
-using Resume.Application.ViewModels.Portfolio.Validators;
 using Resume.Application.ViewModels.Portfolio;
-using System;
+using Resume.Application.ViewModels.Portfolio.Validators;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,9 +30,7 @@ public class DeletePortfolioCategoryCommandRequestHandler : IRequestHandler<Dele
         var validator = new DeletePortfolioCategoryValidator();
         var validationResult = await validator.ValidateAsync(new DeletePortfolioCategoryViewModel() { Id = request.Id }, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var portfolioCategory = await _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().GetAsync(request.Id, cancellationToken);
         _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().Delete(portfolioCategory);

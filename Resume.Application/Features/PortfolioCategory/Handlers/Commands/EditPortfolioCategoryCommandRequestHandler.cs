@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.PortfolioCategory.Requests.Commands;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.Portfolio.Validators;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,9 +29,7 @@ public class EditPortfolioCategoryCommandRequestHandler : IRequestHandler<EditPo
         var validator = new EditPortfolioCategoryValidator();
         var validationResult = await validator.ValidateAsync(request.EditPortfolioViewModel, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var portfolioCategory = await _unitOfWork.GenericRepository<Resume.Domain.Entity.PortfolioCategory>().GetAsync(request.Id, cancellationToken);
         _mapper.Map(request.EditPortfolioViewModel, portfolioCategory);
