@@ -3,16 +3,18 @@ using MediatR;
 using Resume.Application.Exceptions;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
+using Resume.Application.Responses;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.CustomerFeedback;
 using Resume.Application.ViewModels.CustomerFeedback.Validators;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 
-public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<CreateCustomerFeedbackCommandRequest, bool>
+public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<CreateCustomerFeedbackCommandRequest, BaseCommandResponse>
 {
     #region Constructor
 
@@ -29,14 +31,19 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
 
     #endregion
 
-    public async Task<bool> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
+    public async Task<BaseCommandResponse> Handle(CreateCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
+        var response = new BaseCommandResponse();
         var validator = new CreateCustomerFeedbackValidator();
         var validationResult = await validator.ValidateAsync(request.CreateCustomerFeedbackViewModel, cancellationToken);
 
         if (validationResult.IsValid == false)
-            throw new ValidationException(validationResult);
-
+        {
+            //throw new ValidationException(validationResult);
+            response.IsSuccess = false;
+            response.Message = "عملیات با شکست مواجه شد !";
+            response.Errors = validationResult.Errors.Select(s=>s.ErrorMessage).ToList();
+        }
 
         var customerFeedback = _mapper.Map<Domain.Entity.CustomerFeedback>(request.CreateCustomerFeedbackViewModel);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>().Add(customerFeedback);
@@ -51,6 +58,10 @@ public class CreateCustomerFeedbackCommandRequestHandler : IRequestHandler<Creat
         //Remove list from cache to get updated list
         await _cache.RemoveAsync("CustomerFeedbackList");
 
-        return true;
+        response.IsSuccess = true;
+        response.Message = "عملیات با موفقیت انجام شد.";
+        response.Id = customerFeedback.Id;
+
+        return response;
     }
 }

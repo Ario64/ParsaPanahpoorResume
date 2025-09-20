@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using Resume.Application.Responses;
 using Resume.Application.ViewModels.CustomerFeedback;
 
 namespace Resume.Application.Features.CustomerFeedback.Requests.Commands;
 
-public record EditCustomerFeedbackCommandRequest : IRequest<bool>
+public record EditCustomerFeedbackCommandRequest : IRequest<BaseCommandResponse>
 {
     public long? Id { get; set; }
     public EditCustomerFeedbackViewModel CustomerFeedbackViewModel { get; set; }

@@ -1,16 +1,19 @@
-﻿using MediatR;
+﻿using AngleSharp.Io;
+using MediatR;
 using Resume.Application.Exceptions;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.ICacheService;
+using Resume.Application.Responses;
 using Resume.Application.UnitOfWork;
 using Resume.Application.ViewModels.CustomerFeedback;
 using Resume.Application.ViewModels.CustomerFeedback.Validators;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Resume.Application.Features.CustomerFeedback.Handlers.Commands;
 
-public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<DeleteCustomerFeedbackCommandRequest, bool>
+public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<DeleteCustomerFeedbackCommandRequest, BaseCommandResponse>
 {
     #region Constructor
 
@@ -25,14 +28,20 @@ public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<Delet
 
     #endregion
 
-    public async Task<bool> Handle(DeleteCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
+    public async Task<BaseCommandResponse> Handle(DeleteCustomerFeedbackCommandRequest request, CancellationToken cancellationToken)
     {
+        var response = new BaseCommandResponse();
         var validator = new DeleteCustomerFeedbackValidator();
         var validationResult = await validator.ValidateAsync(new DeleteCustomerFeedbackViewModel() { Id = request.Id }, cancellationToken);
 
         if (validationResult.IsValid == false)
-            throw new ValidationException(validationResult);
-       
+        {
+            //throw new ValidationException(validationResult);
+            response.IsSuccess = false;
+            response.Message = "عملیات با شکست مواجه شد !";
+            response.Errors = validationResult.Errors.Select(s => s.ErrorMessage).ToList();
+        }
+
 
         var customerFeedback = await _unitOfWork.GenericRepository<Domain.Entity.CustomerFeedback>()
                                                 .GetAsync(request.Id, cancellationToken);
@@ -45,6 +54,10 @@ public class DeleteCustomerFeedbackCommandRequestHandler : IRequestHandler<Delet
         //Remove data from redis cache
         await _cache.RemoveAsync(cacheKey);
 
-        return true;
+        response.IsSuccess = true;
+        response.Message = "عملیات با موفقیت انجام شد.";
+        response.Id = customerFeedback.Id;
+
+        return response;
     }
 }
