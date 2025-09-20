@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.CustomerLog.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
@@ -35,9 +36,8 @@ public class CreateCustomerLogoCommandRequestHandler : IRequestHandler<CreateCus
         var validationResult = await validator.ValidateAsync(request.CustomerLogoViewModel, cancellationToken);
 
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
+      
 
         var customerLogo = _mapper.Map<CustomerLogo>(request.CustomerLogoViewModel);
         _unitOfWork.GenericRepository<CustomerLogo>().Add(customerLogo);

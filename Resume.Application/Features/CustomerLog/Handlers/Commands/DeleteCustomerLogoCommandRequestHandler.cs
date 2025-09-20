@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Resume.Application.Exceptions;
 using Resume.Application.Features.CustomerLog.Requests.Commands;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
@@ -30,9 +31,7 @@ public class DeleteCustomerLogoCommandRequestHandler : IRequestHandler<DeleteCus
         var validator = new DeleteCustomerLogoValidator();
         var validationResult = await validator.ValidateAsync(new DeleteCustomerLogoViewModel() { Id = request.id }, cancellationToken);
         if (validationResult.IsValid == false)
-        {
-            throw new Exception();
-        }
+            throw new ValidationException(validationResult);
 
         var customerLogo = await _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().GetAsync(request.id);
         _unitOfWork.GenericRepository<Domain.Entity.CustomerLogo>().Delete(customerLogo);
