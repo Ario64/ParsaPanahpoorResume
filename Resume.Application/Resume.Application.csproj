@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
-    <PackageReference Include="HtmlSanitizer" Version="9.0.886" />
-    <PackageReference Include="MediatR" Version="13.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+		<PackageReference Include="HtmlSanitizer" Version="9.0.886" />
+		<PackageReference Include="MediatR" Version="13.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+		<PackageReference Include="StackExchange.Redis" Version="2.9.17" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Resume.Domain\Resume.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Resume.Domain\Resume.Domain.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UnitOfWork\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="UnitOfWork\" />
+	</ItemGroup>
 
 </Project>

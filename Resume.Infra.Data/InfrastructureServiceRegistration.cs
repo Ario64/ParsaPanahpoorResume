@@ -1,6 +1,4 @@
-﻿using AngleSharp;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Resume.Application.ICacheService;
 using Resume.Application.UnitOfWork;
 using Resume.Domain.IRepository.GenericRepository;
@@ -19,9 +17,10 @@ namespace Resume.Infra.Data
 
             services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
-                var redisConnection = configuration.GetConnectionString("RedisConnection");
+                var redisConnection = configuration["Redis:ConnectionString"];
                 return ConnectionMultiplexer.Connect(redisConnection);
             });
+
             services.AddSingleton<ICacheServices, CacheServices>();
         }
     }

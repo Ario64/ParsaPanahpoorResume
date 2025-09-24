@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Resume.Application;
 
@@ -10,5 +9,6 @@ public static class ApplicationServiceRegistration
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+       
     }
 }
