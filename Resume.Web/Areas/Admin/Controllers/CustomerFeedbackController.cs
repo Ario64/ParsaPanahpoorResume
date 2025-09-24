@@ -5,6 +5,7 @@ using Resume.Application.Eetensions;
 using Resume.Application.Features.CustomerFeedback.Requests.Commands;
 using Resume.Application.Features.CustomerFeedback.Requests.Queries;
 using Resume.Application.Generator;
+using Resume.Application.Responses;
 using Resume.Application.StaticTools;
 using Resume.Application.ViewModels.CustomerFeedback;
 using Resume.Web.Areas.Controllers;
@@ -39,7 +40,7 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> SubmitCustomerFeedbackFormModal(EditCustomerFeedbackViewModel customerFeedback)
         {
-            bool result;
+            var respone = new BaseCommandResponse();
 
             if(customerFeedback.Id == 0)
             {
@@ -51,9 +52,9 @@ namespace Resume.Web.Areas.Admin.Controllers
                     Order = customerFeedback.Order
                 };
 
-                result = await _mediator.Send(new CreateCustomerFeedbackCommandRequest(createCustomerFeedback));
+                respone = await _mediator.Send(new CreateCustomerFeedbackCommandRequest(createCustomerFeedback));
 
-                if (result)
+                if (respone.IsSuccess == true)
                 {
                     return new JsonResult(new { status = "Success" });
                 }
@@ -61,9 +62,9 @@ namespace Resume.Web.Areas.Admin.Controllers
                 return new JsonResult(new { status = "Error" });
             }
 
-             result = await _mediator.Send(new EditCustomerFeedbackCommandRequest(customerFeedback.Id, customerFeedback));
+            respone = await _mediator.Send(new EditCustomerFeedbackCommandRequest(customerFeedback.Id, customerFeedback));
 
-            if (result)
+            if (respone.IsSuccess == true)
             {
                 return new JsonResult(new { status = "Success" });
             }
@@ -73,9 +74,11 @@ namespace Resume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> DeleteCustomerFeedback(long id)
         {
-            var result = await _mediator.Send(new DeleteCustomerFeedbackCommandRequest(id));
+            var respone = new BaseCommandResponse();
 
-            if (result) return new JsonResult(new { status = "Success" });
+            respone = await _mediator.Send(new DeleteCustomerFeedbackCommandRequest(id));
+
+            if (respone.IsSuccess == true) return new JsonResult(new { status = "Success" });
 
             return new JsonResult(new { status = "Error" });
         }
